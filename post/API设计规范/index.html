@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://aitangba.com//icon/go.ico">
+	
+    <title>Android的API设计 -- XBeats Home</title>
+
+    
+
+    
+    <link href="http://aitangba.com//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://aitangba.com//css/clean-blog.min.css" rel="stylesheet">
+
+    
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+	
+	
+    <link rel="Stylesheet" type="text/css" href="http://aitangba.com//prettify/tomorrow-night.min.css" />
+    <script type="text/javascript" src="http://aitangba.com//prettify/prettify.js" ></script>
+	<script type="text/javascript" src="http://aitangba.com//prettify/jquery-1.11.1.min.js" ></script>
+	<script type="text/javascript">
+	$(window).load(function(){
+     $("pre").addClass("prettyprint linenums");
+    })
+	</script>
+	
+</head>
+
+<body onload="prettyPrint()">
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aitangba.com/">XBeats Home</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://aitangba.com//img/post-bg.jpg')">
+    
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Android的API设计</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">
+                 
+Posted by <a href="#">XBeats</a> on Tue, Feb 28, 2017
+<br />
+In <a href="/categories/android">Android</a>
+
+<br />
+Tags 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  
+
+<h1 id="android的api设计">Android的API设计</h1>
+
+<h3 id="1-简单明确">1.简单明确</h3>
+
+<p>单个单词简单明确</p>
+
+<pre><code class="language-java">   //例：
+   	size();
+   	remove();
+   	removeAll()
+
+   //反例：
+   	countObservers();
+   	deleteObserver(Observer);
+   	deleteObservers();
+</code></pre>
+
+<p>约束规则：在创建方法时，需要遵守一定的规则，方便调用者理解，相互关联的方法可以考虑保留一致的前缀或后缀</p>
+
+<pre><code class="language-java">   //例：
+   	execute(String);
+   	executeBatch();
+   	executeQuery(String);
+   	executeUpdate(String);
+</code></pre>
+
+<h3 id="2-限制长度">2.限制长度</h3>
+
+<p>不要超过4个单词，这样会大大降低可读性，虽然作用显得更明确，但是太过啰嗦</p>
+
+<p><em>反例:AbstractBeanFactoryBasedTargetSourceCreator</em></p>
+
+<h3 id="3-参数限制">3.参数限制</h3>
+
+<p>方法里有过多参数往往让人不能明确区分其作用，特别在重载方法时，多个方法参数五花八门，会让人不知所措，可以考虑重新优化代码结构或者重新定义一个model</p>
+
+<p><em>反例：regionMatches(boolean, int, String, int, int)</em></p>
+
+<p>在遇到多个参数的情况下，需要遵守一定原则：数组在前(如：copyOf(T[], int))</p>
+
+<h3 id="4-返回参数">4.返回参数</h3>
+
+<p>单个对象没有找到返回null或者抛出异常由调用者来处理；</p>
+
+<p>列表不能返回null,如何没有需要返回的数据就返回一个空集合，防止调用处未能进行空处理而导致异常的发生。</p>
+
+<h3 id="5-命名格式">5.命名格式</h3>
+
+<p>（1）回调(onSomethingDone) ：由其他类来调用本类中的方法，在Listener和Callback中是比较常见的</p>
+
+<p>​    例：onTitleChanged</p>
+
+<p>（2）主动调用(doSomething)：一般是比较常见的方法，多数由本类中其他方法来调用，但是许多开发者利用或创建时却很随意，可用在优化代码显示，比价常见的命名有：reset,refresh,init</p>
+
+<p>​    例：invalidateOptionsMenu</p>
+
+<h2 id="总结">总结</h2>
+
+<p>API的设计过程很多时候不能一撮而就，需要慢慢积累和进化，一个功能性的API一旦设计出来，意味着在一定时间内是相对稳定的，使用者能够放心的去调用，所以也需要一定的前瞻性，特别是对于Android开发着来说，其系统版本的高速迭代，可能会或多或少的影响到自己设计的程序；每个API接口应该只专注一件事，并做好（如果它很难命名，那么这或许是个不好的征兆，好的名称可以驱动开发、并且只需拆分与合并模块即可）；遵守最小惊讶原则，用户API只需根据需求来设计即可，不需要刻意去设计一下复杂无用的API。</p>
+
+<h2 id="thanks">Thanks</h2>
+
+<p><a href="http://www.csdn.net/article/2013-04-10/2814835-how-design-good-regular-api">http://www.csdn.net/article/2013-04-<sup>10</sup>&frasl;<sub>2814835</sub>-how-design-good-regular-api</a></p>
+
+<p><a href="http://blog.csdn.net/hdy007/article/details/1508834">http://blog.csdn.net/hdy007/article/details/1508834</a></p>
+
+<p><a href="http://www.codeceo.com/article/google-java-good-api.html">http://www.codeceo.com/article/google-java-good-api.html</a></p>
+
+                  
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:fenghaifeng008@gmail.com">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/xbeats">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+					<li>
+                      <a href="http://www.jianshu.com/u/51c51c5f2566" >
+                        <span class="fa-stack fa-lg">
+						  <i class="fa fa-circle fa-stack-2x"></i>
+						  <font class="fa fa-stack-1x fa-inverse">简</font>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license. &nbsp <span><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1258603260'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1258603260%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></span> </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://aitangba.com//js/jquery.min.js"></script>
+
+    
+    <script src="http://aitangba.com//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://aitangba.com//js/clean-blog.js"></script>
+
+    
+
+</body>
+
+</html>
+

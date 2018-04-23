@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://aitangba.com//icon/go.ico">
+	
+    <title>Android-右滑返回 -- XBeats Home</title>
+
+    
+
+    
+    <link href="http://aitangba.com//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://aitangba.com//css/clean-blog.min.css" rel="stylesheet">
+
+    
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+	
+	
+    <link rel="Stylesheet" type="text/css" href="http://aitangba.com//prettify/tomorrow-night.min.css" />
+    <script type="text/javascript" src="http://aitangba.com//prettify/prettify.js" ></script>
+	<script type="text/javascript" src="http://aitangba.com//prettify/jquery-1.11.1.min.js" ></script>
+	<script type="text/javascript">
+	$(window).load(function(){
+     $("pre").addClass("prettyprint linenums");
+    })
+	</script>
+	
+</head>
+
+<body onload="prettyPrint()">
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://aitangba.com/">XBeats Home</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://aitangba.com//img/post-bg.jpg')">
+    
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Android-右滑返回</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">
+                 
+Posted by <a href="#">XBeats</a> on Mon, Aug 1, 2016
+<br />
+In <a href="/categories/android">Android</a>
+
+<br />
+Tags 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  
+
+<h1 id="swipeback">SwipeBack</h1>
+
+<p>在设计过程中遇到也有过其他思路：<br />
+1）设置Activity的透明theme，可是发现只要activity的层级变多就会变得非常卡顿；<br />
+2）动态设置Activity的theme，这需要通过反射，而且还需要判断api，部分手机还不兼容；<br />
+3）在滑动展示上个Activity的View时，直接将上个Activity的contentView截图保存在内存卡上，然后显示在当前Activity的view上，但是有明显的卡顿感；<br />
+以上都是在设计过程中想到的方案，也逐个实践了一下，发现问题还是比较多的，想想还不如另辟蹊径，就有了现在的方案，目前看来还是能兼容大部分手机的。</p>
+
+<h1 id="features">Features</h1>
+
+<ul>
+<li>不需要设置透明theme或<code>windowIsTranslucent = true</code></li>
+<li>不影响activity的生命周期</li>
+<li>只需继承SwipeBackActivity</li>
+<li>支持Dialog的滑动返回</li>
+</ul>
+
+<h1 id="getting-started">Getting started</h1>
+
+<p><strong>Firstly, add the following lines to your app/build.gradle.</strong></p>
+
+<pre><code class="language-gradle">dependencies {  
+    compile 'com.aitangba:swipeback:1.0.0'
+}
+</code></pre>
+
+<p><strong>Secondly, add the following lines to your application.</strong></p>
+
+<pre><code class="language-java">public class CustomApplication extends Application{
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
+    }
+
+}
+</code></pre>
+
+<p><strong>Finally, set the activity which need to swipe extends the SwipeBackActivity.</strong></p>
+
+<pre><code class="language-java">public class BaseActivity extends SwipeBackActivity {
+
+}
+</code></pre>
+
+<h1 id="usage">Usage</h1>
+
+<h3 id="api">API</h3>
+
+<p>Application在Api14之后添加了新的Callback方法</p>
+
+<pre><code class="language-java">    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+
+    }
+</code></pre>
+
+<p>这样就可以根据activity的生命周期缓存所有Activity，通过list获取上一个activity的实例，从而获取id为content的ContentView的子View（即setContentView中的View），并进行滑动展示。</p>
+
+<p>默认SwipeBackActivity是支持滑动返回的，不需要滑动返回时则需要复写SwipeBackActivity的方法<code>supportSlideBack</code>，其中方法<code>canBeSlideBack</code>意思是能否返回至本Activity；两个方法相互配合使用，以应对各种需求。</p>
+
+<pre><code class="language-java"> 
+   public class SwipeBackActivity extends AppCompatActivity {
+
+    private SwipeWindowHelper mSwipeWindowHelper;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(!supportSlideBack()) {
+            return super.dispatchTouchEvent(ev);
+        }
+
+        if(mSwipeWindowHelper == null) {
+            mSwipeWindowHelper = new SwipeWindowHelper(getWindow());
+        }
+        return mSwipeWindowHelper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * 是否支持滑动返回
+     * @return
+     */
+    protected boolean supportSlideBack() {
+        return true;
+    }
+
+    /**
+     * 能否滑动返回至当前Activity
+     * @return
+     */
+    protected boolean canBeSlideBack() {
+        return true;
+    }
+   }
+</code></pre>
+
+<h3 id="6种事件状态">6种事件状态</h3>
+
+<pre><code class="language-java">
+    private static final int MSG_ACTION_DOWN = 1; //点击事件  
+    private static final int MSG_ACTION_MOVE = 2; //滑动事件
+    private static final int MSG_ACTION_UP = 3;  //点击结束
+    private static final int MSG_SLIDE_CANCEL = 4; //开始滑动，不返回前一个页面
+    private static final int MSG_SLIDE_CANCELED = 5;  //结束滑动，不返回前一个页面
+    private static final int MSG_SLIDE_PROCEED = 6; //开始滑动，返回前一个页面
+    private static final int MSG_SLIDE_FINISHED = 7;//结束滑动，返回前一个页面
+</code></pre>
+
+<ol>
+<li>在Down手势发生时，只要将上一个Activity的ContentView从parentView中剥离，并加入到当前View的ContentView中；<br /></li>
+<li>在滑动手势发生时，加上阴影View，并进行滑动；同时滑动的有当前Activity的ContentView、上一个Activity的ContentView和自定义的阴影View；<br /></li>
+<li>在Up手势发生时，判断滑动是否超过半屏，触发返回操作，并展示滑动动画；<br /></li>
+<li>滑动取消或滑动返回发生时，需要将上个Activity的ContentView从新加入到上一个Acitivity的布局中。</li>
+</ol>
+
+<h1 id="screenshot">ScreenShot</h1>
+
+<p><img src="https://raw.githubusercontent.com/XBeats/and_swipeback/master/screenshot/swipeback.gif" alt="image" /></p>
+
+<p>gitHub地址：<a href="https://github.com/XBeats/and_swipeback">github.com/XBeats/and_swipeback</a></p>
+
+                  
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:fenghaifeng008@gmail.com">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/xbeats">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+					<li>
+                      <a href="http://www.jianshu.com/u/51c51c5f2566" >
+                        <span class="fa-stack fa-lg">
+						  <i class="fa fa-circle fa-stack-2x"></i>
+						  <font class="fa fa-stack-1x fa-inverse">简</font>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license. &nbsp <span><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1258603260'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1258603260%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></span> </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://aitangba.com//js/jquery.min.js"></script>
+
+    
+    <script src="http://aitangba.com//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://aitangba.com//js/clean-blog.js"></script>
+
+    
+
+</body>
+
+</html>
+

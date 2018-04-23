@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>XBeats Home</title>
+    <link>http://aitangba.com/index.xml</link>
+    <description>Recent content on XBeats Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Sun, 24 May 2015 18:51:50 +0200</lastBuildDate>
+    <atom:link href="http://aitangba.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About</title>
+      <link>http://aitangba.com/about/</link>
+      <pubDate>Sun, 24 May 2015 18:51:50 +0200</pubDate>
+      
+      <guid>http://aitangba.com/about/</guid>
+      <description>&lt;p&gt;To be continue &amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Android的API设计</title>
+      <link>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
+      <pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
+      <description>
+
+&lt;h1 id=&#34;android的api设计&#34;&gt;Android的API设计&lt;/h1&gt;
+
+&lt;h3 id=&#34;1-简单明确&#34;&gt;1.简单明确&lt;/h3&gt;
+
+&lt;p&gt;单个单词简单明确&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   //例：
+   	size();
+   	remove();
+   	removeAll()
+
+   //反例：
+   	countObservers();
+   	deleteObserver(Observer);
+   	deleteObservers();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;约束规则：在创建方法时，需要遵守一定的规则，方便调用者理解，相互关联的方法可以考虑保留一致的前缀或后缀&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   //例：
+   	execute(String);
+   	executeBatch();
+   	executeQuery(String);
+   	executeUpdate(String);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-限制长度&#34;&gt;2.限制长度&lt;/h3&gt;
+
+&lt;p&gt;不要超过4个单词，这样会大大降低可读性，虽然作用显得更明确，但是太过啰嗦&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;反例:AbstractBeanFactoryBasedTargetSourceCreator&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-参数限制&#34;&gt;3.参数限制&lt;/h3&gt;
+
+&lt;p&gt;方法里有过多参数往往让人不能明确区分其作用，特别在重载方法时，多个方法参数五花八门，会让人不知所措，可以考虑重新优化代码结构或者重新定义一个model&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;反例：regionMatches(boolean, int, String, int, int)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;在遇到多个参数的情况下，需要遵守一定原则：数组在前(如：copyOf(T[], int))&lt;/p&gt;
+
+&lt;h3 id=&#34;4-返回参数&#34;&gt;4.返回参数&lt;/h3&gt;
+
+&lt;p&gt;单个对象没有找到返回null或者抛出异常由调用者来处理；&lt;/p&gt;
+
+&lt;p&gt;列表不能返回null,如何没有需要返回的数据就返回一个空集合，防止调用处未能进行空处理而导致异常的发生。&lt;/p&gt;
+
+&lt;h3 id=&#34;5-命名格式&#34;&gt;5.命名格式&lt;/h3&gt;
+
+&lt;p&gt;（1）回调(onSomethingDone) ：由其他类来调用本类中的方法，在Listener和Callback中是比较常见的&lt;/p&gt;
+
+&lt;p&gt;​    例：onTitleChanged&lt;/p&gt;
+
+&lt;p&gt;（2）主动调用(doSomething)：一般是比较常见的方法，多数由本类中其他方法来调用，但是许多开发者利用或创建时却很随意，可用在优化代码显示，比价常见的命名有：reset,refresh,init&lt;/p&gt;
+
+&lt;p&gt;​    例：invalidateOptionsMenu&lt;/p&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;API的设计过程很多时候不能一撮而就，需要慢慢积累和进化，一个功能性的API一旦设计出来，意味着在一定时间内是相对稳定的，使用者能够放心的去调用，所以也需要一定的前瞻性，特别是对于Android开发着来说，其系统版本的高速迭代，可能会或多或少的影响到自己设计的程序；每个API接口应该只专注一件事，并做好（如果它很难命名，那么这或许是个不好的征兆，好的名称可以驱动开发、并且只需拆分与合并模块即可）；遵守最小惊讶原则，用户API只需根据需求来设计即可，不需要刻意去设计一下复杂无用的API。&lt;/p&gt;
+
+&lt;h2 id=&#34;thanks&#34;&gt;Thanks&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.csdn.net/article/2013-04-10/2814835-how-design-good-regular-api&#34;&gt;http://www.csdn.net/article/2013-04-&lt;sup&gt;10&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2814835&lt;/sub&gt;-how-design-good-regular-api&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/hdy007/article/details/1508834&#34;&gt;http://blog.csdn.net/hdy007/article/details/1508834&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.codeceo.com/article/google-java-good-api.html&#34;&gt;http://www.codeceo.com/article/google-java-good-api.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Android-右滑返回</title>
+      <link>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
+      <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
+      <description>
+
+&lt;h1 id=&#34;swipeback&#34;&gt;SwipeBack&lt;/h1&gt;
+
+&lt;p&gt;在设计过程中遇到也有过其他思路：&lt;br /&gt;
+1）设置Activity的透明theme，可是发现只要activity的层级变多就会变得非常卡顿；&lt;br /&gt;
+2）动态设置Activity的theme，这需要通过反射，而且还需要判断api，部分手机还不兼容；&lt;br /&gt;
+3）在滑动展示上个Activity的View时，直接将上个Activity的contentView截图保存在内存卡上，然后显示在当前Activity的view上，但是有明显的卡顿感；&lt;br /&gt;
+以上都是在设计过程中想到的方案，也逐个实践了一下，发现问题还是比较多的，想想还不如另辟蹊径，就有了现在的方案，目前看来还是能兼容大部分手机的。&lt;/p&gt;
+
+&lt;h1 id=&#34;features&#34;&gt;Features&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不需要设置透明theme或&lt;code&gt;windowIsTranslucent = true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;不影响activity的生命周期&lt;/li&gt;
+&lt;li&gt;只需继承SwipeBackActivity&lt;/li&gt;
+&lt;li&gt;支持Dialog的滑动返回&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;getting-started&#34;&gt;Getting started&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Firstly, add the following lines to your app/build.gradle.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;dependencies {  
+    compile &#39;com.aitangba:swipeback:1.0.0&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Secondly, add the following lines to your application.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomApplication extends Application{
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Finally, set the activity which need to swipe extends the SwipeBackActivity.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class BaseActivity extends SwipeBackActivity {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
+
+&lt;h3 id=&#34;api&#34;&gt;API&lt;/h3&gt;
+
+&lt;p&gt;Application在Api14之后添加了新的Callback方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就可以根据activity的生命周期缓存所有Activity，通过list获取上一个activity的实例，从而获取id为content的ContentView的子View（即setContentView中的View），并进行滑动展示。&lt;/p&gt;
+
+&lt;p&gt;默认SwipeBackActivity是支持滑动返回的，不需要滑动返回时则需要复写SwipeBackActivity的方法&lt;code&gt;supportSlideBack&lt;/code&gt;，其中方法&lt;code&gt;canBeSlideBack&lt;/code&gt;意思是能否返回至本Activity；两个方法相互配合使用，以应对各种需求。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; 
+   public class SwipeBackActivity extends AppCompatActivity {
+
+    private SwipeWindowHelper mSwipeWindowHelper;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(!supportSlideBack()) {
+            return super.dispatchTouchEvent(ev);
+        }
+
+        if(mSwipeWindowHelper == null) {
+            mSwipeWindowHelper = new SwipeWindowHelper(getWindow());
+        }
+        return mSwipeWindowHelper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * 是否支持滑动返回
+     * @return
+     */
+    protected boolean supportSlideBack() {
+        return true;
+    }
+
+    /**
+     * 能否滑动返回至当前Activity
+     * @return
+     */
+    protected boolean canBeSlideBack() {
+        return true;
+    }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6种事件状态&#34;&gt;6种事件状态&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+    private static final int MSG_ACTION_DOWN = 1; //点击事件  
+    private static final int MSG_ACTION_MOVE = 2; //滑动事件
+    private static final int MSG_ACTION_UP = 3;  //点击结束
+    private static final int MSG_SLIDE_CANCEL = 4; //开始滑动，不返回前一个页面
+    private static final int MSG_SLIDE_CANCELED = 5;  //结束滑动，不返回前一个页面
+    private static final int MSG_SLIDE_PROCEED = 6; //开始滑动，返回前一个页面
+    private static final int MSG_SLIDE_FINISHED = 7;//结束滑动，返回前一个页面
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在Down手势发生时，只要将上一个Activity的ContentView从parentView中剥离，并加入到当前View的ContentView中；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在滑动手势发生时，加上阴影View，并进行滑动；同时滑动的有当前Activity的ContentView、上一个Activity的ContentView和自定义的阴影View；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在Up手势发生时，判断滑动是否超过半屏，触发返回操作，并展示滑动动画；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;滑动取消或滑动返回发生时，需要将上个Activity的ContentView从新加入到上一个Acitivity的布局中。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;screenshot&#34;&gt;ScreenShot&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/XBeats/and_swipeback/master/screenshot/swipeback.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;gitHub地址：&lt;a href=&#34;https://github.com/XBeats/and_swipeback&#34;&gt;github.com/XBeats/and_swipeback&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>线程池ThreadPoolExecutor</title>
+      <link>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;线程池.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ThreadPoolExecutor的构造方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public ThreadPoolExecutor(int corePoolSize,  
+                          int maximumPoolSize,  
+                          long keepAliveTime,  
+                          TimeUnit unit,  
+                          BlockingQueue&amp;lt;Runnable&amp;gt; workQueue,  
+                          ThreadFactory threadFactory,  
+                          RejectedExecutionHandler handler)  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;###说明
+- corePoolSize： 线程池维护线程的最少数量&lt;br /&gt;
+- maximumPoolSize：线程池维护线程的最大数量
+- keepAliveTime： 线程池维护线程所允许的空闲时间
+- unit： 线程池维护线程所允许的空闲时间的单位
+- workQueue： 线程池所使用的缓冲队列
+- handler： 线程池对拒绝任务的处理策略&lt;/p&gt;
+
+&lt;p&gt;###逻辑
+1. 当池子线程数量小于corePoolSize就新建线程，并处理请求&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;当池子大小等于corePoolSize，就会将请求放入workQueue中，等池子里的线程空闲了，就去从workQueue中取任务并处理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;当workQueue放不下新入的任务时，新建线程入池，并处理请求，如果池子大小撑到了maximumPoolSize就用RejectedExecutionHandler来做拒绝处理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;另外，当池子的线程数大于corePoolSize的时候，多余的线程会等待keepAliveTime长的时间，如果无请求可处理就自行销毁&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;###理解
+一个任务通过 execute(Runnable)方法被添加到线程池，任务就是一个 Runnable类型的对象，任务的执行方法就是Runnable类型对象的run()方法。&lt;/p&gt;
+
+&lt;p&gt;###参数
+&lt;strong&gt;unit&lt;/strong&gt;  可选的参数为java.util.concurrent.TimeUnit中的几个静态属性：
+- NANOSECONDS
+- MICROSECONDS
+- MILLISECONDS 毫秒
+- SECONDS 秒&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;workQueue&lt;/strong&gt;  常用的是：java.util.concurrent.ArrayBlockingQueue&lt;br /&gt;
+- SynchronousQueue  直接提交，它将任务直接提交给线程而不保持它们。
+- LinkedBlockingQueue  无界队列，将导致在所有 corePoolSize 线程都忙的情况下将新任务加入队列。
+- ArrayBlockingQueue  有界队列，有助于防止资源耗尽，但是可能较难调整和控制。
+&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;handler&lt;/strong&gt;  有四个选择：
+- ThreadPoolExecutor.AbortPolicy()&lt;br /&gt;
+抛出java.util.concurrent.RejectedExecutionException异常
+ 
+- ThreadPoolExecutor.CallerRunsPolicy()&lt;br /&gt;
+当抛出RejectedExecutionException异常时，会调用&lt;strong&gt;rejectedExecution&lt;/strong&gt;方法
+(如果主线程没有关闭，则主线程调用run方法,源码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {            
+         if (!e.isShutdown()) {                
+                 r.run();            
+         }
+        }
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; 
+- ThreadPoolExecutor.DiscardOldestPolicy()&lt;br /&gt;
+抛弃旧的任务
+ 
+- ThreadPoolExecutor.DiscardPolicy()&lt;br /&gt;
+抛弃当前的任务&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>热修复入门：Android-中的-ClassLoader</title>
+      <link>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
+      <pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
+      <description>
+
+&lt;p&gt;从去年下半年开始，热修复技术在 Android 技术社区热了一阵子，这种不用发布新版本就可以修复线上 bug 的技术确实有很大的需求，最近正好在研究一些开源的热修复方案，本文就其中常用的 ClassLoader 方式实现的热修复方案中的 ClassLoader 机制作一个简单的介绍。
+&amp;gt; ##ClassLoader 简介&lt;br /&gt;
+&amp;gt; 对于 Java 程序来说，编写程序就是编写类，运行程序也就是运行类（编译得到的 class 文件），其中起到关键作用的就是类加载器 ClassLoader。&lt;/p&gt;
+
+&lt;p&gt;任何一个 Java 程序都是由若干个 class 文件组成的一个完整的 Java 程序，在程序运行时，需要将 class 文件加载到 JVM 中才可以使用，负责加载这些 class 文件的就是 Java 的类加载（ClassLoader）机制。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-6fd6aca614f731f1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+因此 ClassLoader 的作用简单来说就是加载 class 文件，提供给程序运行时使用。&lt;/p&gt;
+
+&lt;h2 id=&#34;classloader-的双亲委托模型-parent-delegation-model&#34;&gt;ClassLoader 的双亲委托模型（Parent *Delegation Model* ）&lt;/h2&gt;
+
+&lt;p&gt;先来看 jdk 中的 ClassLoader 类的构造方法，其需要传入一个父类加载器，并持有该引用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;protected ClassLoader(ClassLoader parent) { this(checkCreateClassLoader(), parent);}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当类加载器收到加载类或资源的请求时，通常都是先委托给父类加载器加载，也就是说只有当父类加载器找不到指定类或资源时，自身才会执行实际的类加载过程，具体的加载过程如下：
+1. 源 ClassLoader 先判断该 Class 是否已加载，如果已加载，则直接返回 Class，如果没有则委托给父类加载器。
+2. 父类加载器判断是否加载过该 Class，如果已加载，则直接返回 Class，如果没有则委托给祖父类加载器。
+3. 依此类推，直到始祖类加载器（引用类加载器）。
+4. 始祖类加载器判断是否加载过该 Class，如果已加载，则直接返回 Class，如果没有则尝试从其对应的类路径下寻找 class 字节码文件并载入。如果载入成功，则直接返回 Class，如果载入失败，则委托给始祖类加载器的子类加载器。
+5. 始祖类加载器的子类加载器尝试从其对应的类路径下寻找 class 字节码文件并载入。如果载入成功，则直接返回 Class，如果载入失败，则委托给始祖类加载器的孙类加载器。
+6. 依此类推，直到源 ClassLoader。
+7. 源 ClassLoader 尝试从其对应的类路径下寻找 class 字节码文件并载入。如果载入成功，则直接返回 Class，如果载入失败，源 ClassLoader 不会再委托其子类加载器，而是抛出异常。&lt;/p&gt;
+
+&lt;p&gt;如果需要详细了解 ClassLoader 的信息，可以借助以下文章深入了解：
+- &lt;a href=&#34;https://segmentfault.com/a/1190000002579346&#34;&gt;JVM 的工作原理,层次结构以及 GC 工作原理&lt;/a&gt;
+- &lt;a href=&#34;http://blog.csdn.net/xyang81/article/details/7292380&#34;&gt;深入分析Java ClassLoader原理&lt;/a&gt;
+- &lt;a href=&#34;http://blog.csdn.net/zhangzeyuaaa/article/details/42499839&#34;&gt;类加载机制：全盘负责和双亲委托&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;##Android 中的 ClassLoader&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Android 的 Dalvik/ART 虚拟机如同标准 Java 的 JVM 虚拟机一样，也是同样需要加载 class 文件到内存中来使用，但是在 ClassLoader 的加载细节上会有略微的差别。
+###Android 中的 dex 文件
+Android 应用打包成 apk 文件时，class 文件会被打包成一个或者多个 dex 文件。将一个 apk 文件后缀改成 .zip 格式解压后（也可以直接解压，apk 文件本质是个 zip 文件），里面就有 class.dex 文件，由于 Android 的 65K 问题（不要纠结是 64K 还是 65K），使用 MultiDex 就会生成多个 dex 文件。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-1b52e5cf56ea4658.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+当 Android 系统安装一个应用的时候，会针对不同平台对 Dex 进行优化，这个过程由一个专门的工具来处理，叫 DexOpt 。DexOpt 是在第一次加载 Dex 文件的时候执行的，该过程会生成一个 ODEX 文件，即 Optimised Dex。执行 ODEX 的效率会比直接执行 Dex 文件的效率要高很多，加快 App 的启动和响应。
+ODEX 相关的细节可以阅读以下文章扩展：
+- &lt;a href=&#34;http://www.mywiki.cn/hovercool/index.php/ART%E5%92%8CDalvik&#34;&gt;ART 和 Dalvik&lt;/a&gt;
+- &lt;a href=&#34;http://www.jianshu.com/p/242abfb7eb7f&#34;&gt;ODEX格式及生成过程&lt;/a&gt;
+- &lt;a href=&#34;http://stackoverflow.com/questions/9593527/what-are-odex-files-in-android&#34;&gt;What are ODEX files in Android&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注：本人的 5.0 机器 ODEX 优化后的文件是在 /data/dalvilk-cache
+ 文件夹下的，6.0 机器该文件夹下只有 framework 和部分内置的 App 的优化后的 dex 文件，查找相关资料后没有找到明确的说法，目前猜测和 ROM 有关系，后续再深究下这个问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-8797300b6cf9cc3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+总之，Android 中的 Dalvik/ART 无法像 JVM 那样 &lt;strong&gt;直接&lt;/strong&gt; 加载 class 文件和 jar 文件中的 class，需要通过 dx 工具来优化转换成 Dalvik byte code 才行，只能通过 dex 或者 包含 dex 的jar、apk 文件来加载（注意 odex 文件后缀可能是 .dex 或 .odex，也属于 dex 文件），因此 Android 中的 ClassLoader 工作就交给了 BaseDexClassLoader 来处理。
+&amp;gt;注：如果 jar 文件包含有 dex 文件，此时 jar 文件也是可以用来加载的，不过实际加载的还是其中的 dex 文件，不要弄混淆了。&lt;/p&gt;
+
+&lt;h3 id=&#34;basedexclassloader-及其子类&#34;&gt;BaseDexClassLoader 及其子类&lt;/h3&gt;
+
+&lt;p&gt;在 Android 开发者官网上的 &lt;a href=&#34;https://developer.android.com/reference/java/lang/ClassLoader.html&#34;&gt;ClassLoader&lt;/a&gt; 的文档说明中我们可以看到，ClassLoader 是个抽象类，其具体实现的子类有 BaseDexClassLoader 和SecureClassLoader。
+SecureClassLoader 的子类是 URLClassLoader，其只能用来加载 jar 文件，这在 Android 的 Dalvik/ART 上没法使用的。BaseDexClassLoader 的子类是 PathClassLoader和 DexClassLoader。
+&lt;strong&gt;PathClassLoader&lt;/strong&gt;
+PathClassLoader 在应用启动时创建，从 data/app/… 安装目录下加载 apk 文件。其有 2 个构造函数，如下所示，这里遵从之前提到的双亲委托模型：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public PathClassLoader(String dexPath, ClassLoader parent) {
+    super(dexPath, null, null, parent);
+}
+
+public PathClassLoader(String dexPath, String libraryPath,
+        ClassLoader parent) {
+    super(dexPath, null, libraryPath, parent);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;dexPath : 包含 dex 的 jar 文件或 apk 文件的路径集，多个以文件分隔符分隔，默认是“：”&lt;/li&gt;
+&lt;li&gt;libraryPath : 包含 C/C++ 库的路径集，多个同样以文件分隔符分隔，可以为空&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;PathClassLoader 里面除了这 2 个构造方法以外就没有其他的代码了，具体的实现都是在 BaseDexClassLoader 里面，其 dexPath 比较受限制，一般是已经安装应用的 apk 文件路径。
+在 Android 中，App 安装到手机后，apk 里面的 class.dex 中的 class 均是通过 PathClassLoader 来加载的。
+我们可以新建一个项目来验证下，在 MainActivity 中添加如下代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ClassLoader loader = MainActivity.class.getClassLoader();
+        while (loader != null) {
+            System.out.println(loader.toString());
+            loader = loader.getParent();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; I/System.out: dalvik.system.PathClassLoader[DexPathList[[zip file &amp;quot;/data/app/com.jaeger.testclassloader-2/base.apk&amp;quot;],nativeLibraryDirectories=[/vendor/lib, /system/lib]]]
+ I/System.out: java.lang.BootClassLoader@1d9c6226
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;/data/app/com.jaeger.testclassloader-2/base.apk就是示例应用安装在手机上的位置。BootClassLoader 是 PathClassLoader 的父加载器，其在系统启动时创建，在 App 启动时会将该对象传进来，具体的调用在com.android.internal.os.ZygoteInit的 main()方法中调用了 preload()， 然后调用 preloadClasses()方法，在该方法内部调用了 Class 的 forName()方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Class.forName(line, true, null);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;forName()方法源码如下，方法内部获取到 BootClassLoader 实例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public static Class&amp;lt;?&amp;gt; forName(String className, boolean shouldInitialize,
+        ClassLoader classLoader) throws ClassNotFoundException {
+    if (classLoader == null) {
+        classLoader = BootClassLoader.getInstance();
+    }
+    // Catch an Exception thrown by the underlying native code. It wraps
+    // up everything inside a ClassNotFoundException, even if e.g. an
+    // Error occurred during initialization. This as a workaround for
+    // an ExceptionInInitializerError that&#39;s also wrapped. It is actually
+    // expected to be thrown. Maybe the same goes for other errors.
+    // Not wrapping up all the errors will break android though.
+    Class&amp;lt;?&amp;gt; result;
+    try {
+        result = classForName(className, shouldInitialize, classLoader);
+    } catch (ClassNotFoundException e) {
+        Throwable cause = e.getCause();
+        if (cause instanceof LinkageError) {
+            throw (LinkageError) cause;
+        }
+        throw e;
+    }
+    return result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而 PathClassLoader 的实例化又是在哪进行的呢？在源码中寻找下其构造方法调用的地方，结果如下：
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-4a609133426fad87.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+其中：
+- 在 ZygoteInit 中的调用是用来启动相关的系统服务
+- 在 ApplicationLoaders 中用来加载系统安装过的 apk，用来加载 apk 内的 class ，其调用是在 LoadApk 类中的 getClassLoader()方法中调用的，得到的就是 PathClassLoader：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;mClassLoader = ApplicationLoaders.getDefault().getClassLoader(zip, lib, mBaseClassLoader);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;DexClassLoader&lt;/strong&gt;
+介绍 DexClassLoader 之前，先来看看其官方描述：
+&amp;gt;A class loader that loads classes from .jar and .apk filescontaining a classes.dex entry. This can be used to execute code notinstalled as part of an application.&lt;/p&gt;
+
+&lt;p&gt;很明显，对比 PathClassLoader 只能加载已经安装应用的 dex 或 apk 文件，DexClassLoader 则没有此限制，可以从 SD 卡上加载包含 class.dex 的 .jar 和 .apk 文件，这也是插件化和热修复的基础，在不需要安装应用的情况下，完成需要使用的 dex 的加载。
+DexClassLoader 的源码里面只有一个构造方法，这里也是遵从双亲委托模型：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public DexClassLoader(String dexPath, String optimizedDirectory,
+        String libraryPath, ClassLoader parent) {
+    super(dexPath, new File(optimizedDirectory), libraryPath, parent);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参数说明：
+- String dexPath: 包含 class.dex 的 apk、jar 文件路径 ，多个用文件分隔符(默认是 ：)分隔
+- String optimizedDirectory : 用来缓存优化的 dex 文件的路径，即从 apk 或 jar 文件中提取出来的 dex 文件。该路径不可以为空，且应该是应用私有的，有读写权限的路径（实际上也可以使用外部存储空间，但是这样的话就存在代码注入的风险），可以通过以下方式来创建一个这样的路径：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;File dexOutputDir = context.getCodeCacheDir();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注：后续发现，getCodeCacheDir() 方法只能在 API 21 以上可以使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;String libraryPath: 存储 C/C++ 库文件的路径集&lt;/li&gt;
+&lt;li&gt;ClassLoader parent : 父类加载器，遵从双亲委托模型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;简单介绍了 PathClassLoader 和 DexClassLoader，但这两者都是对 BaseDexClassLoader 的一层简单封装，真正的实现都在 BaseClassLoader 内。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;BaseClassLoader 源码分析&lt;/strong&gt;
+先来看一眼 BaseClassLoader 的结构：&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-0a2eededd79ba200.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+其中有个重要的字段 private final DexPathList pathList，其继承 ClassLoader 实现的 findClass()、findResource()
+ 均是基于 pathList 来实现的（省略了部分源码）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Override
+    protected Class&amp;lt;?&amp;gt; findClass(String name) throws ClassNotFoundException {
+        List&amp;lt;Throwable&amp;gt; suppressedExceptions = new ArrayList&amp;lt;Throwable&amp;gt;();
+        Class c = pathList.findClass(name, suppressedExceptions);
+        ...
+        return c;
+    }
+    @Override
+    protected URL findResource(String name) {
+        return pathList.findResource(name);
+    }
+    @Override
+    protected Enumeration&amp;lt;URL&amp;gt; findResources(String name) {
+        return pathList.findResources(name);
+    }
+    @Override
+    public String findLibrary(String name) {
+        return pathList.findLibrary(name);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么重要的部分则是在 DexPathList 类的内部了，DexPathList 的构造方法也较为简单，和之前介绍的类似：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public DexPathList(ClassLoader definingContext, String dexPath,
+        String libraryPath, File optimizedDirectory) {
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接受之前传进来的包含 dex 的 apk/jar/dex 的路径集、native 库的路径集和缓存优化的 dex 文件的路径，然后调用 makePathElements()方法生成一个Element[] dexElements数组，Element 是 DexPathList 的一个嵌套类，其有以下字段：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;static class Element {
+	private final File dir;
+	private final boolean isDirectory;
+	private final File zip;
+	private final DexFile dexFile;
+	private ZipFile zipFile;
+	private boolean initialized;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;makePathElements() 是如何生成 Element 数组的？继续看源码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;private static Element[] makePathElements(List&amp;lt;File&amp;gt; files, File optimizedDirectory,
+                                          List&amp;lt;IOException&amp;gt; suppressedExceptions) {
+    List&amp;lt;Element&amp;gt; elements = new ArrayList&amp;lt;&amp;gt;();
+    // 遍历所有的包含 dex 的文件
+    for (File file : files) {
+        File zip = null;
+        File dir = new File(&amp;quot;&amp;quot;);
+        DexFile dex = null;
+        String path = file.getPath();
+        String name = file.getName();
+        // 判断是不是 zip 类型
+        if (path.contains(zipSeparator)) {
+            String split[] = path.split(zipSeparator, 2);
+            zip = new File(split[0]);
+            dir = new File(split[1]);
+        } else if (file.isDirectory()) {
+            // 如果是文件夹,则直接添加 Element,这个一般是用来处理 native 库和资源文件
+            elements.add(new Element(file, true, null, null));
+        } else if (file.isFile()) {
+            // 直接是 .dex 文件,而不是 zip/jar 文件(apk 归为 zip),则直接加载 dex 文件
+            if (name.endsWith(DEX_SUFFIX)) {
+                try {
+                    dex = loadDexFile(file, optimizedDirectory);
+                } catch (IOException ex) {
+                    System.logE(&amp;quot;Unable to load dex file: &amp;quot; + file, ex);
+                }
+            } else {
+                // 如果是 zip/jar 文件(apk 归为 zip),则将 file 值赋给 zip 字段,再加载 dex 文件
+                zip = file;
+                try {
+                    dex = loadDexFile(file, optimizedDirectory);
+                } catch (IOException suppressed) {
+                    suppressedExceptions.add(suppressed);
+                }
+            }
+        } else {
+            System.logW(&amp;quot;ClassLoader referenced unknown path: &amp;quot; + file);
+        }
+        if ((zip != null) || (dex != null)) {
+            elements.add(new Element(dir, false, zip, dex));
+        }
+    }
+    // list 转为数组
+    return elements.toArray(new Element[elements.size()]);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;loadDexFile()方法最终会调用 JNI 层的方法来读取 dex 文件，这里不再深入探究，有兴趣的可以阅读 &lt;a href=&#34;http://blog.csdn.net/nanzhiwen666/article/details/50515895&#34;&gt;从源码分析 Android dexClassLoader 加载机制原理&lt;/a&gt; 这篇文章深入了解。
+接下来看以下 DexPathList 的 findClass()方法，其根据传入的完整的类名来加载对应的 class，源码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public Class findClass(String name, List&amp;lt;Throwable&amp;gt; suppressed) {
+	// 遍历 dexElements 数组，依次寻找对应的 class，一旦找到就终止遍历
+    for (Element element : dexElements) {
+        DexFile dex = element.dexFile;
+        if (dex != null) {
+            Class clazz = dex.loadClassBinaryName(name, definingContext, suppressed);
+            if (clazz != null) {
+                return clazz;
+            }
+        }
+    }
+    // 抛出异常
+    if (dexElementsSuppressedExceptions != null) {
+        suppressed.addAll(Arrays.asList(dexElementsSuppressedExceptions));
+    }
+    return null;
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里有关于热修复实现的一个点，就是将补丁 dex 文件放到 dexElements 数组前面，这样在加载 class 时，优先找到补丁包中的 dex 文件，加载到 class 之后就不再寻找，从而原来的 apk 文件中同名的类就不会再使用，从而达到修复的目的，虽然说起来较为简单，但是实现起来还有很多细节需要注意，本文先热身，后期再分析具体实现。
+至此，BaseDexClassLader 寻找 class 的路线就清晰了：
+1. 当传入一个完整的类名，调用 BaseDexClassLader 的 findClass(String name) 方法
+2. BaseDexClassLader 的 findClass 方法会交给 DexPathList 的 findClass(String name, List&lt;Throwable&gt; suppressed 
+方法处理
+3. 在 DexPathList 方法的内部，会遍历 dexFile ，通过 DexFile的dex.loadClassBinaryName(name,definingContext, suppressed)来完成类的加载&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;实际使用&lt;/strong&gt;
+需要注意到的是，在项目中使用 BaseDexClassLoader 或者 DexClassLoader 去加载某个 dex 或者 apk 中的 class 时，是无法调用 findClass()方法的，因为该方法是包访问权限，你需要调用 loadClass(String className)
+ ，该方法其实是 BaseDexClassLoader 的父类 ClassLoader 内实现的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public Class&amp;lt;?&amp;gt; loadClass(String className) throws ClassNotFoundException {
+    return loadClass(className, false);
+}
+
+protected Class&amp;lt;?&amp;gt; loadClass(String className, boolean resolve) throws ClassNotFoundException {
+    Class&amp;lt;?&amp;gt; clazz = findLoadedClass(className);
+    if (clazz == null) {
+        ClassNotFoundException suppressed = null;
+        try {
+            clazz = parent.loadClass(className, false);
+        } catch (ClassNotFoundException e) {
+            suppressed = e;
+        }
+        if (clazz == null) {
+            try {
+                clazz = findClass(className);
+            } catch (ClassNotFoundException e) {
+                e.addSuppressed(suppressed);
+                throw e;
+            }
+        }
+    }
+    return clazz;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这段代码结合之前提到的双亲委托模型就很好理解了，先查找当前的 ClassLoader 是否已经加载过，如果没有就交给父 ClassLoader 去加载，如果父 ClassLoader 没有找到，才调用当前 ClassLoader 来加载，此时就是调用上面分析的 findClass() 方法了。
+&amp;gt; ##ClassLoader 使用示例&lt;/p&gt;
+
+&lt;p&gt;上面说了这么多理论知识，只说不练假把式，接下来实战：从 SD 卡中动态加载一个包含 class.dex 的 jar 文件，加载其中的类，并调用其方法。
+1. 新建一个 Java 项目，包含两个文件：ISayHello.java和 HelloAndroid.java&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  package com.jaeger;
+    
+   public interface ISayHello {
+       String say();
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  package com.jaeger;
+    
+   public class HelloAndroid implements ISayHello {
+       @Override
+       public String say() {
+           return &amp;quot;Hello Android&amp;quot;;
+       }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;导出 jar 包
+这一步使用 IntelliJ IDEA 导出有点问题，最终我是用 Eclipse 导出 jar 包的。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-24ea3c9c26686a03.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;使用 SDK 目录 &amp;gt; platform-tools 里面的 dx 工具生成包含 class.dex 的 jar 包
+将上一步生成的 sayhello.jar放到 你的 SDK 下的 platform-tools 文件夹下，使用下面的命令生成 dex 化的 jar 文件，其中是 output 后面的sayhello_dex.jar就是最终生成的 jar 包。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;dx --dex --output=sayhello_dex.jar sayhello.jar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生成 sayhello_dex.jar之后，用解压解压后就会发现其已经包含了 class.dex 文件了。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-20983b8044fe24b8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;将 sayhello_dex.jar文件拷贝到手机存储空间的根目录，不一定是内存卡。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-a270c670f0ff42ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;新建一个 Android 项目，在 MainActivity 中添加如下的代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class MainActivity extends AppCompatActivity {
+private static final String TAG = &amp;quot;TestClassLoader&amp;quot;;
+private TextView mTvInfo;
+private Button mBtnLoad;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    mTvInfo = (TextView) findViewById(R.id.tv_info);
+    mBtnLoad = (Button) findViewById(R.id.btn_load);
+    mBtnLoad.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            // 获取到包含 class.dex 的 jar 包文件
+            final File jarFile =
+                new File(Environment.getExternalStorageDirectory().getPath() + File.separator + &amp;quot;sayhello_dex.jar&amp;quot;);
+                   
+            // 如果没有读权限,确定你在 AndroidManifest 中是否声明了读写权限
+            Log.d(TAG, jarFile.canRead() + &amp;quot;&amp;quot;);
+
+            if (!jarFile.exists()) {
+                Log.e(TAG, &amp;quot;sayhello_dex.jar not exists&amp;quot;);
+                return;
+            }
+
+            // getCodeCacheDir() 方法在 API 21 才能使用,实际测试替换成 getExternalCacheDir() 等也是可以的
+            // 只要有读写权限的路径均可
+            DexClassLoader dexClassLoader =
+                new DexClassLoader(jarFile.getAbsolutePath(), getExternalCacheDir().getAbsolutePath(), null, getClassLoader());
+            try {
+                // 加载 HelloAndroid 类
+                Class clazz = dexClassLoader.loadClass(&amp;quot;com.jaeger.HelloAndroid&amp;quot;);
+                // 强转成 ISayHello, 注意 ISayHello 的包名需要和 jar 包中的
+                ISayHello iSayHello = (ISayHello) clazz.newInstance();
+                mTvInfo.setText(iSayHello.say());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;同时需要新建一个和第一步创建的 Java 项目中包名一致的 ISayHello
+ 接口：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package com.jaeger;
+public interface ISayHello {
+String say();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这里需要注意几点：
+- 因为需要从存储空间中读取 jar 文件，需要在 AndroidManifest 中声明读写权限
+- ISayHello 接口的包名必须一致
+- getCodeCacheDir()方法在 API 21 才能使用,实际测试替换成 getExternalCacheDir()等也是可以的&lt;/p&gt;
+
+&lt;p&gt;接下来就是运行，运行的结果如图，和预期的一样，完美收工。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-cb63cb921d2f4083.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+示例代码以及 jar 包上传到 GitHub 了，请前往 &lt;a href=&#34;https://github.com/laobie/TestClassLoader&#34;&gt;这里&lt;/a&gt; 去查看。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;原文地址:&lt;a href=&#34;http://jaeger.itscoder.com/android/2016/08/27/android-classloader.html&#34;&gt;http://jaeger.itscoder.com/android/2016/08/27/android-classloader.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>HashMap知识点</title>
+      <link>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
+      <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-dc3526b7baa6eb4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;HashMap.png&#34; /&gt;
+###前言
+首先再次强调hashcode （==）和equals的真正含义
+- &lt;strong&gt;equals&lt;/strong&gt;：是否同一个对象实例。注意，是“&lt;strong&gt;实例&lt;/strong&gt;”。比如String s = new String(&amp;ldquo;test&amp;rdquo;);  s.equals(s), 这就是同一个对象实例的比较；
+- &lt;strong&gt;等号(==)&lt;/strong&gt;：对比对象实例的内存地址（也即对象实例的ID），来判断是否是同一对象实例；又可以说是判断对象实例是否物理相等；
+- &lt;strong&gt;Hashcode&lt;/strong&gt;：可以这样理解：并不是对象的内存地址，而是利用hash算法，对对象实例的一种描述符（或者说对象存储位置的hash算法映射）——对象实例的哈希码。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;为什么需要使用Hashcode?&lt;/strong&gt;
+可以从java集合的常用需求来描述：
+Java中的集合（Collection）有两类，一类是List，再有一类是Set。前者集合内的元素是有序的，元素可以重复；后者元素无序，但元素不可重复。那么这里就有一个比较严重的问题了：要想保证元素不重复，可两个元素是否重复应该依据什么来判断呢？这就是 Object.equals方法了。但是，如果每增加一个元素就检查一次，那么当元素很多时，后添加到集合中的元素比较的次数就非常多了。也就是说，如果集合中现在已经有1000个元素，那么第1001个元素加入集合时，它就要调用1000次equals方法。这显然会大大降低效率。  于是，Java采用了哈希表的原理。哈希算法也称为散列算法，是将数据依特定算法直接指定到一个地址上。可以这样简单理解，hashCode方法实际上返回的就是对象存储位置的映像。   这样一来，当集合要添加新的元素时，先调用这个元素的hashCode方法，就能定位到它应该放置的存储位置。如果这个位置上没有元素，它就可以直接存储在这个位置上，不用再进行任何比较了；如果这个位置上已经有元素了，就调用它的equals方法与新元素进行比较，相同的话就不存了，不相同就表示发生冲突了，散列表对于冲突有具体的解决办法，但最终还会将新元素保存在适当的位置。这样一来，实际调用equals方法的次数就大大降低了，几乎只需要一两次。&lt;/p&gt;
+
+&lt;p&gt;简单归纳，hashmap的深入理解：
+HashMap的数据结构是基于&lt;strong&gt;数组和链表&lt;/strong&gt;的。（以数组存储元素，如有hash相同的元素，在数组结构中，创建链表结构，再把hash相同的元素放到链表的下一个节点）
+hashMap的结构类似这样 : 
+元素0&amp;ndash;&amp;gt;[hashCode=0, key.value=x1的数据]  
+元素1&amp;ndash;&amp;gt;[hashCode=1, key.value=y1的数据]  
+。
+。&lt;br /&gt;
+。&lt;br /&gt;
+元素n&amp;ndash;&amp;gt;[hashCode=n, key.value=z1的数据]&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;假设没有hashCode=1的元素加入，但是有两个hashCode=0的数据，它的结构就变成这样&lt;/em&gt;&lt;br /&gt;
+元素0&amp;ndash;&amp;gt;[hashCode=0, key.value=x1的数据].next&amp;ndash;&amp;gt;[hashCode=0, key.value=x2的数据]  
+元素1&amp;ndash;&amp;gt;[null] 
+。
+。&lt;br /&gt;
+。
+元素n&amp;ndash;&amp;gt;[hashCode=n, key.value=z1的数据]&lt;br /&gt;
+put和get都首先会调用hashcode方法，去查找相关的key，当有冲突时，再调用equals（这也是为什么刚开始就重温hashcode和equals的原因）！
+HashMap基于hashing原理，我们通过put()和get()方法储存和获取对象。当我们将键值对传递给put()方法时，它调用键对象的hashCode()方法来计算hashcode，让后找到bucket位置来储存值对象。当获取对象时，通过键对象的equals()方法找到正确的键值对，然后返回值对象。HashMap使用链表来解决碰撞问题，当发生碰撞了，对象将会储存在链表的下一个节点中。 HashMap在每个链表节点中储存键值对对象。当两个不同的键对象的hashcode相同时会发生什么？ 它们会储存在同一个bucket位置的链表中。键对象的equals()方法用来找到键值对。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**
+     * Maps the specified key to the specified value.
+     *
+     * @param key
+     *            the key.
+     * @param value
+     *            the value.
+     * @return the value of any previous mapping with the specified key or
+     *         {@code null} if there was no such mapping.
+     */
+    @Override public V put(K key, V value) {
+        if (key == null) {
+            return putValueForNullKey(value);
+        }
+
+        int hash = Collections.secondaryHash(key);
+        HashMapEntry&amp;lt;K, V&amp;gt;[] tab = table;
+        int index = hash &amp;amp; (tab.length - 1);
+        for (HashMapEntry&amp;lt;K, V&amp;gt; e = tab[index]; e != null; e = e.next) {
+            if (e.hash == hash &amp;amp;&amp;amp; key.equals(e.key)) {
+                preModify(e);
+                V oldValue = e.value;
+                e.value = value;
+                return oldValue;
+            }
+        }
+
+        // No entry for (non-null) key is present; create one
+        modCount++;
+        if (size++ &amp;gt; threshold) {
+            tab = doubleCapacity();
+            index = hash &amp;amp; (tab.length - 1);
+        }
+        addNewEntry(key, value, hash, index);
+        return null;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;###正文（以下来自转载）&lt;br /&gt;
+HashMap的工作原理是近年来常见的Java面试题。几乎每个Java程序员都知道HashMap，都知道哪里要用HashMap，知道Hashtable和HashMap之间的区别，那么为何这道面试题如此特殊呢？是因为这道题考察的深度很深。这题经常出现在高级或中高级面试中。ConcurrentHashMap和其它同步集合的引入让这道题变得更加复杂。让我们开始探索的旅程吧！
+&lt;strong&gt;&lt;em&gt;先来些简单的问题“你用过HashMap吗？” “什么是HashMap？你为什么用到它？”&lt;/em&gt;&lt;/strong&gt;
+几乎每个人都会回答“是的”，然后回答HashMap的一些特性，譬如HashMap可以接受null键值和值，而Hashtable则不能；HashMap是非synchronized;HashMap很快；以及HashMap储存的是键值对等等。这显示出你已经用过HashMap，而且对它相当的熟悉。但是面试官来个急转直下，从此刻开始问出一些刁钻的问题，关于HashMap的更多基础的细节。面试官可能会问出下面的问题：
+&lt;strong&gt;&lt;em&gt;“你知道HashMap的工作原理吗？” “你知道HashMap的get()方法的工作原理吗？”&lt;/em&gt;&lt;/strong&gt;
+你也许会回答“我没有详查标准的Java API，你可以看看Java源代码或者Open JDK。”“我可以用Google找到答案。”
+但一些面试者可能可以给出答案，“HashMap是基于hashing的原理，我们使用put(key, value)存储对象到HashMap中，使用get(key)从HashMap中获取对象。当我们给put()方法传递键和值时，我们先对键调用hashCode()方法，返回的hashCode用于找到bucket位置来储存Entry对象。”这里关键点在于指出，HashMap是在bucket中储存键对象和值对象，作为Map.Entry。这一点有助于理解获取对象的逻辑。如果你没有意识到这一点，或者错误的认为仅仅只在bucket中存储值的话，你将不会回答如何从HashMap中获取对象的逻辑。这个答案相当的正确，也显示出面试者确实知道hashing以及HashMap的工作原理。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    /**
+     * Returns the value of the mapping with the specified key.
+     *
+     * @param key
+     *            the key.
+     * @return the value of the mapping with the specified key, or {@code null}
+     *         if no mapping for the specified key is found.
+     */
+    public V get(Object key) {
+        if (key == null) {
+            HashMapEntry&amp;lt;K, V&amp;gt; e = entryForNullKey;
+            return e == null ? null : e.value;
+        }
+
+        int hash = Collections.secondaryHash(key);
+        HashMapEntry&amp;lt;K, V&amp;gt;[] tab = table;
+        for (HashMapEntry&amp;lt;K, V&amp;gt; e = tab[hash &amp;amp; (tab.length - 1)];
+                e != null; e = e.next) {
+            K eKey = e.key;
+            if (eKey == key || (e.hash == hash &amp;amp;&amp;amp; key.equals(eKey))) {
+                return e.value;
+            }
+        }
+        return null;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是这仅仅是故事的开始，当面试官加入一些Java程序员每天要碰到的实际场景的时候，错误的答案频现。下个问题可能是关于HashMap中的碰撞探测(collision detection)以及碰撞的解决方法：
+&lt;strong&gt;&lt;em&gt;“当两个对象的hashcode相同会发生什么？”&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+ 从这里开始，真正的困惑开始了，一些面试者会回答因为hashcode相同，所以两个对象是相等的，HashMap将会抛出异常，或者不会存储它们。然后面试官可能会提醒他们有equals()和hashCode()两个方法，并告诉他们两个对象就算hashcode相同，但是它们可能并不相等。一些面试者可能就此放弃，而另外一些还能继续挺进，他们回答“因为hashcode相同，所以它们的bucket位置相同，‘碰撞’会发生。因为HashMap使用链表存储对象，这个Entry(包含有键值对的Map.Entry对象)会存储在链表中。”这个答案非常的合理，虽然有很多种处理碰撞的方法，这种方法是最简单的，也正是HashMap的处理方法。但故事还没有完结，面试官会继续问：
+&lt;strong&gt;&lt;em&gt;“如果两个键的hashcode相同，你如何获取值对象？”&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+ 面试者会回答：当我们调用get()方法，HashMap会使用键对象的hashcode找到bucket位置，然后获取值对象。面试官提醒他如果有两个值对象储存在同一个bucket，他给出答案:将会遍历链表直到找到值对象。面试官会问因为你并没有值对象去比较，你是如何确定确定找到值对象的？除非面试者直到HashMap在链表中存储的是键值对，否则他们不可能回答出这一题。
+其中一些记得这个重要知识点的面试者会说，找到bucket位置之后，会调用keys.equals()方法去找到链表中正确的节点，最终找到要找的值对象。完美的答案！
+许多情况下，面试者会在这个环节中出错，因为他们混淆了hashCode()和equals()方法。因为在此之前hashCode()屡屡出现，而equals()方法仅仅在获取值对象的时候才出现。一些优秀的开发者会指出使用不可变的、声明作final的对象，并且采用合适的equals()和hashCode()方法的话，将会减少碰撞的发生，提高效率。不可变性使得能够缓存不同键的hashcode，这将提高整个获取对象的速度，使用String，Interger这样的wrapper类作为键是非常好的选择。
+如果你认为到这里已经完结了，那么听到下面这个问题的时候，你会大吃一惊。“如果HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？”除非你真正知道HashMap的工作原理，否则你将回答不出这道题。默认的负载因子大小为0.75，也就是说，当一个map填满了75%的bucket时候，和其它集合类(如ArrayList等)一样，将会创建原来HashMap大小的两倍的bucket数组，来重新调整map的大小，并将原来的对象放入新的bucket数组中。这个过程叫作rehashing，因为它调用hash方法找到新的bucket位置。
+如果你能够回答这道问题，下面的问题来了：&lt;br /&gt;
+&lt;strong&gt;&lt;em&gt;“你了解重新调整HashMap大小存在什么问题吗？”&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+你可能回答不上来，这时面试官会提醒你当多线程的情况下，可能产生条件竞争(race condition)。
+当重新调整HashMap大小的时候，确实存在条件竞争，因为如果两个线程都发现HashMap需要重新调整大小了，它们会同时试着调整大小。在调整大小的过程中，存储在链表中的元素的次序会反过来，因为移动到新的bucket位置的时候，HashMap并不会将元素放在链表的尾部，而是放在头部，这是为了避免尾部遍历(tail traversing)。如果条件竞争发生了，那么就死循环了。这个时候，你可以质问面试官，为什么这么奇怪，要在多线程的环境下使用HashMap呢？：）
+热心的读者贡献了更多的关于HashMap的问题：
+为什么String, Interger这样的wrapper类适合作为键？ String, Interger这样的wrapper类作为HashMap的键是再适合不过了，而且String最为常用。因为String是不可变的，也是final的，而且已经重写了equals()和hashCode()方法了。其他的wrapper类也有这个特点。不可变性是必要的，因为为了要计算hashCode()，就要防止键值改变，如果键值在放入时和获取时返回不同的hashcode的话，那么就不能从HashMap中找到你想要的对象。不可变性还有其他的优点如线程安全。如果你可以仅仅通过将某个field声明成final就能保证hashCode是不变的，那么请这么做吧。因为获取对象的时候要用到equals()和hashCode()方法，那么键对象正确的重写这两个方法是非常重要的。如果两个不相等的对象返回不同的hashcode的话，那么碰撞的几率就会小些，这样就能提高HashMap的性能。
+我们可以使用自定义的对象作为键吗？ 这是前一个问题的延伸。当然你可能使用任何对象作为键，只要它遵守了equals()和hashCode()方法的定义规则，并且当对象插入到Map中之后将不会再改变了。如果这个自定义对象时不可变的，那么它已经满足了作为键的条件，因为当它创建之后就已经不能改变了。
+我们可以使用CocurrentHashMap来代替Hashtable吗？这是另外一个很热门的面试题，因为ConcurrentHashMap越来越多人用了。我们知道Hashtable是synchronized的，但是ConcurrentHashMap同步性能更好，因为它仅仅根据同步级别对map的一部分进行上锁。ConcurrentHashMap当然可以代替HashTable，但是HashTable提供更强的线程安全性。看看&lt;a href=&#34;http://blog.csdn.net/wisgood/article/details/19338693&#34;&gt;这篇博客&lt;/a&gt;查看Hashtable和ConcurrentHashMap的区别。&lt;/p&gt;
+
+&lt;p&gt;我个人很喜欢这个问题，因为这个问题的深度和广度，也不直接的涉及到不同的概念。让我们再来看看这些问题设计哪些知识点：
+hashing的概念
+HashMap中解决碰撞的方法
+equals()和hashCode()的应用，以及它们在HashMap中的重要性
+不可变对象的好处
+HashMap多线程的条件竞争
+重新调整HashMap的大小
+HashMap的工作原理
+HashMap基于hashing原理&lt;br /&gt;
+我们通过put()和get()方法储存和获取对象。当我们将键值对传递给put()方法时，它调用键对象的hashCode()方法来计算hashcode，让后找到bucket位置来储存值对象。当获取对象时，通过键对象的equals()方法找到正确的键值对，然后返回值对象。HashMap使用链表来解决碰撞问题，当发生碰撞了，对象将会储存在链表的下一个节点中。 HashMap在每个链表节点中储存键值对对象。当两个不同的键对象的hashcode相同时会发生什么？ 它们会储存在同一个bucket位置的链表中。键对象的equals()方法用来找到键值对。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;参考资料：
+&lt;a href=&#34;http://blog.csdn.net/fyxxq/article/details/42066843&#34;&gt;http://blog.csdn.net/fyxxq/article/details/42066843&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://www.cnblogs.com/xwdreamer/archive/2012/06/03/2532832.html&#34;&gt;http://www.cnblogs.com/xwdreamer/archive/2012/06/03/2532832.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to use git</title>
+      <link>http://aitangba.com/post/How%20to%20use%20git/</link>
+      <pubDate>Fri, 25 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/How%20to%20use%20git/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-bb0ca3652ff14150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;git.png&#34; /&gt;
+团队开发中，必然会用到SVN、git等版本控制系统（Version Control System），其中SVN在分支管理上有着很大的局限性，而git则在许多方面的特性则脱颖而出。&lt;/p&gt;
+
+&lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
+
+&lt;p&gt;Git在生成新分支时，会生成一个指向当前版本的指针（又称&amp;rdquo;快照&amp;rdquo;），并不需要对主分支代码进行物理拷贝，所以极为方便快捷。切换分支，其实就是指针跳转到对应分支的过程。
+由于分支创建的便捷性，许多团队就忽视了对分支进行必要的管理，生成了一个枝节蔓生、四处开花的版本库，到处是分支结点，完成看不出版本库的迭代思路和脉路。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-e3c084ec920634e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;一个错误的版本库&#34; /&gt;
+上图的分支管理就显得非常杂乱，由此看来git分支管理非常必要！&lt;/p&gt;
+
+&lt;h2 id=&#34;版本管理&#34;&gt;版本管理&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://nvie.com/&#34;&gt;Vincent Driessen&lt;/a&gt;提出了一个分支管理的&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;策略&lt;/a&gt;，我觉得非常值得借鉴。它可以使得版本库的演进保持简洁，主干清晰，各个分支各司其职、井井有条。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-67b6f4b4480c4a0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;git-model.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;一、主分支Master&lt;/strong&gt;
+首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-3f4203bff6df3f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+Git主分支的名字，默认叫做Master。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;二、开发分支Develop&lt;/strong&gt;
+主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-7f7ab7709450dcd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+这个分支可以用来生成代码的最新隔夜版本（nightly）。如果想正式对外发布，就在Master分支上，对Develop分支进行&amp;rdquo;合并&amp;rdquo;（merge）。
+Git创建Develop分支的命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     git checkout -b develop master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将Develop分支发布到Master分支的命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　  # 切换到Master分支
+　　git checkout master
+　　# 对Develop分支进行合并
+　　git merge --no-ff develop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里稍微解释一下，上一条命令的&amp;ndash;no-ff参数是什么意思。默认情况下，Git执行&amp;rdquo;快进式合并&amp;rdquo;（fast-farward merge），会直接将Master分支指向Develop分支。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-3820c9a17b02d050.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+使用&lt;code&gt;--no-ff&lt;/code&gt;参数后，会执行正常合并，在Master分支上生成一个新节点。为了保证版本演进的清晰，我们希望采用这种做法。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-edec962384700b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;strong&gt;三、临时性分支&lt;/strong&gt;
+前面讲到版本库的两条主要分支：Master和Develop。前者用于正式发布，后者用于日常开发。其实，常设分支只需要这两条就够了，不需要其他了。
+但是，除了常设分支以外，还有一些临时性分支，用于应对一些特定目的的版本开发。临时性分支主要有三种：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;* 功能（feature）分支
+* 预发布（release）分支
+* 修补bug（fixbug）分支  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这三种分支都属于临时性需要，使用完以后，应该删除，使得代码库的常设分支始终只有Master和Develop。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;四、 功能分支&lt;/strong&gt;
+接下来，一个个来看这三种&amp;rdquo;临时性分支&amp;rdquo;。
+第一种是功能分支，它是为了开发某种特定功能，从Develop分支上面分出来的。开发完成后，要再并入Develop。
+功能分支的名字，可以采用feature-*的形式命名。
+创建一个功能分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git checkout -b feature-x develop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;开发完成后，将功能分支合并到develop分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout develop
+　　git merge --no-ff feature-x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;删除feature分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git branch -d feature-x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;五、预发布分支&lt;/strong&gt;
+第二种是预发布分支，它是指发布正式版本之前（即合并到Master分支之前），我们可能需要有一个预发布的版本进行测试。
+预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并进Develop和Master分支。它的命名，可以采用release-*的形式。
+创建一个预发布分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout -b release-1.2 develop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认没有问题后，合并到master分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout master
+　　git merge --no-ff release-1.2
+　　# 对合并生成的新节点，做一个标签　　git tag -a 1.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再合并到develop分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout develop
+　　git merge --no-ff release-1.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后，删除预发布分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git branch -d release-1.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;六、修补bug分支&lt;/strong&gt;
+最后一种是修补bug分支。软件正式发布以后，难免会出现bug。这时就需要创建一个分支，进行bug修补。
+修补bug分支是从Master分支上面分出来的。修补结束以后，再合并进Master和Develop分支。它的命名，可以采用fixbug-*的形式。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-86baeac96407f0c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+创建一个修补bug分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout -b fixbug-0.1 master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修补结束后，合并到master分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout master
+　　git merge --no-ff fixbug-0.1
+　　git tag -a 0.1.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再合并到develop分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout develop
+　　git merge --no-ff fixbug-0.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后，删除&amp;rdquo;修补bug分支&amp;rdquo;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git branch -d fixbug-0.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;原文地址：
+&lt;a href=&#34;http://www.ruanyifeng.com/blog/2012/07/git.html&#34;&gt;http://www.ruanyifeng.com/blog/2012/07/git.html&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://www.jianshu.com/p/3081e33a6136&#34;&gt;http://www.jianshu.com/p/3081e33a6136&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Markdown的说明文档</title>
+      <link>http://aitangba.com/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Mon, 22 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+      <description>
+
+&lt;h1 id=&#34;markdown&#34;&gt;Markdown&lt;/h1&gt;
+
+&lt;p&gt;####导语：
+&amp;gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Markdown&#34;&gt;Markdown&lt;/a&gt;是一种轻量级『标记语言』，它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。&lt;br /&gt;
+创始人为约翰·格鲁伯（John Gruber），初始版本发布在2004年3月19日。&lt;/p&gt;
+
+&lt;h2 id=&#34;一-关于markdown&#34;&gt;一、关于Markdown&lt;/h2&gt;
+
+&lt;p&gt;文本格式一种规范，使用简洁的语法代替繁琐的排版，与HTML语言相比，特点是显而易见的，多种语法，字体样式、颜色等等设置都是相对简单得多的。相对简单的语法，使我们能更专心于书写自己的文档。所以越来越多的博客平台也都相继开始兼容markdown格式，例如github的README，就是最好的代表，国内的博客平台有：Oschina，简书，CSDN等等。&lt;/p&gt;
+
+&lt;p&gt;###Markdown官相关文档
+- &lt;a href=&#34;http://www.markdown.cn/&#34;&gt;&lt;em&gt;说明文档&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
+- &lt;a href=&#34;http://www.markdown.cn/&#34;&gt;&lt;em&gt;Markdown中文语法说明&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;###使用Markdown的优点&lt;br /&gt;
+- 专注文本，而不是排版
+- 多种格式可供导出（PDF、HTML等）
+- 纯文本格式，多平台兼容
+- 可读性强，可供多种人群读写&lt;/p&gt;
+
+&lt;p&gt;###Markdown开发工具
+&amp;gt; &lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://markdownpad.com/&#34;&gt;&lt;em&gt;Markdownpad&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-014f645995f9927b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;MAC&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://25.io/mou/&#34;&gt;&lt;em&gt;Mou&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-244acb3dfee23163.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;浏览器&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://markable.in/&#34;&gt;&lt;em&gt;Markable&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://dillinger.io/&#34;&gt;&lt;em&gt;Dillinger&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;二-markdown语法&#34;&gt;二、Markdown语法&lt;/h2&gt;
+
+&lt;p&gt;###作用域
+像很多的其他编程语言一样，每个方法或者类都有一个范围或权限修饰符。而markdown的语法范围几乎都是对称的（例如：&lt;code&gt;*Hello World!*&lt;/code&gt;）,又开始必然有结束，当然也有一些特殊的类型只有开始符号（例如：&lt;code&gt;#标题&lt;/code&gt;），在其结尾部分需要通过2个空格和换行来去其他部分区分&lt;/p&gt;
+
+&lt;p&gt;###语法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;标题&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-88716dd9f7ba5886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+标题是每篇文章都需要也是最常用的格式，在 Markdown 中，如果一段文字被定义为标题，只要在这段文字前加 # 号即可。&lt;/p&gt;
+
+&lt;p&gt;# 一级标题&lt;/p&gt;
+
+&lt;p&gt;## 二级标题&lt;/p&gt;
+
+&lt;p&gt;### 三级标题&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;列表&lt;/strong&gt;&lt;br /&gt;
+列表有有序列表与无序列表的区别，在 Markdown 下，列表的显示只需要在文字前加上 - 或 * 即可变为无序列表，有序列表则直接在文字前加 1. 2. 3. 符号要和文字之间加上一个字符的空格。&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-57afd995052ecc35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;引用&lt;/strong&gt;&lt;br /&gt;
+如果你需要引用一小段别处的句子，那么就要用引用的格式。&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-c6d2da6543f1a205.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;链接&lt;/strong&gt;
+链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记,在解释标示的地方加上链接地址和说明；当然也可以直接用括号加上链接地址：&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;This is [an example][id] reference-style link.&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;[id]: http://example.com/  &amp;quot;Optional Title Here&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;或者&lt;br /&gt;
+&lt;code&gt;This is [an example](http://example.com/) reference-style link.&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;图片&lt;/strong&gt;&lt;br /&gt;
+插入链接与插入图片的语法很像，区别在一个!号。可以先将图片上传到自己的云空间，生成可以访问的外链即可。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-61432270893a5830.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;粗体与斜体&lt;/strong&gt;&lt;br /&gt;
+Markdown 的粗体和斜体也非常简单，用一个 * 包含一段文本就是斜体的语法,用两个 * 包含一段文本就是粗体的语法，用三个 * 包含一段文本就是斜体加粗体的语法。&lt;br /&gt;
+例如：&lt;br /&gt;
+&lt;em&gt;这里是粗斜体&lt;/em&gt;&lt;br /&gt;
+&lt;strong&gt;这里是粗体&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;em&gt;这里是斜体加粗体&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;表格&lt;/strong&gt;&lt;br /&gt;
+表格是Markdown中最烦的语法，&lt;code&gt;&amp;quot;|&amp;quot;&lt;/code&gt;表示表格范围，&lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;表示内容范围，&lt;code&gt;&amp;quot;:&amp;quot;&lt;/code&gt;表示对齐方式（&lt;code&gt;:---&lt;/code&gt;和&lt;code&gt;---&lt;/code&gt;左对齐，&lt;code&gt;---：&lt;/code&gt;右对齐，&lt;code&gt;---：&lt;/code&gt;中间对齐） 例子如下：&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Tables&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Are&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Cool&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;col 3 is&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;right-aligned&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;$1600&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;col 2 is&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;centered&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;$12&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;zebra stripes&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;are neat&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;$1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;em&gt;源代码&lt;/em&gt;&lt;br /&gt;
+    | Tables| Are   | Cool  |&lt;br /&gt;
+    | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;- |:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-:| &amp;mdash;&amp;ndash;:|&lt;br /&gt;
+    | col 3 is  | right-aligned | $1600 |&lt;br /&gt;
+    | col 2 is  | centered  |   $12 |&lt;br /&gt;
+    | zebra stripes | are neat  |$1 |&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;代码框&lt;/strong&gt;
+如果你是个程序猿，需要在文章里优雅的引用代码框，在 Markdown 下实现也非常简单，只需要用两个 &amp;ldquo;`&amp;rdquo; 把中间的代码包裹起来，如 &lt;code&gt;code&lt;/code&gt;。也可使用 tab 键即可缩进。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;分割线&lt;/strong&gt;
+分割线的语法只需要另起一行，连续输入三个星号 *** 即可。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;脚注&lt;/strong&gt;&lt;br /&gt;
+用来表示一些注解&lt;br /&gt;
+&lt;code&gt;hello[^hello]&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;效果：&lt;br /&gt;
+hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:hello&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
+
+&lt;p&gt;目前总计10种语法格式，再借助工具，学习成本比较低；在使用过程中很多公司也在使用Md来开发接口文档，这样会便于版本管理，这可能会是未来的一个趋势和潮流。&lt;/p&gt;
+
+&lt;p&gt;##三、转义&lt;br /&gt;
+在前面加上反斜杠来帮助插入普通的符号&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;.END.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;##四、其他&lt;/p&gt;
+
+&lt;p&gt;锚点的使用&lt;/p&gt;
+
+&lt;p&gt;由于markdown暂时不支持自定义id和name属性，所以 只能借助html标签来定义&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;使用方法：&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;
+&amp;lt;a id=&amp;quot;anchor&amp;quot;&amp;gt;锚点标记&amp;lt;/a&amp;gt;  
+[跳转到锚点位置](#anchor) 
+&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;展示效果：&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a id=&#34;anchor&#34;&gt;锚点标记&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;#anchor&#34;&gt;跳转到锚点位置&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;#anchor&#34;&gt;锚点标记&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:hello&#34;&gt;hi
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:hello&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>一个人的朝圣</title>
+      <link>http://aitangba.com/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
+      <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-d7da15147f296752.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;一个人的朝圣&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;像哈罗德一样，对生活和生命在某一时刻有着和过往完全不同想法的人，身边还是会有一些的。有时突发奇想的想去完成一件事情，可是在完成的过程中却发现更多新鲜的事物，&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>日常感想--电商-蜜淘C轮融资失败</title>
+      <link>http://aitangba.com/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</link>
+      <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://static.oschina.net/uploads/img/201603/31161245_WXtr.jpg&#34; alt=&#34;背景&#34; title=&#34;奋斗创业&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;现在的群多电商环境下，越来越来都的创业型企业倒闭，折射出来的是当今互利网时代的机会和挑战。&lt;br /&gt; 
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这让我突然想到了自己想要创业的想法，在公司稳稳当当地生活，或许不是最终所属。在当今社会，虽说不能单靠理想吃饭，可是没有理想的驱动，做起事来，还是缺乏一些激情和动力的。&lt;br /&gt; 
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;创业的念头，或者可以说是想我一样的90后一代人的理想。在当今的创业潮流中，90后的创业者并不多见，许多人还奋斗在职场的第一线，有的或许离创业差之毫厘。当然我身边也有许多朋友已经开始踏上了创业之路，不过大多时间还是在为今后公司的走向和一帮跟着自己的伙伴们感到担忧。很多时候我能听到他们有多么羡慕那些有着稳定工作的职员；多么厌恶现在正在接触中的顾客；多么恨那些富人们可以那么悠闲&amp;hellip;&amp;hellip; 听完他们发发牢骚和骂娘，我再向他们讲述，那个刘强东·马云等成功的道路是怎样，怎样的。给他们鼓气，给他们信心，做自己能帮到的事。&lt;br /&gt; 
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;道理谁都懂，他们需要的仅仅是总一个人能听他们说说这创业路上的所见所闻的这么一个人物。也许多我的那些朋友而已，我可能恰如其分的担当着，这样的一个角色。
+       &amp;hellip;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>一个产品的推广问题</title>
+      <link>http://aitangba.com/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;**第一步  **  ****树立方向和目标 ****
+      刚出来的app在网络上肯定是一篇空白，网络上还没有任何关于新的app的信息，建立一个关于App的百科，有用户搜索的话，用户可以从百科上更详细的了解你，同时，如果后期做品牌营销的话，也能为你引来更多的潜在用户，当然，百科不一定只仅仅是百度百科，你可以举一反三在各种百科上建立你的词条，建立的越多越方便用户快速的搜索到。建立百科看似是一个很简单的事情，其实不然。有的百科看起来简单明了，有的百科看起来一头雾水，这里面也是有技术含量的，所以建立百科时一定要条理清晰，语言通俗易通，同时配上清晰的截图，这样用户才能更快的了解，明白。国内很多app的百科写的很烂，为什么很烂，一是写的很专业，二是还有很多修饰性词语，三是还很啰嗦，这样的词条带着很重的主观思维，用户也不会喜欢，所以通俗的告诉用户你的app能帮他们干什么，可以更方便他们下载。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第二步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;注重反馈渠道&lt;/em&gt;&lt;/strong&gt;*
+      微博是一个大众化的产品，很多人的手机上可能都装有，当用户从词条哪里了解了你的app之后可以很轻松的通过微博关注你，和你互动，包括信息反馈，有的人说用户可以通过app里的“留言反馈”可以和你互动啊，这个是大错特错，很多用户在不了解一个app之前是不会轻易下载的，除非这个app是非下不可，而且很多app的用户反馈都藏的很深，用户一般找不到。相反，通过微博，用户可以实时的了解你，好的微博内容还会引起用户的转发和扩散，这些都是建立微博的好处，当然微博不仅是新浪微博，其他的微博也都要入驻，别让腾讯微博的用户去新浪微博找你，那是不可能的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第三步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;收集需求&lt;/em&gt;&lt;/strong&gt;*
+      通过百科和微博的信息填充，一个新的app算是有一定的品牌基础了，接下来就是在论坛发个帖子，别小看发帖子，我曾经一篇广告帖子可以传播几百万页面，而且被各种淘宝店当做教程，直接贴在卖手机的说明书里，我这样说的意思是别小看一篇帖子，你要把帖子写的用心一些，从用户的角度出发，让用户看了觉得非常有用才行。帖子写好了，就要找论坛发，找什么样的论坛，那肯定是找权重高的，那些网站论坛权重最高？建议用站长查询查询下，权重高的论坛搜索引擎的抓取速度是最快的，一般是一分钟之内抓取，我建议发个20~50个论坛，之前在推广APP时候，论坛带来的流量能高达一两万激活，现在应该更多。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第四步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;拓展渠道&lt;/em&gt;&lt;/strong&gt;*
+      前面三步说了那么多，其实都是在网络上布置关键词，方便用户搜索，提高app的曝光量和自传播力，接下来是拓展渠道，把新的app上传到各种应用商店，软件下载站上，拓展200个渠道，目前的渠道很多，你可以根据类别进行分类，同时发掘一些新的渠道。渠道的定义为能给APP带来展示和下载的网络媒介，谈渠道不是只指那些APP商店，比如有些公交车的免费wifi也提供APP下载的，也是你的渠道，另外一些微信粉丝比较多的应用自媒体，经常会推荐一些APP，也能为你的APP提供一些下载量，这些都是你的渠道。另外，铺渠道是一种比较累的工作，但是确实很有用，我曾经只铺渠道就带来了一百万的量。铺渠道还有另外一个好处就是，通过自然下载可以知道一个app在用户心中是什么位置了，也可以知道自己的app到底优秀不优秀，同时也可以帮你更详细的了解各个渠道的质量，为以后的付费推广做铺垫。铺渠道当然不能只是简单的铺渠道，在铺渠道的过程中，要了解渠道的一些情况，比如是否对新的APP有推广资源、首发资源等，可以为后续的大量推广做铺垫。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第五步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;活动营销&lt;/em&gt;&lt;/strong&gt;*
+      前面说了那么多，都是免费推广APP的一些方法，当然如果有一点预算又不是很多的话，可以做一些活动营销，花费不会很多，你可以在论坛，在渠道做一些活动，活动形式要简单，可玩性强，而且奖品要吸引人，通过用户的参与可以提高APP的下载量，可以提供曝光度。活动营销要和你的APP属性相结合，找到你的特定人群，比如做女性APP的，可以在校园里办活动，也可以在线上的女性社区办活动，做旅游APP的，可以和一些旅行社合作等等，所以做活动营销一定要和受众人群合作。
+      这些都是一些新的APP的推广思路和方法，在推广APP的时候要视野宽泛，举一反三，切不可思维定势，同时要站在用户的角度考虑问题，现在的新APP一出来，大部分一开始就是换量，建议不要做，换量这种推广方式，一方面对产品的影响比较大，一方面对产品来说没有什么意义，换量适合做垃圾APP。此外，本文的思路适合没有资源的个人和中小团队。&lt;/p&gt;
+
+&lt;p&gt;原文地址:&lt;a href=&#34;http://www.zhihu.com/question/21140904/answer/27340883&#34;&gt;http://www.zhihu.com/question/21140904/answer/27340883&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

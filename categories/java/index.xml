@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on XBeats Home</title>
-    <link>http://aitangba.com/categories/java/index.xml</link>
+    <link>https://xbeats.github.io/categories/java/index.xml</link>
     <description>Recent content in Java on XBeats Home</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
-    <atom:link href="http://aitangba.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://xbeats.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>HashMap知识点</title>
-      <link>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
+      <link>https://xbeats.github.io/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
       <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
+      <guid>https://xbeats.github.io/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-dc3526b7baa6eb4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;HashMap.png&#34; /&gt;
 ###前言
 首先再次强调hashcode （==）和equals的真正含义

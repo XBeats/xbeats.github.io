@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android on XBeats Home</title>
+    <link>https://xbeats.github.io/categories/android/index.xml</link>
+    <description>Recent content in Android on XBeats Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <atom:link href="https://xbeats.github.io/categories/android/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Android的API设计</title>
+      <link>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
+      <pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
+      <description>
+
+&lt;h1 id=&#34;android的api设计&#34;&gt;Android的API设计&lt;/h1&gt;
+
+&lt;h3 id=&#34;1-简单明确&#34;&gt;1.简单明确&lt;/h3&gt;
+
+&lt;p&gt;单个单词简单明确&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   //例：
+   	size();
+   	remove();
+   	removeAll()
+
+   //反例：
+   	countObservers();
+   	deleteObserver(Observer);
+   	deleteObservers();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;约束规则：在创建方法时，需要遵守一定的规则，方便调用者理解，相互关联的方法可以考虑保留一致的前缀或后缀&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   //例：
+   	execute(String);
+   	executeBatch();
+   	executeQuery(String);
+   	executeUpdate(String);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-限制长度&#34;&gt;2.限制长度&lt;/h3&gt;
+
+&lt;p&gt;不要超过4个单词，这样会大大降低可读性，虽然作用显得更明确，但是太过啰嗦&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;反例:AbstractBeanFactoryBasedTargetSourceCreator&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-参数限制&#34;&gt;3.参数限制&lt;/h3&gt;
+
+&lt;p&gt;方法里有过多参数往往让人不能明确区分其作用，特别在重载方法时，多个方法参数五花八门，会让人不知所措，可以考虑重新优化代码结构或者重新定义一个model&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;反例：regionMatches(boolean, int, String, int, int)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;在遇到多个参数的情况下，需要遵守一定原则：数组在前(如：copyOf(T[], int))&lt;/p&gt;
+
+&lt;h3 id=&#34;4-返回参数&#34;&gt;4.返回参数&lt;/h3&gt;
+
+&lt;p&gt;单个对象没有找到返回null或者抛出异常由调用者来处理；&lt;/p&gt;
+
+&lt;p&gt;列表不能返回null,如何没有需要返回的数据就返回一个空集合，防止调用处未能进行空处理而导致异常的发生。&lt;/p&gt;
+
+&lt;h3 id=&#34;5-命名格式&#34;&gt;5.命名格式&lt;/h3&gt;
+
+&lt;p&gt;（1）回调(onSomethingDone) ：由其他类来调用本类中的方法，在Listener和Callback中是比较常见的&lt;/p&gt;
+
+&lt;p&gt;​    例：onTitleChanged&lt;/p&gt;
+
+&lt;p&gt;（2）主动调用(doSomething)：一般是比较常见的方法，多数由本类中其他方法来调用，但是许多开发者利用或创建时却很随意，可用在优化代码显示，比价常见的命名有：reset,refresh,init&lt;/p&gt;
+
+&lt;p&gt;​    例：invalidateOptionsMenu&lt;/p&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;API的设计过程很多时候不能一撮而就，需要慢慢积累和进化，一个功能性的API一旦设计出来，意味着在一定时间内是相对稳定的，使用者能够放心的去调用，所以也需要一定的前瞻性，特别是对于Android开发着来说，其系统版本的高速迭代，可能会或多或少的影响到自己设计的程序；每个API接口应该只专注一件事，并做好（如果它很难命名，那么这或许是个不好的征兆，好的名称可以驱动开发、并且只需拆分与合并模块即可）；遵守最小惊讶原则，用户API只需根据需求来设计即可，不需要刻意去设计一下复杂无用的API。&lt;/p&gt;
+
+&lt;h2 id=&#34;thanks&#34;&gt;Thanks&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.csdn.net/article/2013-04-10/2814835-how-design-good-regular-api&#34;&gt;http://www.csdn.net/article/2013-04-&lt;sup&gt;10&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2814835&lt;/sub&gt;-how-design-good-regular-api&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/hdy007/article/details/1508834&#34;&gt;http://blog.csdn.net/hdy007/article/details/1508834&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.codeceo.com/article/google-java-good-api.html&#34;&gt;http://www.codeceo.com/article/google-java-good-api.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Android-右滑返回</title>
+      <link>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
+      <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
+      <description>
+
+&lt;h1 id=&#34;swipeback&#34;&gt;SwipeBack&lt;/h1&gt;
+
+&lt;p&gt;在设计过程中遇到也有过其他思路：&lt;br /&gt;
+1）设置Activity的透明theme，可是发现只要activity的层级变多就会变得非常卡顿；&lt;br /&gt;
+2）动态设置Activity的theme，这需要通过反射，而且还需要判断api，部分手机还不兼容；&lt;br /&gt;
+3）在滑动展示上个Activity的View时，直接将上个Activity的contentView截图保存在内存卡上，然后显示在当前Activity的view上，但是有明显的卡顿感；&lt;br /&gt;
+以上都是在设计过程中想到的方案，也逐个实践了一下，发现问题还是比较多的，想想还不如另辟蹊径，就有了现在的方案，目前看来还是能兼容大部分手机的。&lt;/p&gt;
+
+&lt;h1 id=&#34;features&#34;&gt;Features&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不需要设置透明theme或&lt;code&gt;windowIsTranslucent = true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;不影响activity的生命周期&lt;/li&gt;
+&lt;li&gt;只需继承SwipeBackActivity&lt;/li&gt;
+&lt;li&gt;支持Dialog的滑动返回&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;getting-started&#34;&gt;Getting started&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Firstly, add the following lines to your app/build.gradle.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;dependencies {  
+    compile &#39;com.aitangba:swipeback:1.0.0&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Secondly, add the following lines to your application.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomApplication extends Application{
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Finally, set the activity which need to swipe extends the SwipeBackActivity.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class BaseActivity extends SwipeBackActivity {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
+
+&lt;h3 id=&#34;api&#34;&gt;API&lt;/h3&gt;
+
+&lt;p&gt;Application在Api14之后添加了新的Callback方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就可以根据activity的生命周期缓存所有Activity，通过list获取上一个activity的实例，从而获取id为content的ContentView的子View（即setContentView中的View），并进行滑动展示。&lt;/p&gt;
+
+&lt;p&gt;默认SwipeBackActivity是支持滑动返回的，不需要滑动返回时则需要复写SwipeBackActivity的方法&lt;code&gt;supportSlideBack&lt;/code&gt;，其中方法&lt;code&gt;canBeSlideBack&lt;/code&gt;意思是能否返回至本Activity；两个方法相互配合使用，以应对各种需求。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; 
+   public class SwipeBackActivity extends AppCompatActivity {
+
+    private SwipeWindowHelper mSwipeWindowHelper;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(!supportSlideBack()) {
+            return super.dispatchTouchEvent(ev);
+        }
+
+        if(mSwipeWindowHelper == null) {
+            mSwipeWindowHelper = new SwipeWindowHelper(getWindow());
+        }
+        return mSwipeWindowHelper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * 是否支持滑动返回
+     * @return
+     */
+    protected boolean supportSlideBack() {
+        return true;
+    }
+
+    /**
+     * 能否滑动返回至当前Activity
+     * @return
+     */
+    protected boolean canBeSlideBack() {
+        return true;
+    }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6种事件状态&#34;&gt;6种事件状态&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+    private static final int MSG_ACTION_DOWN = 1; //点击事件  
+    private static final int MSG_ACTION_MOVE = 2; //滑动事件
+    private static final int MSG_ACTION_UP = 3;  //点击结束
+    private static final int MSG_SLIDE_CANCEL = 4; //开始滑动，不返回前一个页面
+    private static final int MSG_SLIDE_CANCELED = 5;  //结束滑动，不返回前一个页面
+    private static final int MSG_SLIDE_PROCEED = 6; //开始滑动，返回前一个页面
+    private static final int MSG_SLIDE_FINISHED = 7;//结束滑动，返回前一个页面
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在Down手势发生时，只要将上一个Activity的ContentView从parentView中剥离，并加入到当前View的ContentView中；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在滑动手势发生时，加上阴影View，并进行滑动；同时滑动的有当前Activity的ContentView、上一个Activity的ContentView和自定义的阴影View；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在Up手势发生时，判断滑动是否超过半屏，触发返回操作，并展示滑动动画；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;滑动取消或滑动返回发生时，需要将上个Activity的ContentView从新加入到上一个Acitivity的布局中。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;screenshot&#34;&gt;ScreenShot&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/XBeats/and_swipeback/master/screenshot/swipeback.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;gitHub地址：&lt;a href=&#34;https://github.com/XBeats/and_swipeback&#34;&gt;github.com/XBeats/and_swipeback&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>线程池ThreadPoolExecutor</title>
+      <link>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;线程池.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ThreadPoolExecutor的构造方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public ThreadPoolExecutor(int corePoolSize,  
+                          int maximumPoolSize,  
+                          long keepAliveTime,  
+                          TimeUnit unit,  
+                          BlockingQueue&amp;lt;Runnable&amp;gt; workQueue,  
+                          ThreadFactory threadFactory,  
+                          RejectedExecutionHandler handler)  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;###说明
+- corePoolSize： 线程池维护线程的最少数量&lt;br /&gt;
+- maximumPoolSize：线程池维护线程的最大数量
+- keepAliveTime： 线程池维护线程所允许的空闲时间
+- unit： 线程池维护线程所允许的空闲时间的单位
+- workQueue： 线程池所使用的缓冲队列
+- handler： 线程池对拒绝任务的处理策略&lt;/p&gt;
+
+&lt;p&gt;###逻辑
+1. 当池子线程数量小于corePoolSize就新建线程，并处理请求&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;当池子大小等于corePoolSize，就会将请求放入workQueue中，等池子里的线程空闲了，就去从workQueue中取任务并处理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;当workQueue放不下新入的任务时，新建线程入池，并处理请求，如果池子大小撑到了maximumPoolSize就用RejectedExecutionHandler来做拒绝处理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;另外，当池子的线程数大于corePoolSize的时候，多余的线程会等待keepAliveTime长的时间，如果无请求可处理就自行销毁&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;###理解
+一个任务通过 execute(Runnable)方法被添加到线程池，任务就是一个 Runnable类型的对象，任务的执行方法就是Runnable类型对象的run()方法。&lt;/p&gt;
+
+&lt;p&gt;###参数
+&lt;strong&gt;unit&lt;/strong&gt;  可选的参数为java.util.concurrent.TimeUnit中的几个静态属性：
+- NANOSECONDS
+- MICROSECONDS
+- MILLISECONDS 毫秒
+- SECONDS 秒&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;workQueue&lt;/strong&gt;  常用的是：java.util.concurrent.ArrayBlockingQueue&lt;br /&gt;
+- SynchronousQueue  直接提交，它将任务直接提交给线程而不保持它们。
+- LinkedBlockingQueue  无界队列，将导致在所有 corePoolSize 线程都忙的情况下将新任务加入队列。
+- ArrayBlockingQueue  有界队列，有助于防止资源耗尽，但是可能较难调整和控制。
+&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;handler&lt;/strong&gt;  有四个选择：
+- ThreadPoolExecutor.AbortPolicy()&lt;br /&gt;
+抛出java.util.concurrent.RejectedExecutionException异常
+ 
+- ThreadPoolExecutor.CallerRunsPolicy()&lt;br /&gt;
+当抛出RejectedExecutionException异常时，会调用&lt;strong&gt;rejectedExecution&lt;/strong&gt;方法
+(如果主线程没有关闭，则主线程调用run方法,源码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {            
+         if (!e.isShutdown()) {                
+                 r.run();            
+         }
+        }
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; 
+- ThreadPoolExecutor.DiscardOldestPolicy()&lt;br /&gt;
+抛弃旧的任务
+ 
+- ThreadPoolExecutor.DiscardPolicy()&lt;br /&gt;
+抛弃当前的任务&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>热修复入门：Android-中的-ClassLoader</title>
+      <link>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
+      <pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
+      <description>
+
+&lt;p&gt;从去年下半年开始，热修复技术在 Android 技术社区热了一阵子，这种不用发布新版本就可以修复线上 bug 的技术确实有很大的需求，最近正好在研究一些开源的热修复方案，本文就其中常用的 ClassLoader 方式实现的热修复方案中的 ClassLoader 机制作一个简单的介绍。
+&amp;gt; ##ClassLoader 简介&lt;br /&gt;
+&amp;gt; 对于 Java 程序来说，编写程序就是编写类，运行程序也就是运行类（编译得到的 class 文件），其中起到关键作用的就是类加载器 ClassLoader。&lt;/p&gt;
+
+&lt;p&gt;任何一个 Java 程序都是由若干个 class 文件组成的一个完整的 Java 程序，在程序运行时，需要将 class 文件加载到 JVM 中才可以使用，负责加载这些 class 文件的就是 Java 的类加载（ClassLoader）机制。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-6fd6aca614f731f1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+因此 ClassLoader 的作用简单来说就是加载 class 文件，提供给程序运行时使用。&lt;/p&gt;
+
+&lt;h2 id=&#34;classloader-的双亲委托模型-parent-delegation-model&#34;&gt;ClassLoader 的双亲委托模型（Parent *Delegation Model* ）&lt;/h2&gt;
+
+&lt;p&gt;先来看 jdk 中的 ClassLoader 类的构造方法，其需要传入一个父类加载器，并持有该引用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;protected ClassLoader(ClassLoader parent) { this(checkCreateClassLoader(), parent);}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当类加载器收到加载类或资源的请求时，通常都是先委托给父类加载器加载，也就是说只有当父类加载器找不到指定类或资源时，自身才会执行实际的类加载过程，具体的加载过程如下：
+1. 源 ClassLoader 先判断该 Class 是否已加载，如果已加载，则直接返回 Class，如果没有则委托给父类加载器。
+2. 父类加载器判断是否加载过该 Class，如果已加载，则直接返回 Class，如果没有则委托给祖父类加载器。
+3. 依此类推，直到始祖类加载器（引用类加载器）。
+4. 始祖类加载器判断是否加载过该 Class，如果已加载，则直接返回 Class，如果没有则尝试从其对应的类路径下寻找 class 字节码文件并载入。如果载入成功，则直接返回 Class，如果载入失败，则委托给始祖类加载器的子类加载器。
+5. 始祖类加载器的子类加载器尝试从其对应的类路径下寻找 class 字节码文件并载入。如果载入成功，则直接返回 Class，如果载入失败，则委托给始祖类加载器的孙类加载器。
+6. 依此类推，直到源 ClassLoader。
+7. 源 ClassLoader 尝试从其对应的类路径下寻找 class 字节码文件并载入。如果载入成功，则直接返回 Class，如果载入失败，源 ClassLoader 不会再委托其子类加载器，而是抛出异常。&lt;/p&gt;
+
+&lt;p&gt;如果需要详细了解 ClassLoader 的信息，可以借助以下文章深入了解：
+- &lt;a href=&#34;https://segmentfault.com/a/1190000002579346&#34;&gt;JVM 的工作原理,层次结构以及 GC 工作原理&lt;/a&gt;
+- &lt;a href=&#34;http://blog.csdn.net/xyang81/article/details/7292380&#34;&gt;深入分析Java ClassLoader原理&lt;/a&gt;
+- &lt;a href=&#34;http://blog.csdn.net/zhangzeyuaaa/article/details/42499839&#34;&gt;类加载机制：全盘负责和双亲委托&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;##Android 中的 ClassLoader&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Android 的 Dalvik/ART 虚拟机如同标准 Java 的 JVM 虚拟机一样，也是同样需要加载 class 文件到内存中来使用，但是在 ClassLoader 的加载细节上会有略微的差别。
+###Android 中的 dex 文件
+Android 应用打包成 apk 文件时，class 文件会被打包成一个或者多个 dex 文件。将一个 apk 文件后缀改成 .zip 格式解压后（也可以直接解压，apk 文件本质是个 zip 文件），里面就有 class.dex 文件，由于 Android 的 65K 问题（不要纠结是 64K 还是 65K），使用 MultiDex 就会生成多个 dex 文件。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-1b52e5cf56ea4658.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+当 Android 系统安装一个应用的时候，会针对不同平台对 Dex 进行优化，这个过程由一个专门的工具来处理，叫 DexOpt 。DexOpt 是在第一次加载 Dex 文件的时候执行的，该过程会生成一个 ODEX 文件，即 Optimised Dex。执行 ODEX 的效率会比直接执行 Dex 文件的效率要高很多，加快 App 的启动和响应。
+ODEX 相关的细节可以阅读以下文章扩展：
+- &lt;a href=&#34;http://www.mywiki.cn/hovercool/index.php/ART%E5%92%8CDalvik&#34;&gt;ART 和 Dalvik&lt;/a&gt;
+- &lt;a href=&#34;http://www.jianshu.com/p/242abfb7eb7f&#34;&gt;ODEX格式及生成过程&lt;/a&gt;
+- &lt;a href=&#34;http://stackoverflow.com/questions/9593527/what-are-odex-files-in-android&#34;&gt;What are ODEX files in Android&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注：本人的 5.0 机器 ODEX 优化后的文件是在 /data/dalvilk-cache
+ 文件夹下的，6.0 机器该文件夹下只有 framework 和部分内置的 App 的优化后的 dex 文件，查找相关资料后没有找到明确的说法，目前猜测和 ROM 有关系，后续再深究下这个问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-8797300b6cf9cc3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+总之，Android 中的 Dalvik/ART 无法像 JVM 那样 &lt;strong&gt;直接&lt;/strong&gt; 加载 class 文件和 jar 文件中的 class，需要通过 dx 工具来优化转换成 Dalvik byte code 才行，只能通过 dex 或者 包含 dex 的jar、apk 文件来加载（注意 odex 文件后缀可能是 .dex 或 .odex，也属于 dex 文件），因此 Android 中的 ClassLoader 工作就交给了 BaseDexClassLoader 来处理。
+&amp;gt;注：如果 jar 文件包含有 dex 文件，此时 jar 文件也是可以用来加载的，不过实际加载的还是其中的 dex 文件，不要弄混淆了。&lt;/p&gt;
+
+&lt;h3 id=&#34;basedexclassloader-及其子类&#34;&gt;BaseDexClassLoader 及其子类&lt;/h3&gt;
+
+&lt;p&gt;在 Android 开发者官网上的 &lt;a href=&#34;https://developer.android.com/reference/java/lang/ClassLoader.html&#34;&gt;ClassLoader&lt;/a&gt; 的文档说明中我们可以看到，ClassLoader 是个抽象类，其具体实现的子类有 BaseDexClassLoader 和SecureClassLoader。
+SecureClassLoader 的子类是 URLClassLoader，其只能用来加载 jar 文件，这在 Android 的 Dalvik/ART 上没法使用的。BaseDexClassLoader 的子类是 PathClassLoader和 DexClassLoader。
+&lt;strong&gt;PathClassLoader&lt;/strong&gt;
+PathClassLoader 在应用启动时创建，从 data/app/… 安装目录下加载 apk 文件。其有 2 个构造函数，如下所示，这里遵从之前提到的双亲委托模型：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public PathClassLoader(String dexPath, ClassLoader parent) {
+    super(dexPath, null, null, parent);
+}
+
+public PathClassLoader(String dexPath, String libraryPath,
+        ClassLoader parent) {
+    super(dexPath, null, libraryPath, parent);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;dexPath : 包含 dex 的 jar 文件或 apk 文件的路径集，多个以文件分隔符分隔，默认是“：”&lt;/li&gt;
+&lt;li&gt;libraryPath : 包含 C/C++ 库的路径集，多个同样以文件分隔符分隔，可以为空&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;PathClassLoader 里面除了这 2 个构造方法以外就没有其他的代码了，具体的实现都是在 BaseDexClassLoader 里面，其 dexPath 比较受限制，一般是已经安装应用的 apk 文件路径。
+在 Android 中，App 安装到手机后，apk 里面的 class.dex 中的 class 均是通过 PathClassLoader 来加载的。
+我们可以新建一个项目来验证下，在 MainActivity 中添加如下代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ClassLoader loader = MainActivity.class.getClassLoader();
+        while (loader != null) {
+            System.out.println(loader.toString());
+            loader = loader.getParent();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; I/System.out: dalvik.system.PathClassLoader[DexPathList[[zip file &amp;quot;/data/app/com.jaeger.testclassloader-2/base.apk&amp;quot;],nativeLibraryDirectories=[/vendor/lib, /system/lib]]]
+ I/System.out: java.lang.BootClassLoader@1d9c6226
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;/data/app/com.jaeger.testclassloader-2/base.apk就是示例应用安装在手机上的位置。BootClassLoader 是 PathClassLoader 的父加载器，其在系统启动时创建，在 App 启动时会将该对象传进来，具体的调用在com.android.internal.os.ZygoteInit的 main()方法中调用了 preload()， 然后调用 preloadClasses()方法，在该方法内部调用了 Class 的 forName()方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Class.forName(line, true, null);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;forName()方法源码如下，方法内部获取到 BootClassLoader 实例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public static Class&amp;lt;?&amp;gt; forName(String className, boolean shouldInitialize,
+        ClassLoader classLoader) throws ClassNotFoundException {
+    if (classLoader == null) {
+        classLoader = BootClassLoader.getInstance();
+    }
+    // Catch an Exception thrown by the underlying native code. It wraps
+    // up everything inside a ClassNotFoundException, even if e.g. an
+    // Error occurred during initialization. This as a workaround for
+    // an ExceptionInInitializerError that&#39;s also wrapped. It is actually
+    // expected to be thrown. Maybe the same goes for other errors.
+    // Not wrapping up all the errors will break android though.
+    Class&amp;lt;?&amp;gt; result;
+    try {
+        result = classForName(className, shouldInitialize, classLoader);
+    } catch (ClassNotFoundException e) {
+        Throwable cause = e.getCause();
+        if (cause instanceof LinkageError) {
+            throw (LinkageError) cause;
+        }
+        throw e;
+    }
+    return result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而 PathClassLoader 的实例化又是在哪进行的呢？在源码中寻找下其构造方法调用的地方，结果如下：
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-4a609133426fad87.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+其中：
+- 在 ZygoteInit 中的调用是用来启动相关的系统服务
+- 在 ApplicationLoaders 中用来加载系统安装过的 apk，用来加载 apk 内的 class ，其调用是在 LoadApk 类中的 getClassLoader()方法中调用的，得到的就是 PathClassLoader：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;mClassLoader = ApplicationLoaders.getDefault().getClassLoader(zip, lib, mBaseClassLoader);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;DexClassLoader&lt;/strong&gt;
+介绍 DexClassLoader 之前，先来看看其官方描述：
+&amp;gt;A class loader that loads classes from .jar and .apk filescontaining a classes.dex entry. This can be used to execute code notinstalled as part of an application.&lt;/p&gt;
+
+&lt;p&gt;很明显，对比 PathClassLoader 只能加载已经安装应用的 dex 或 apk 文件，DexClassLoader 则没有此限制，可以从 SD 卡上加载包含 class.dex 的 .jar 和 .apk 文件，这也是插件化和热修复的基础，在不需要安装应用的情况下，完成需要使用的 dex 的加载。
+DexClassLoader 的源码里面只有一个构造方法，这里也是遵从双亲委托模型：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public DexClassLoader(String dexPath, String optimizedDirectory,
+        String libraryPath, ClassLoader parent) {
+    super(dexPath, new File(optimizedDirectory), libraryPath, parent);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参数说明：
+- String dexPath: 包含 class.dex 的 apk、jar 文件路径 ，多个用文件分隔符(默认是 ：)分隔
+- String optimizedDirectory : 用来缓存优化的 dex 文件的路径，即从 apk 或 jar 文件中提取出来的 dex 文件。该路径不可以为空，且应该是应用私有的，有读写权限的路径（实际上也可以使用外部存储空间，但是这样的话就存在代码注入的风险），可以通过以下方式来创建一个这样的路径：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;File dexOutputDir = context.getCodeCacheDir();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注：后续发现，getCodeCacheDir() 方法只能在 API 21 以上可以使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;String libraryPath: 存储 C/C++ 库文件的路径集&lt;/li&gt;
+&lt;li&gt;ClassLoader parent : 父类加载器，遵从双亲委托模型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;简单介绍了 PathClassLoader 和 DexClassLoader，但这两者都是对 BaseDexClassLoader 的一层简单封装，真正的实现都在 BaseClassLoader 内。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;BaseClassLoader 源码分析&lt;/strong&gt;
+先来看一眼 BaseClassLoader 的结构：&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-0a2eededd79ba200.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+其中有个重要的字段 private final DexPathList pathList，其继承 ClassLoader 实现的 findClass()、findResource()
+ 均是基于 pathList 来实现的（省略了部分源码）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Override
+    protected Class&amp;lt;?&amp;gt; findClass(String name) throws ClassNotFoundException {
+        List&amp;lt;Throwable&amp;gt; suppressedExceptions = new ArrayList&amp;lt;Throwable&amp;gt;();
+        Class c = pathList.findClass(name, suppressedExceptions);
+        ...
+        return c;
+    }
+    @Override
+    protected URL findResource(String name) {
+        return pathList.findResource(name);
+    }
+    @Override
+    protected Enumeration&amp;lt;URL&amp;gt; findResources(String name) {
+        return pathList.findResources(name);
+    }
+    @Override
+    public String findLibrary(String name) {
+        return pathList.findLibrary(name);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么重要的部分则是在 DexPathList 类的内部了，DexPathList 的构造方法也较为简单，和之前介绍的类似：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public DexPathList(ClassLoader definingContext, String dexPath,
+        String libraryPath, File optimizedDirectory) {
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接受之前传进来的包含 dex 的 apk/jar/dex 的路径集、native 库的路径集和缓存优化的 dex 文件的路径，然后调用 makePathElements()方法生成一个Element[] dexElements数组，Element 是 DexPathList 的一个嵌套类，其有以下字段：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;static class Element {
+	private final File dir;
+	private final boolean isDirectory;
+	private final File zip;
+	private final DexFile dexFile;
+	private ZipFile zipFile;
+	private boolean initialized;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;makePathElements() 是如何生成 Element 数组的？继续看源码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;private static Element[] makePathElements(List&amp;lt;File&amp;gt; files, File optimizedDirectory,
+                                          List&amp;lt;IOException&amp;gt; suppressedExceptions) {
+    List&amp;lt;Element&amp;gt; elements = new ArrayList&amp;lt;&amp;gt;();
+    // 遍历所有的包含 dex 的文件
+    for (File file : files) {
+        File zip = null;
+        File dir = new File(&amp;quot;&amp;quot;);
+        DexFile dex = null;
+        String path = file.getPath();
+        String name = file.getName();
+        // 判断是不是 zip 类型
+        if (path.contains(zipSeparator)) {
+            String split[] = path.split(zipSeparator, 2);
+            zip = new File(split[0]);
+            dir = new File(split[1]);
+        } else if (file.isDirectory()) {
+            // 如果是文件夹,则直接添加 Element,这个一般是用来处理 native 库和资源文件
+            elements.add(new Element(file, true, null, null));
+        } else if (file.isFile()) {
+            // 直接是 .dex 文件,而不是 zip/jar 文件(apk 归为 zip),则直接加载 dex 文件
+            if (name.endsWith(DEX_SUFFIX)) {
+                try {
+                    dex = loadDexFile(file, optimizedDirectory);
+                } catch (IOException ex) {
+                    System.logE(&amp;quot;Unable to load dex file: &amp;quot; + file, ex);
+                }
+            } else {
+                // 如果是 zip/jar 文件(apk 归为 zip),则将 file 值赋给 zip 字段,再加载 dex 文件
+                zip = file;
+                try {
+                    dex = loadDexFile(file, optimizedDirectory);
+                } catch (IOException suppressed) {
+                    suppressedExceptions.add(suppressed);
+                }
+            }
+        } else {
+            System.logW(&amp;quot;ClassLoader referenced unknown path: &amp;quot; + file);
+        }
+        if ((zip != null) || (dex != null)) {
+            elements.add(new Element(dir, false, zip, dex));
+        }
+    }
+    // list 转为数组
+    return elements.toArray(new Element[elements.size()]);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;loadDexFile()方法最终会调用 JNI 层的方法来读取 dex 文件，这里不再深入探究，有兴趣的可以阅读 &lt;a href=&#34;http://blog.csdn.net/nanzhiwen666/article/details/50515895&#34;&gt;从源码分析 Android dexClassLoader 加载机制原理&lt;/a&gt; 这篇文章深入了解。
+接下来看以下 DexPathList 的 findClass()方法，其根据传入的完整的类名来加载对应的 class，源码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public Class findClass(String name, List&amp;lt;Throwable&amp;gt; suppressed) {
+	// 遍历 dexElements 数组，依次寻找对应的 class，一旦找到就终止遍历
+    for (Element element : dexElements) {
+        DexFile dex = element.dexFile;
+        if (dex != null) {
+            Class clazz = dex.loadClassBinaryName(name, definingContext, suppressed);
+            if (clazz != null) {
+                return clazz;
+            }
+        }
+    }
+    // 抛出异常
+    if (dexElementsSuppressedExceptions != null) {
+        suppressed.addAll(Arrays.asList(dexElementsSuppressedExceptions));
+    }
+    return null;
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里有关于热修复实现的一个点，就是将补丁 dex 文件放到 dexElements 数组前面，这样在加载 class 时，优先找到补丁包中的 dex 文件，加载到 class 之后就不再寻找，从而原来的 apk 文件中同名的类就不会再使用，从而达到修复的目的，虽然说起来较为简单，但是实现起来还有很多细节需要注意，本文先热身，后期再分析具体实现。
+至此，BaseDexClassLader 寻找 class 的路线就清晰了：
+1. 当传入一个完整的类名，调用 BaseDexClassLader 的 findClass(String name) 方法
+2. BaseDexClassLader 的 findClass 方法会交给 DexPathList 的 findClass(String name, List&lt;Throwable&gt; suppressed 
+方法处理
+3. 在 DexPathList 方法的内部，会遍历 dexFile ，通过 DexFile的dex.loadClassBinaryName(name,definingContext, suppressed)来完成类的加载&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;实际使用&lt;/strong&gt;
+需要注意到的是，在项目中使用 BaseDexClassLoader 或者 DexClassLoader 去加载某个 dex 或者 apk 中的 class 时，是无法调用 findClass()方法的，因为该方法是包访问权限，你需要调用 loadClass(String className)
+ ，该方法其实是 BaseDexClassLoader 的父类 ClassLoader 内实现的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public Class&amp;lt;?&amp;gt; loadClass(String className) throws ClassNotFoundException {
+    return loadClass(className, false);
+}
+
+protected Class&amp;lt;?&amp;gt; loadClass(String className, boolean resolve) throws ClassNotFoundException {
+    Class&amp;lt;?&amp;gt; clazz = findLoadedClass(className);
+    if (clazz == null) {
+        ClassNotFoundException suppressed = null;
+        try {
+            clazz = parent.loadClass(className, false);
+        } catch (ClassNotFoundException e) {
+            suppressed = e;
+        }
+        if (clazz == null) {
+            try {
+                clazz = findClass(className);
+            } catch (ClassNotFoundException e) {
+                e.addSuppressed(suppressed);
+                throw e;
+            }
+        }
+    }
+    return clazz;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这段代码结合之前提到的双亲委托模型就很好理解了，先查找当前的 ClassLoader 是否已经加载过，如果没有就交给父 ClassLoader 去加载，如果父 ClassLoader 没有找到，才调用当前 ClassLoader 来加载，此时就是调用上面分析的 findClass() 方法了。
+&amp;gt; ##ClassLoader 使用示例&lt;/p&gt;
+
+&lt;p&gt;上面说了这么多理论知识，只说不练假把式，接下来实战：从 SD 卡中动态加载一个包含 class.dex 的 jar 文件，加载其中的类，并调用其方法。
+1. 新建一个 Java 项目，包含两个文件：ISayHello.java和 HelloAndroid.java&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  package com.jaeger;
+    
+   public interface ISayHello {
+       String say();
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  package com.jaeger;
+    
+   public class HelloAndroid implements ISayHello {
+       @Override
+       public String say() {
+           return &amp;quot;Hello Android&amp;quot;;
+       }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;导出 jar 包
+这一步使用 IntelliJ IDEA 导出有点问题，最终我是用 Eclipse 导出 jar 包的。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-24ea3c9c26686a03.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;使用 SDK 目录 &amp;gt; platform-tools 里面的 dx 工具生成包含 class.dex 的 jar 包
+将上一步生成的 sayhello.jar放到 你的 SDK 下的 platform-tools 文件夹下，使用下面的命令生成 dex 化的 jar 文件，其中是 output 后面的sayhello_dex.jar就是最终生成的 jar 包。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;dx --dex --output=sayhello_dex.jar sayhello.jar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生成 sayhello_dex.jar之后，用解压解压后就会发现其已经包含了 class.dex 文件了。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-20983b8044fe24b8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;将 sayhello_dex.jar文件拷贝到手机存储空间的根目录，不一定是内存卡。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-a270c670f0ff42ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;新建一个 Android 项目，在 MainActivity 中添加如下的代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class MainActivity extends AppCompatActivity {
+private static final String TAG = &amp;quot;TestClassLoader&amp;quot;;
+private TextView mTvInfo;
+private Button mBtnLoad;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    mTvInfo = (TextView) findViewById(R.id.tv_info);
+    mBtnLoad = (Button) findViewById(R.id.btn_load);
+    mBtnLoad.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            // 获取到包含 class.dex 的 jar 包文件
+            final File jarFile =
+                new File(Environment.getExternalStorageDirectory().getPath() + File.separator + &amp;quot;sayhello_dex.jar&amp;quot;);
+                   
+            // 如果没有读权限,确定你在 AndroidManifest 中是否声明了读写权限
+            Log.d(TAG, jarFile.canRead() + &amp;quot;&amp;quot;);
+
+            if (!jarFile.exists()) {
+                Log.e(TAG, &amp;quot;sayhello_dex.jar not exists&amp;quot;);
+                return;
+            }
+
+            // getCodeCacheDir() 方法在 API 21 才能使用,实际测试替换成 getExternalCacheDir() 等也是可以的
+            // 只要有读写权限的路径均可
+            DexClassLoader dexClassLoader =
+                new DexClassLoader(jarFile.getAbsolutePath(), getExternalCacheDir().getAbsolutePath(), null, getClassLoader());
+            try {
+                // 加载 HelloAndroid 类
+                Class clazz = dexClassLoader.loadClass(&amp;quot;com.jaeger.HelloAndroid&amp;quot;);
+                // 强转成 ISayHello, 注意 ISayHello 的包名需要和 jar 包中的
+                ISayHello iSayHello = (ISayHello) clazz.newInstance();
+                mTvInfo.setText(iSayHello.say());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;同时需要新建一个和第一步创建的 Java 项目中包名一致的 ISayHello
+ 接口：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package com.jaeger;
+public interface ISayHello {
+String say();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这里需要注意几点：
+- 因为需要从存储空间中读取 jar 文件，需要在 AndroidManifest 中声明读写权限
+- ISayHello 接口的包名必须一致
+- getCodeCacheDir()方法在 API 21 才能使用,实际测试替换成 getExternalCacheDir()等也是可以的&lt;/p&gt;
+
+&lt;p&gt;接下来就是运行，运行的结果如图，和预期的一样，完美收工。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-cb63cb921d2f4083.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+示例代码以及 jar 包上传到 GitHub 了，请前往 &lt;a href=&#34;https://github.com/laobie/TestClassLoader&#34;&gt;这里&lt;/a&gt; 去查看。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;原文地址:&lt;a href=&#34;http://jaeger.itscoder.com/android/2016/08/27/android-classloader.html&#34;&gt;http://jaeger.itscoder.com/android/2016/08/27/android-classloader.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

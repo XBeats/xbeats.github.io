@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://xbeats.github.io//icon/go.ico">
+	
+    <title>线程池ThreadPoolExecutor -- XBeats Home</title>
+
+    
+
+    
+    <link href="https://xbeats.github.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://xbeats.github.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+	
+	
+    <link rel="Stylesheet" type="text/css" href="https://xbeats.github.io//prettify/tomorrow-night.min.css" />
+    <script type="text/javascript" src="https://xbeats.github.io//prettify/prettify.js" ></script>
+	<script type="text/javascript" src="https://xbeats.github.io//prettify/jquery-1.11.1.min.js" ></script>
+	<script type="text/javascript">
+	$(window).load(function(){
+     $("pre").addClass("prettyprint linenums");
+    })
+	</script>
+	
+</head>
+
+<body onload="prettyPrint()">
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://xbeats.github.io/">XBeats Home</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('https://xbeats.github.io//img/post-bg.jpg')">
+    
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>线程池ThreadPoolExecutor</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">
+                 
+Posted by <a href="#">XBeats</a> on Wed, Nov 2, 2016
+
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <p><img src="http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="线程池.png" /></p>
+
+<p>ThreadPoolExecutor的构造方法：</p>
+
+<pre><code class="language-java">public ThreadPoolExecutor(int corePoolSize,  
+                          int maximumPoolSize,  
+                          long keepAliveTime,  
+                          TimeUnit unit,  
+                          BlockingQueue&lt;Runnable&gt; workQueue,  
+                          ThreadFactory threadFactory,  
+                          RejectedExecutionHandler handler)  
+</code></pre>
+
+<p>###说明
+- corePoolSize： 线程池维护线程的最少数量<br />
+- maximumPoolSize：线程池维护线程的最大数量
+- keepAliveTime： 线程池维护线程所允许的空闲时间
+- unit： 线程池维护线程所允许的空闲时间的单位
+- workQueue： 线程池所使用的缓冲队列
+- handler： 线程池对拒绝任务的处理策略</p>
+
+<p>###逻辑
+1. 当池子线程数量小于corePoolSize就新建线程，并处理请求</p>
+
+<ol>
+<li><p>当池子大小等于corePoolSize，就会将请求放入workQueue中，等池子里的线程空闲了，就去从workQueue中取任务并处理</p></li>
+
+<li><p>当workQueue放不下新入的任务时，新建线程入池，并处理请求，如果池子大小撑到了maximumPoolSize就用RejectedExecutionHandler来做拒绝处理</p></li>
+
+<li><p>另外，当池子的线程数大于corePoolSize的时候，多余的线程会等待keepAliveTime长的时间，如果无请求可处理就自行销毁</p></li>
+</ol>
+
+<p>###理解
+一个任务通过 execute(Runnable)方法被添加到线程池，任务就是一个 Runnable类型的对象，任务的执行方法就是Runnable类型对象的run()方法。</p>
+
+<p>###参数
+<strong>unit</strong>  可选的参数为java.util.concurrent.TimeUnit中的几个静态属性：
+- NANOSECONDS
+- MICROSECONDS
+- MILLISECONDS 毫秒
+- SECONDS 秒</p>
+
+<p><strong>workQueue</strong>  常用的是：java.util.concurrent.ArrayBlockingQueue<br />
+- SynchronousQueue  直接提交，它将任务直接提交给线程而不保持它们。
+- LinkedBlockingQueue  无界队列，将导致在所有 corePoolSize 线程都忙的情况下将新任务加入队列。
+- ArrayBlockingQueue  有界队列，有助于防止资源耗尽，但是可能较难调整和控制。
+&hellip;</p>
+
+<p><strong>handler</strong>  有四个选择：
+- ThreadPoolExecutor.AbortPolicy()<br />
+抛出java.util.concurrent.RejectedExecutionException异常
+ 
+- ThreadPoolExecutor.CallerRunsPolicy()<br />
+当抛出RejectedExecutionException异常时，会调用<strong>rejectedExecution</strong>方法
+(如果主线程没有关闭，则主线程调用run方法,源码如下</p>
+
+<pre><code class="language-java">public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {            
+         if (!e.isShutdown()) {                
+                 r.run();            
+         }
+        }
+)
+</code></pre>
+
+<p> 
+- ThreadPoolExecutor.DiscardOldestPolicy()<br />
+抛弃旧的任务
+ 
+- ThreadPoolExecutor.DiscardPolicy()<br />
+抛弃当前的任务</p>
+
+                  
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:fenghaifeng008@gmail.com">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/xbeats">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+					<li>
+                      <a href="http://www.jianshu.com/u/51c51c5f2566" >
+                        <span class="fa-stack fa-lg">
+						  <i class="fa fa-circle fa-stack-2x"></i>
+						  <font class="fa fa-stack-1x fa-inverse">简</font>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license. &nbsp <span><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1258603260'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1258603260%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></span> </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://xbeats.github.io//js/jquery.min.js"></script>
+
+    
+    <script src="https://xbeats.github.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="https://xbeats.github.io//js/clean-blog.js"></script>
+
+    
+
+</body>
+
+</html>
+

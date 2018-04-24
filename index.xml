@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>XBeats Home</title>
-    <link>https://xbeats.github.io/index.xml</link>
+    <link>http://aitangba.com/index.xml</link>
     <description>Recent content on XBeats Home</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
     <lastBuildDate>Sun, 24 May 2015 18:51:50 +0200</lastBuildDate>
-    <atom:link href="https://xbeats.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://aitangba.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>About</title>
-      <link>https://xbeats.github.io/about/</link>
+      <link>http://aitangba.com/about/</link>
       <pubDate>Sun, 24 May 2015 18:51:50 +0200</pubDate>
       
-      <guid>https://xbeats.github.io/about/</guid>
+      <guid>http://aitangba.com/about/</guid>
       <description>&lt;p&gt;To be continue &amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Android的API设计</title>
-      <link>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
+      <link>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
       <pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
+      <guid>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
       <description>
 
 &lt;h1 id=&#34;android的api设计&#34;&gt;Android的API设计&lt;/h1&gt;
@@ -100,10 +100,10 @@
     
     <item>
       <title>Android-右滑返回</title>
-      <link>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
+      <link>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
       <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
+      <guid>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
       <description>
 
 &lt;h1 id=&#34;swipeback&#34;&gt;SwipeBack&lt;/h1&gt;
@@ -231,10 +231,10 @@
     
     <item>
       <title>线程池ThreadPoolExecutor</title>
-      <link>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
+      <link>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
       <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
+      <guid>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;线程池.png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ThreadPoolExecutor的构造方法：&lt;/p&gt;
@@ -310,10 +310,10 @@
     
     <item>
       <title>热修复入门：Android-中的-ClassLoader</title>
-      <link>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
+      <link>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
       <pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
+      <guid>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
       <description>
 
 &lt;p&gt;从去年下半年开始，热修复技术在 Android 技术社区热了一阵子，这种不用发布新版本就可以修复线上 bug 的技术确实有很大的需求，最近正好在研究一些开源的热修复方案，本文就其中常用的 ClassLoader 方式实现的热修复方案中的 ClassLoader 机制作一个简单的介绍。
@@ -760,10 +760,10 @@ String say();
     
     <item>
       <title>HashMap知识点</title>
-      <link>https://xbeats.github.io/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
+      <link>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
       <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
+      <guid>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-dc3526b7baa6eb4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;HashMap.png&#34; /&gt;
 ###前言
 首先再次强调hashcode （==）和equals的真正含义
@@ -905,11 +905,25 @@ HashMap基于hashing原理&lt;br /&gt;
     </item>
     
     <item>
+      <title>暂停使用aitangba.com域名</title>
+      <link>http://aitangba.com/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</link>
+      <pubDate>Tue, 24 Apr 2018 17:19:37 +0800</pubDate>
+      
+      <guid>http://aitangba.com/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</guid>
+      <description>&lt;p&gt;域名aitangba.com不再准备续费了！&lt;/p&gt;
+
+&lt;p&gt;原意为“爱糖吧”，几年前买下这个域名是准备做一个类似在线购物的网站，当时就单纯的一个的想法，一边上班一边去完善自己的想法。几年的时间，没能花更多的精力去维护这样一个点子，后期索性做成了个人博客的域名，就这样挂了一年多吧，博客还是在不断的维护的，但是这个域名是时候说再见了！&lt;/p&gt;
+
+&lt;p&gt;虽说这个域名不再续费，但是博客还是会继续维护滴，其他的点子也在酝酿中，，，&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>How to use git</title>
-      <link>https://xbeats.github.io/post/How%20to%20use%20git/</link>
+      <link>http://aitangba.com/post/How%20to%20use%20git/</link>
       <pubDate>Fri, 25 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/How%20to%20use%20git/</guid>
+      <guid>http://aitangba.com/post/How%20to%20use%20git/</guid>
       <description>
 
 &lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-bb0ca3652ff14150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;git.png&#34; /&gt;
@@ -1047,10 +1061,10 @@ Git创建Develop分支的命令：&lt;/p&gt;
     
     <item>
       <title>Markdown的说明文档</title>
-      <link>https://xbeats.github.io/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+      <link>http://aitangba.com/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
       <pubDate>Mon, 22 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+      <guid>http://aitangba.com/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
       <description>
 
 &lt;h1 id=&#34;markdown&#34;&gt;Markdown&lt;/h1&gt;
@@ -1250,10 +1264,10 @@ hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=
     
     <item>
       <title>一个人的朝圣</title>
-      <link>https://xbeats.github.io/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
+      <link>http://aitangba.com/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
+      <guid>http://aitangba.com/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-d7da15147f296752.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;一个人的朝圣&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;像哈罗德一样，对生活和生命在某一时刻有着和过往完全不同想法的人，身边还是会有一些的。有时突发奇想的想去完成一件事情，可是在完成的过程中却发现更多新鲜的事物，&lt;/p&gt;
@@ -1262,10 +1276,10 @@ hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=
     
     <item>
       <title>日常感想--电商-蜜淘C轮融资失败</title>
-      <link>https://xbeats.github.io/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</link>
+      <link>http://aitangba.com/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</guid>
+      <guid>http://aitangba.com/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://static.oschina.net/uploads/img/201603/31161245_WXtr.jpg&#34; alt=&#34;背景&#34; title=&#34;奋斗创业&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;现在的群多电商环境下，越来越来都的创业型企业倒闭，折射出来的是当今互利网时代的机会和挑战。&lt;br /&gt; 
@@ -1278,10 +1292,10 @@ hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=
     
     <item>
       <title>一个产品的推广问题</title>
-      <link>https://xbeats.github.io/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</link>
+      <link>http://aitangba.com/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</link>
       <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://aitangba.com/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;p&gt;**第一步  **  ****树立方向和目标 ****
       刚出来的app在网络上肯定是一篇空白，网络上还没有任何关于新的app的信息，建立一个关于App的百科，有用户搜索的话，用户可以从百科上更详细的了解你，同时，如果后期做品牌营销的话，也能为你引来更多的潜在用户，当然，百科不一定只仅仅是百度百科，你可以举一反三在各种百科上建立你的词条，建立的越多越方便用户快速的搜索到。建立百科看似是一个很简单的事情，其实不然。有的百科看起来简单明了，有的百科看起来一头雾水，这里面也是有技术含量的，所以建立百科时一定要条理清晰，语言通俗易通，同时配上清晰的截图，这样用户才能更快的了解，明白。国内很多app的百科写的很烂，为什么很烂，一是写的很专业，二是还有很多修饰性词语，三是还很啰嗦，这样的词条带着很重的主观思维，用户也不会喜欢，所以通俗的告诉用户你的app能帮他们干什么，可以更方便他们下载。&lt;/p&gt;
 

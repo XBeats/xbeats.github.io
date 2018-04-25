@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Android on XBeats Home</title>
-    <link>http://aitangba.com/categories/android/index.xml</link>
+    <link>https://xbeats.github.io/categories/android/index.xml</link>
     <description>Recent content in Android on XBeats Home</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
-    <atom:link href="http://aitangba.com/categories/android/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://xbeats.github.io/categories/android/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>暂停使用aitangba.com域名</title>
-      <link>http://aitangba.com/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</link>
+      <link>https://xbeats.github.io/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</link>
       <pubDate>Tue, 24 Apr 2018 17:19:37 +0800</pubDate>
       
-      <guid>http://aitangba.com/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</guid>
+      <guid>https://xbeats.github.io/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</guid>
       <description>&lt;p&gt;域名aitangba.com不再准备续费了！&lt;/p&gt;
 
 &lt;p&gt;原意为“爱糖吧”，几年前买下这个域名是准备做一个类似在线购物的网站，当时就单纯的一个的想法，一边上班一边去完善自己的想法。几年的时间，没能花更多的精力去维护这样一个点子，后期索性做成了个人博客的域名，就这样挂了一年多吧，博客还是在不断的维护的，但是这个域名是时候说再见了！&lt;/p&gt;
@@ -25,10 +25,10 @@
     
     <item>
       <title>Android的API设计</title>
-      <link>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
+      <link>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
       <pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
+      <guid>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
       <description>
 
 &lt;h1 id=&#34;android的api设计&#34;&gt;Android的API设计&lt;/h1&gt;
@@ -103,10 +103,10 @@
     
     <item>
       <title>热修复入门：Android-中的-ClassLoader</title>
-      <link>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
+      <link>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
       <pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
+      <guid>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
       <description>
 
 &lt;p&gt;从去年下半年开始，热修复技术在 Android 技术社区热了一阵子，这种不用发布新版本就可以修复线上 bug 的技术确实有很大的需求，最近正好在研究一些开源的热修复方案，本文就其中常用的 ClassLoader 方式实现的热修复方案中的 ClassLoader 机制作一个简单的介绍。
@@ -553,10 +553,10 @@ String say();
     
     <item>
       <title>线程池ThreadPoolExecutor</title>
-      <link>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
+      <link>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
       <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
+      <guid>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;线程池.png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ThreadPoolExecutor的构造方法：&lt;/p&gt;
@@ -632,10 +632,10 @@ String say();
     
     <item>
       <title>Android-右滑返回</title>
-      <link>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
+      <link>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
       <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
+      <guid>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
       <description>
 
 &lt;h1 id=&#34;swipeback&#34;&gt;SwipeBack&lt;/h1&gt;

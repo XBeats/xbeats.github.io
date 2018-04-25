@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on XBeats Home</title>
-    <link>https://xbeats.github.io/post/index.xml</link>
+    <link>http://aitangba.com/post/index.xml</link>
     <description>Recent content in Posts on XBeats Home</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
     <lastBuildDate>Tue, 24 Apr 2018 17:19:37 +0800</lastBuildDate>
-    <atom:link href="https://xbeats.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://aitangba.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>暂停使用aitangba.com域名</title>
-      <link>https://xbeats.github.io/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</link>
+      <link>http://aitangba.com/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</link>
       <pubDate>Tue, 24 Apr 2018 17:19:37 +0800</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</guid>
+      <guid>http://aitangba.com/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</guid>
       <description>&lt;p&gt;域名aitangba.com不再准备续费了！&lt;/p&gt;
 
 &lt;p&gt;原意为“爱糖吧”，几年前买下这个域名是准备做一个类似在线购物的网站，当时就单纯的一个的想法，一边上班一边去完善自己的想法。几年的时间，没能花更多的精力去维护这样一个点子，后期索性做成了个人博客的域名，就这样挂了一年多吧，博客还是在不断的维护的，但是这个域名是时候说再见了！&lt;/p&gt;
@@ -25,11 +25,89 @@
     </item>
     
     <item>
+      <title>Android的API设计</title>
+      <link>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
+      <pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
+      <description>
+
+&lt;h1 id=&#34;android的api设计&#34;&gt;Android的API设计&lt;/h1&gt;
+
+&lt;h3 id=&#34;1-简单明确&#34;&gt;1.简单明确&lt;/h3&gt;
+
+&lt;p&gt;单个单词简单明确&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   //例：
+   	size();
+   	remove();
+   	removeAll()
+
+   //反例：
+   	countObservers();
+   	deleteObserver(Observer);
+   	deleteObservers();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;约束规则：在创建方法时，需要遵守一定的规则，方便调用者理解，相互关联的方法可以考虑保留一致的前缀或后缀&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   //例：
+   	execute(String);
+   	executeBatch();
+   	executeQuery(String);
+   	executeUpdate(String);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-限制长度&#34;&gt;2.限制长度&lt;/h3&gt;
+
+&lt;p&gt;不要超过4个单词，这样会大大降低可读性，虽然作用显得更明确，但是太过啰嗦&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;反例:AbstractBeanFactoryBasedTargetSourceCreator&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-参数限制&#34;&gt;3.参数限制&lt;/h3&gt;
+
+&lt;p&gt;方法里有过多参数往往让人不能明确区分其作用，特别在重载方法时，多个方法参数五花八门，会让人不知所措，可以考虑重新优化代码结构或者重新定义一个model&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;反例：regionMatches(boolean, int, String, int, int)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;在遇到多个参数的情况下，需要遵守一定原则：数组在前(如：copyOf(T[], int))&lt;/p&gt;
+
+&lt;h3 id=&#34;4-返回参数&#34;&gt;4.返回参数&lt;/h3&gt;
+
+&lt;p&gt;单个对象没有找到返回null或者抛出异常由调用者来处理；&lt;/p&gt;
+
+&lt;p&gt;列表不能返回null,如何没有需要返回的数据就返回一个空集合，防止调用处未能进行空处理而导致异常的发生。&lt;/p&gt;
+
+&lt;h3 id=&#34;5-命名格式&#34;&gt;5.命名格式&lt;/h3&gt;
+
+&lt;p&gt;（1）回调(onSomethingDone) ：由其他类来调用本类中的方法，在Listener和Callback中是比较常见的&lt;/p&gt;
+
+&lt;p&gt;​    例：onTitleChanged&lt;/p&gt;
+
+&lt;p&gt;（2）主动调用(doSomething)：一般是比较常见的方法，多数由本类中其他方法来调用，但是许多开发者利用或创建时却很随意，可用在优化代码显示，比价常见的命名有：reset,refresh,init&lt;/p&gt;
+
+&lt;p&gt;​    例：invalidateOptionsMenu&lt;/p&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;API的设计过程很多时候不能一撮而就，需要慢慢积累和进化，一个功能性的API一旦设计出来，意味着在一定时间内是相对稳定的，使用者能够放心的去调用，所以也需要一定的前瞻性，特别是对于Android开发着来说，其系统版本的高速迭代，可能会或多或少的影响到自己设计的程序；每个API接口应该只专注一件事，并做好（如果它很难命名，那么这或许是个不好的征兆，好的名称可以驱动开发、并且只需拆分与合并模块即可）；遵守最小惊讶原则，用户API只需根据需求来设计即可，不需要刻意去设计一下复杂无用的API。&lt;/p&gt;
+
+&lt;h2 id=&#34;thanks&#34;&gt;Thanks&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.csdn.net/article/2013-04-10/2814835-how-design-good-regular-api&#34;&gt;http://www.csdn.net/article/2013-04-&lt;sup&gt;10&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2814835&lt;/sub&gt;-how-design-good-regular-api&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/hdy007/article/details/1508834&#34;&gt;http://blog.csdn.net/hdy007/article/details/1508834&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.codeceo.com/article/google-java-good-api.html&#34;&gt;http://www.codeceo.com/article/google-java-good-api.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>How to use git</title>
-      <link>https://xbeats.github.io/post/How%20to%20use%20git/</link>
+      <link>http://aitangba.com/post/How%20to%20use%20git/</link>
       <pubDate>Fri, 25 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/How%20to%20use%20git/</guid>
+      <guid>http://aitangba.com/post/How%20to%20use%20git/</guid>
       <description>
 
 &lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-bb0ca3652ff14150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;git.png&#34; /&gt;
@@ -166,556 +244,11 @@ Git创建Develop分支的命令：&lt;/p&gt;
     </item>
     
     <item>
-      <title>Markdown的说明文档</title>
-      <link>https://xbeats.github.io/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
-      <pubDate>Mon, 22 Aug 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
-      <description>
-
-&lt;h1 id=&#34;markdown&#34;&gt;Markdown&lt;/h1&gt;
-
-&lt;p&gt;####导语：
-&amp;gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Markdown&#34;&gt;Markdown&lt;/a&gt;是一种轻量级『标记语言』，它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。&lt;br /&gt;
-创始人为约翰·格鲁伯（John Gruber），初始版本发布在2004年3月19日。&lt;/p&gt;
-
-&lt;h2 id=&#34;一-关于markdown&#34;&gt;一、关于Markdown&lt;/h2&gt;
-
-&lt;p&gt;文本格式一种规范，使用简洁的语法代替繁琐的排版，与HTML语言相比，特点是显而易见的，多种语法，字体样式、颜色等等设置都是相对简单得多的。相对简单的语法，使我们能更专心于书写自己的文档。所以越来越多的博客平台也都相继开始兼容markdown格式，例如github的README，就是最好的代表，国内的博客平台有：Oschina，简书，CSDN等等。&lt;/p&gt;
-
-&lt;p&gt;###Markdown官相关文档
-- &lt;a href=&#34;http://www.markdown.cn/&#34;&gt;&lt;em&gt;说明文档&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
-- &lt;a href=&#34;http://www.markdown.cn/&#34;&gt;&lt;em&gt;Markdown中文语法说明&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;###使用Markdown的优点&lt;br /&gt;
-- 专注文本，而不是排版
-- 多种格式可供导出（PDF、HTML等）
-- 纯文本格式，多平台兼容
-- 可读性强，可供多种人群读写&lt;/p&gt;
-
-&lt;p&gt;###Markdown开发工具
-&amp;gt; &lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://markdownpad.com/&#34;&gt;&lt;em&gt;Markdownpad&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-014f645995f9927b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;MAC&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://25.io/mou/&#34;&gt;&lt;em&gt;Mou&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-244acb3dfee23163.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;浏览器&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://markable.in/&#34;&gt;&lt;em&gt;Markable&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://dillinger.io/&#34;&gt;&lt;em&gt;Dillinger&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;二-markdown语法&#34;&gt;二、Markdown语法&lt;/h2&gt;
-
-&lt;p&gt;###作用域
-像很多的其他编程语言一样，每个方法或者类都有一个范围或权限修饰符。而markdown的语法范围几乎都是对称的（例如：&lt;code&gt;*Hello World!*&lt;/code&gt;）,又开始必然有结束，当然也有一些特殊的类型只有开始符号（例如：&lt;code&gt;#标题&lt;/code&gt;），在其结尾部分需要通过2个空格和换行来去其他部分区分&lt;/p&gt;
-
-&lt;p&gt;###语法&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;标题&lt;/strong&gt;&lt;br /&gt;
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-88716dd9f7ba5886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-标题是每篇文章都需要也是最常用的格式，在 Markdown 中，如果一段文字被定义为标题，只要在这段文字前加 # 号即可。&lt;/p&gt;
-
-&lt;p&gt;# 一级标题&lt;/p&gt;
-
-&lt;p&gt;## 二级标题&lt;/p&gt;
-
-&lt;p&gt;### 三级标题&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;列表&lt;/strong&gt;&lt;br /&gt;
-列表有有序列表与无序列表的区别，在 Markdown 下，列表的显示只需要在文字前加上 - 或 * 即可变为无序列表，有序列表则直接在文字前加 1. 2. 3. 符号要和文字之间加上一个字符的空格。&lt;br /&gt;
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-57afd995052ecc35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;引用&lt;/strong&gt;&lt;br /&gt;
-如果你需要引用一小段别处的句子，那么就要用引用的格式。&lt;br /&gt;
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-c6d2da6543f1a205.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;链接&lt;/strong&gt;
-链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记,在解释标示的地方加上链接地址和说明；当然也可以直接用括号加上链接地址：&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;This is [an example][id] reference-style link.&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;[id]: http://example.com/  &amp;quot;Optional Title Here&amp;quot;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;或者&lt;br /&gt;
-&lt;code&gt;This is [an example](http://example.com/) reference-style link.&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;图片&lt;/strong&gt;&lt;br /&gt;
-插入链接与插入图片的语法很像，区别在一个!号。可以先将图片上传到自己的云空间，生成可以访问的外链即可。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-61432270893a5830.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;粗体与斜体&lt;/strong&gt;&lt;br /&gt;
-Markdown 的粗体和斜体也非常简单，用一个 * 包含一段文本就是斜体的语法,用两个 * 包含一段文本就是粗体的语法，用三个 * 包含一段文本就是斜体加粗体的语法。&lt;br /&gt;
-例如：&lt;br /&gt;
-&lt;em&gt;这里是粗斜体&lt;/em&gt;&lt;br /&gt;
-&lt;strong&gt;这里是粗体&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;&lt;em&gt;这里是斜体加粗体&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;表格&lt;/strong&gt;&lt;br /&gt;
-表格是Markdown中最烦的语法，&lt;code&gt;&amp;quot;|&amp;quot;&lt;/code&gt;表示表格范围，&lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;表示内容范围，&lt;code&gt;&amp;quot;:&amp;quot;&lt;/code&gt;表示对齐方式（&lt;code&gt;:---&lt;/code&gt;和&lt;code&gt;---&lt;/code&gt;左对齐，&lt;code&gt;---：&lt;/code&gt;右对齐，&lt;code&gt;---：&lt;/code&gt;中间对齐） 例子如下：&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Tables&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Are&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;Cool&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;col 3 is&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;right-aligned&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;$1600&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;col 2 is&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;centered&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;$12&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;zebra stripes&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;are neat&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;$1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;em&gt;源代码&lt;/em&gt;&lt;br /&gt;
-    | Tables| Are   | Cool  |&lt;br /&gt;
-    | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;- |:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-:| &amp;mdash;&amp;ndash;:|&lt;br /&gt;
-    | col 3 is  | right-aligned | $1600 |&lt;br /&gt;
-    | col 2 is  | centered  |   $12 |&lt;br /&gt;
-    | zebra stripes | are neat  |$1 |&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;代码框&lt;/strong&gt;
-如果你是个程序猿，需要在文章里优雅的引用代码框，在 Markdown 下实现也非常简单，只需要用两个 &amp;ldquo;`&amp;rdquo; 把中间的代码包裹起来，如 &lt;code&gt;code&lt;/code&gt;。也可使用 tab 键即可缩进。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;分割线&lt;/strong&gt;
-分割线的语法只需要另起一行，连续输入三个星号 *** 即可。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;脚注&lt;/strong&gt;&lt;br /&gt;
-用来表示一些注解&lt;br /&gt;
-&lt;code&gt;hello[^hello]&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;效果：&lt;br /&gt;
-hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:hello&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
-
-&lt;p&gt;目前总计10种语法格式，再借助工具，学习成本比较低；在使用过程中很多公司也在使用Md来开发接口文档，这样会便于版本管理，这可能会是未来的一个趋势和潮流。&lt;/p&gt;
-
-&lt;p&gt;##三、转义&lt;br /&gt;
-在前面加上反斜杠来帮助插入普通的符号&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;.END.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;##四、其他&lt;/p&gt;
-
-&lt;p&gt;锚点的使用&lt;/p&gt;
-
-&lt;p&gt;由于markdown暂时不支持自定义id和name属性，所以 只能借助html标签来定义&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;使用方法：&lt;/strong&gt;&lt;br /&gt;
-&lt;code&gt;
-&amp;lt;a id=&amp;quot;anchor&amp;quot;&amp;gt;锚点标记&amp;lt;/a&amp;gt;  
-[跳转到锚点位置](#anchor) 
-&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;展示效果：&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a id=&#34;anchor&#34;&gt;锚点标记&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;#anchor&#34;&gt;跳转到锚点位置&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;#anchor&#34;&gt;锚点标记&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:hello&#34;&gt;hi
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:hello&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>一个人的朝圣</title>
-      <link>https://xbeats.github.io/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
-      <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-d7da15147f296752.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;一个人的朝圣&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;像哈罗德一样，对生活和生命在某一时刻有着和过往完全不同想法的人，身边还是会有一些的。有时突发奇想的想去完成一件事情，可是在完成的过程中却发现更多新鲜的事物，&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>日常感想--电商-蜜淘C轮融资失败</title>
-      <link>https://xbeats.github.io/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</link>
-      <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://static.oschina.net/uploads/img/201603/31161245_WXtr.jpg&#34; alt=&#34;背景&#34; title=&#34;奋斗创业&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;现在的群多电商环境下，越来越来都的创业型企业倒闭，折射出来的是当今互利网时代的机会和挑战。&lt;br /&gt; 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这让我突然想到了自己想要创业的想法，在公司稳稳当当地生活，或许不是最终所属。在当今社会，虽说不能单靠理想吃饭，可是没有理想的驱动，做起事来，还是缺乏一些激情和动力的。&lt;br /&gt; 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;创业的念头，或者可以说是想我一样的90后一代人的理想。在当今的创业潮流中，90后的创业者并不多见，许多人还奋斗在职场的第一线，有的或许离创业差之毫厘。当然我身边也有许多朋友已经开始踏上了创业之路，不过大多时间还是在为今后公司的走向和一帮跟着自己的伙伴们感到担忧。很多时候我能听到他们有多么羡慕那些有着稳定工作的职员；多么厌恶现在正在接触中的顾客；多么恨那些富人们可以那么悠闲&amp;hellip;&amp;hellip; 听完他们发发牢骚和骂娘，我再向他们讲述，那个刘强东·马云等成功的道路是怎样，怎样的。给他们鼓气，给他们信心，做自己能帮到的事。&lt;br /&gt; 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;道理谁都懂，他们需要的仅仅是总一个人能听他们说说这创业路上的所见所闻的这么一个人物。也许多我的那些朋友而已，我可能恰如其分的担当着，这样的一个角色。
-       &amp;hellip;&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>一个产品的推广问题</title>
-      <link>https://xbeats.github.io/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</guid>
-      <description>&lt;p&gt;**第一步  **  ****树立方向和目标 ****
-      刚出来的app在网络上肯定是一篇空白，网络上还没有任何关于新的app的信息，建立一个关于App的百科，有用户搜索的话，用户可以从百科上更详细的了解你，同时，如果后期做品牌营销的话，也能为你引来更多的潜在用户，当然，百科不一定只仅仅是百度百科，你可以举一反三在各种百科上建立你的词条，建立的越多越方便用户快速的搜索到。建立百科看似是一个很简单的事情，其实不然。有的百科看起来简单明了，有的百科看起来一头雾水，这里面也是有技术含量的，所以建立百科时一定要条理清晰，语言通俗易通，同时配上清晰的截图，这样用户才能更快的了解，明白。国内很多app的百科写的很烂，为什么很烂，一是写的很专业，二是还有很多修饰性词语，三是还很啰嗦，这样的词条带着很重的主观思维，用户也不会喜欢，所以通俗的告诉用户你的app能帮他们干什么，可以更方便他们下载。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;第二步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;注重反馈渠道&lt;/em&gt;&lt;/strong&gt;*
-      微博是一个大众化的产品，很多人的手机上可能都装有，当用户从词条哪里了解了你的app之后可以很轻松的通过微博关注你，和你互动，包括信息反馈，有的人说用户可以通过app里的“留言反馈”可以和你互动啊，这个是大错特错，很多用户在不了解一个app之前是不会轻易下载的，除非这个app是非下不可，而且很多app的用户反馈都藏的很深，用户一般找不到。相反，通过微博，用户可以实时的了解你，好的微博内容还会引起用户的转发和扩散，这些都是建立微博的好处，当然微博不仅是新浪微博，其他的微博也都要入驻，别让腾讯微博的用户去新浪微博找你，那是不可能的。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;第三步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;收集需求&lt;/em&gt;&lt;/strong&gt;*
-      通过百科和微博的信息填充，一个新的app算是有一定的品牌基础了，接下来就是在论坛发个帖子，别小看发帖子，我曾经一篇广告帖子可以传播几百万页面，而且被各种淘宝店当做教程，直接贴在卖手机的说明书里，我这样说的意思是别小看一篇帖子，你要把帖子写的用心一些，从用户的角度出发，让用户看了觉得非常有用才行。帖子写好了，就要找论坛发，找什么样的论坛，那肯定是找权重高的，那些网站论坛权重最高？建议用站长查询查询下，权重高的论坛搜索引擎的抓取速度是最快的，一般是一分钟之内抓取，我建议发个20~50个论坛，之前在推广APP时候，论坛带来的流量能高达一两万激活，现在应该更多。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;第四步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;拓展渠道&lt;/em&gt;&lt;/strong&gt;*
-      前面三步说了那么多，其实都是在网络上布置关键词，方便用户搜索，提高app的曝光量和自传播力，接下来是拓展渠道，把新的app上传到各种应用商店，软件下载站上，拓展200个渠道，目前的渠道很多，你可以根据类别进行分类，同时发掘一些新的渠道。渠道的定义为能给APP带来展示和下载的网络媒介，谈渠道不是只指那些APP商店，比如有些公交车的免费wifi也提供APP下载的，也是你的渠道，另外一些微信粉丝比较多的应用自媒体，经常会推荐一些APP，也能为你的APP提供一些下载量，这些都是你的渠道。另外，铺渠道是一种比较累的工作，但是确实很有用，我曾经只铺渠道就带来了一百万的量。铺渠道还有另外一个好处就是，通过自然下载可以知道一个app在用户心中是什么位置了，也可以知道自己的app到底优秀不优秀，同时也可以帮你更详细的了解各个渠道的质量，为以后的付费推广做铺垫。铺渠道当然不能只是简单的铺渠道，在铺渠道的过程中，要了解渠道的一些情况，比如是否对新的APP有推广资源、首发资源等，可以为后续的大量推广做铺垫。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;第五步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;活动营销&lt;/em&gt;&lt;/strong&gt;*
-      前面说了那么多，都是免费推广APP的一些方法，当然如果有一点预算又不是很多的话，可以做一些活动营销，花费不会很多，你可以在论坛，在渠道做一些活动，活动形式要简单，可玩性强，而且奖品要吸引人，通过用户的参与可以提高APP的下载量，可以提供曝光度。活动营销要和你的APP属性相结合，找到你的特定人群，比如做女性APP的，可以在校园里办活动，也可以在线上的女性社区办活动，做旅游APP的，可以和一些旅行社合作等等，所以做活动营销一定要和受众人群合作。
-      这些都是一些新的APP的推广思路和方法，在推广APP的时候要视野宽泛，举一反三，切不可思维定势，同时要站在用户的角度考虑问题，现在的新APP一出来，大部分一开始就是换量，建议不要做，换量这种推广方式，一方面对产品的影响比较大，一方面对产品来说没有什么意义，换量适合做垃圾APP。此外，本文的思路适合没有资源的个人和中小团队。&lt;/p&gt;
-
-&lt;p&gt;原文地址:&lt;a href=&#34;http://www.zhihu.com/question/21140904/answer/27340883&#34;&gt;http://www.zhihu.com/question/21140904/answer/27340883&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Android的API设计</title>
-      <link>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
-      <pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
-      <description>
-
-&lt;h1 id=&#34;android的api设计&#34;&gt;Android的API设计&lt;/h1&gt;
-
-&lt;h3 id=&#34;1-简单明确&#34;&gt;1.简单明确&lt;/h3&gt;
-
-&lt;p&gt;单个单词简单明确&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   //例：
-   	size();
-   	remove();
-   	removeAll()
-
-   //反例：
-   	countObservers();
-   	deleteObserver(Observer);
-   	deleteObservers();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;约束规则：在创建方法时，需要遵守一定的规则，方便调用者理解，相互关联的方法可以考虑保留一致的前缀或后缀&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   //例：
-   	execute(String);
-   	executeBatch();
-   	executeQuery(String);
-   	executeUpdate(String);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-限制长度&#34;&gt;2.限制长度&lt;/h3&gt;
-
-&lt;p&gt;不要超过4个单词，这样会大大降低可读性，虽然作用显得更明确，但是太过啰嗦&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;反例:AbstractBeanFactoryBasedTargetSourceCreator&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;3-参数限制&#34;&gt;3.参数限制&lt;/h3&gt;
-
-&lt;p&gt;方法里有过多参数往往让人不能明确区分其作用，特别在重载方法时，多个方法参数五花八门，会让人不知所措，可以考虑重新优化代码结构或者重新定义一个model&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;反例：regionMatches(boolean, int, String, int, int)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;在遇到多个参数的情况下，需要遵守一定原则：数组在前(如：copyOf(T[], int))&lt;/p&gt;
-
-&lt;h3 id=&#34;4-返回参数&#34;&gt;4.返回参数&lt;/h3&gt;
-
-&lt;p&gt;单个对象没有找到返回null或者抛出异常由调用者来处理；&lt;/p&gt;
-
-&lt;p&gt;列表不能返回null,如何没有需要返回的数据就返回一个空集合，防止调用处未能进行空处理而导致异常的发生。&lt;/p&gt;
-
-&lt;h3 id=&#34;5-命名格式&#34;&gt;5.命名格式&lt;/h3&gt;
-
-&lt;p&gt;（1）回调(onSomethingDone) ：由其他类来调用本类中的方法，在Listener和Callback中是比较常见的&lt;/p&gt;
-
-&lt;p&gt;​    例：onTitleChanged&lt;/p&gt;
-
-&lt;p&gt;（2）主动调用(doSomething)：一般是比较常见的方法，多数由本类中其他方法来调用，但是许多开发者利用或创建时却很随意，可用在优化代码显示，比价常见的命名有：reset,refresh,init&lt;/p&gt;
-
-&lt;p&gt;​    例：invalidateOptionsMenu&lt;/p&gt;
-
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-
-&lt;p&gt;API的设计过程很多时候不能一撮而就，需要慢慢积累和进化，一个功能性的API一旦设计出来，意味着在一定时间内是相对稳定的，使用者能够放心的去调用，所以也需要一定的前瞻性，特别是对于Android开发着来说，其系统版本的高速迭代，可能会或多或少的影响到自己设计的程序；每个API接口应该只专注一件事，并做好（如果它很难命名，那么这或许是个不好的征兆，好的名称可以驱动开发、并且只需拆分与合并模块即可）；遵守最小惊讶原则，用户API只需根据需求来设计即可，不需要刻意去设计一下复杂无用的API。&lt;/p&gt;
-
-&lt;h2 id=&#34;thanks&#34;&gt;Thanks&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.csdn.net/article/2013-04-10/2814835-how-design-good-regular-api&#34;&gt;http://www.csdn.net/article/2013-04-&lt;sup&gt;10&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2814835&lt;/sub&gt;-how-design-good-regular-api&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/hdy007/article/details/1508834&#34;&gt;http://blog.csdn.net/hdy007/article/details/1508834&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.codeceo.com/article/google-java-good-api.html&#34;&gt;http://www.codeceo.com/article/google-java-good-api.html&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Android-右滑返回</title>
-      <link>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
-      <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
-      <description>
-
-&lt;h1 id=&#34;swipeback&#34;&gt;SwipeBack&lt;/h1&gt;
-
-&lt;p&gt;在设计过程中遇到也有过其他思路：&lt;br /&gt;
-1）设置Activity的透明theme，可是发现只要activity的层级变多就会变得非常卡顿；&lt;br /&gt;
-2）动态设置Activity的theme，这需要通过反射，而且还需要判断api，部分手机还不兼容；&lt;br /&gt;
-3）在滑动展示上个Activity的View时，直接将上个Activity的contentView截图保存在内存卡上，然后显示在当前Activity的view上，但是有明显的卡顿感；&lt;br /&gt;
-以上都是在设计过程中想到的方案，也逐个实践了一下，发现问题还是比较多的，想想还不如另辟蹊径，就有了现在的方案，目前看来还是能兼容大部分手机的。&lt;/p&gt;
-
-&lt;h1 id=&#34;features&#34;&gt;Features&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;不需要设置透明theme或&lt;code&gt;windowIsTranslucent = true&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;不影响activity的生命周期&lt;/li&gt;
-&lt;li&gt;只需继承SwipeBackActivity&lt;/li&gt;
-&lt;li&gt;支持Dialog的滑动返回&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;getting-started&#34;&gt;Getting started&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;Firstly, add the following lines to your app/build.gradle.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;dependencies {  
-    compile &#39;com.aitangba:swipeback:1.0.0&#39;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;Secondly, add the following lines to your application.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomApplication extends Application{
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
-    }
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;Finally, set the activity which need to swipe extends the SwipeBackActivity.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class BaseActivity extends SwipeBackActivity {
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
-
-&lt;h3 id=&#34;api&#34;&gt;API&lt;/h3&gt;
-
-&lt;p&gt;Application在Api14之后添加了新的Callback方法&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
-
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这样就可以根据activity的生命周期缓存所有Activity，通过list获取上一个activity的实例，从而获取id为content的ContentView的子View（即setContentView中的View），并进行滑动展示。&lt;/p&gt;
-
-&lt;p&gt;默认SwipeBackActivity是支持滑动返回的，不需要滑动返回时则需要复写SwipeBackActivity的方法&lt;code&gt;supportSlideBack&lt;/code&gt;，其中方法&lt;code&gt;canBeSlideBack&lt;/code&gt;意思是能否返回至本Activity；两个方法相互配合使用，以应对各种需求。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; 
-   public class SwipeBackActivity extends AppCompatActivity {
-
-    private SwipeWindowHelper mSwipeWindowHelper;
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(!supportSlideBack()) {
-            return super.dispatchTouchEvent(ev);
-        }
-
-        if(mSwipeWindowHelper == null) {
-            mSwipeWindowHelper = new SwipeWindowHelper(getWindow());
-        }
-        return mSwipeWindowHelper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
-    }
-
-    /**
-     * 是否支持滑动返回
-     * @return
-     */
-    protected boolean supportSlideBack() {
-        return true;
-    }
-
-    /**
-     * 能否滑动返回至当前Activity
-     * @return
-     */
-    protected boolean canBeSlideBack() {
-        return true;
-    }
-   }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;6种事件状态&#34;&gt;6种事件状态&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-    private static final int MSG_ACTION_DOWN = 1; //点击事件  
-    private static final int MSG_ACTION_MOVE = 2; //滑动事件
-    private static final int MSG_ACTION_UP = 3;  //点击结束
-    private static final int MSG_SLIDE_CANCEL = 4; //开始滑动，不返回前一个页面
-    private static final int MSG_SLIDE_CANCELED = 5;  //结束滑动，不返回前一个页面
-    private static final int MSG_SLIDE_PROCEED = 6; //开始滑动，返回前一个页面
-    private static final int MSG_SLIDE_FINISHED = 7;//结束滑动，返回前一个页面
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;在Down手势发生时，只要将上一个Activity的ContentView从parentView中剥离，并加入到当前View的ContentView中；&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;在滑动手势发生时，加上阴影View，并进行滑动；同时滑动的有当前Activity的ContentView、上一个Activity的ContentView和自定义的阴影View；&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;在Up手势发生时，判断滑动是否超过半屏，触发返回操作，并展示滑动动画；&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;滑动取消或滑动返回发生时，需要将上个Activity的ContentView从新加入到上一个Acitivity的布局中。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&#34;screenshot&#34;&gt;ScreenShot&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/XBeats/and_swipeback/master/screenshot/swipeback.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;gitHub地址：&lt;a href=&#34;https://github.com/XBeats/and_swipeback&#34;&gt;github.com/XBeats/and_swipeback&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>线程池ThreadPoolExecutor</title>
-      <link>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
-      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;线程池.png&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ThreadPoolExecutor的构造方法：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public ThreadPoolExecutor(int corePoolSize,  
-                          int maximumPoolSize,  
-                          long keepAliveTime,  
-                          TimeUnit unit,  
-                          BlockingQueue&amp;lt;Runnable&amp;gt; workQueue,  
-                          ThreadFactory threadFactory,  
-                          RejectedExecutionHandler handler)  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;###说明
-- corePoolSize： 线程池维护线程的最少数量&lt;br /&gt;
-- maximumPoolSize：线程池维护线程的最大数量
-- keepAliveTime： 线程池维护线程所允许的空闲时间
-- unit： 线程池维护线程所允许的空闲时间的单位
-- workQueue： 线程池所使用的缓冲队列
-- handler： 线程池对拒绝任务的处理策略&lt;/p&gt;
-
-&lt;p&gt;###逻辑
-1. 当池子线程数量小于corePoolSize就新建线程，并处理请求&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;当池子大小等于corePoolSize，就会将请求放入workQueue中，等池子里的线程空闲了，就去从workQueue中取任务并处理&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;当workQueue放不下新入的任务时，新建线程入池，并处理请求，如果池子大小撑到了maximumPoolSize就用RejectedExecutionHandler来做拒绝处理&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;另外，当池子的线程数大于corePoolSize的时候，多余的线程会等待keepAliveTime长的时间，如果无请求可处理就自行销毁&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;###理解
-一个任务通过 execute(Runnable)方法被添加到线程池，任务就是一个 Runnable类型的对象，任务的执行方法就是Runnable类型对象的run()方法。&lt;/p&gt;
-
-&lt;p&gt;###参数
-&lt;strong&gt;unit&lt;/strong&gt;  可选的参数为java.util.concurrent.TimeUnit中的几个静态属性：
-- NANOSECONDS
-- MICROSECONDS
-- MILLISECONDS 毫秒
-- SECONDS 秒&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;workQueue&lt;/strong&gt;  常用的是：java.util.concurrent.ArrayBlockingQueue&lt;br /&gt;
-- SynchronousQueue  直接提交，它将任务直接提交给线程而不保持它们。
-- LinkedBlockingQueue  无界队列，将导致在所有 corePoolSize 线程都忙的情况下将新任务加入队列。
-- ArrayBlockingQueue  有界队列，有助于防止资源耗尽，但是可能较难调整和控制。
-&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;handler&lt;/strong&gt;  有四个选择：
-- ThreadPoolExecutor.AbortPolicy()&lt;br /&gt;
-抛出java.util.concurrent.RejectedExecutionException异常
- 
-- ThreadPoolExecutor.CallerRunsPolicy()&lt;br /&gt;
-当抛出RejectedExecutionException异常时，会调用&lt;strong&gt;rejectedExecution&lt;/strong&gt;方法
-(如果主线程没有关闭，则主线程调用run方法,源码如下&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {            
-         if (!e.isShutdown()) {                
-                 r.run();            
-         }
-        }
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; 
-- ThreadPoolExecutor.DiscardOldestPolicy()&lt;br /&gt;
-抛弃旧的任务
- 
-- ThreadPoolExecutor.DiscardPolicy()&lt;br /&gt;
-抛弃当前的任务&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>热修复入门：Android-中的-ClassLoader</title>
-      <link>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
+      <link>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
       <pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
+      <guid>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
       <description>
 
 &lt;p&gt;从去年下半年开始，热修复技术在 Android 技术社区热了一阵子，这种不用发布新版本就可以修复线上 bug 的技术确实有很大的需求，最近正好在研究一些开源的热修复方案，本文就其中常用的 ClassLoader 方式实现的热修复方案中的 ClassLoader 机制作一个简单的介绍。
@@ -1161,11 +694,90 @@ String say();
     </item>
     
     <item>
+      <title>线程池ThreadPoolExecutor</title>
+      <link>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;线程池.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ThreadPoolExecutor的构造方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public ThreadPoolExecutor(int corePoolSize,  
+                          int maximumPoolSize,  
+                          long keepAliveTime,  
+                          TimeUnit unit,  
+                          BlockingQueue&amp;lt;Runnable&amp;gt; workQueue,  
+                          ThreadFactory threadFactory,  
+                          RejectedExecutionHandler handler)  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;###说明
+- corePoolSize： 线程池维护线程的最少数量&lt;br /&gt;
+- maximumPoolSize：线程池维护线程的最大数量
+- keepAliveTime： 线程池维护线程所允许的空闲时间
+- unit： 线程池维护线程所允许的空闲时间的单位
+- workQueue： 线程池所使用的缓冲队列
+- handler： 线程池对拒绝任务的处理策略&lt;/p&gt;
+
+&lt;p&gt;###逻辑
+1. 当池子线程数量小于corePoolSize就新建线程，并处理请求&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;当池子大小等于corePoolSize，就会将请求放入workQueue中，等池子里的线程空闲了，就去从workQueue中取任务并处理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;当workQueue放不下新入的任务时，新建线程入池，并处理请求，如果池子大小撑到了maximumPoolSize就用RejectedExecutionHandler来做拒绝处理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;另外，当池子的线程数大于corePoolSize的时候，多余的线程会等待keepAliveTime长的时间，如果无请求可处理就自行销毁&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;###理解
+一个任务通过 execute(Runnable)方法被添加到线程池，任务就是一个 Runnable类型的对象，任务的执行方法就是Runnable类型对象的run()方法。&lt;/p&gt;
+
+&lt;p&gt;###参数
+&lt;strong&gt;unit&lt;/strong&gt;  可选的参数为java.util.concurrent.TimeUnit中的几个静态属性：
+- NANOSECONDS
+- MICROSECONDS
+- MILLISECONDS 毫秒
+- SECONDS 秒&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;workQueue&lt;/strong&gt;  常用的是：java.util.concurrent.ArrayBlockingQueue&lt;br /&gt;
+- SynchronousQueue  直接提交，它将任务直接提交给线程而不保持它们。
+- LinkedBlockingQueue  无界队列，将导致在所有 corePoolSize 线程都忙的情况下将新任务加入队列。
+- ArrayBlockingQueue  有界队列，有助于防止资源耗尽，但是可能较难调整和控制。
+&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;handler&lt;/strong&gt;  有四个选择：
+- ThreadPoolExecutor.AbortPolicy()&lt;br /&gt;
+抛出java.util.concurrent.RejectedExecutionException异常
+ 
+- ThreadPoolExecutor.CallerRunsPolicy()&lt;br /&gt;
+当抛出RejectedExecutionException异常时，会调用&lt;strong&gt;rejectedExecution&lt;/strong&gt;方法
+(如果主线程没有关闭，则主线程调用run方法,源码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {            
+         if (!e.isShutdown()) {                
+                 r.run();            
+         }
+        }
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; 
+- ThreadPoolExecutor.DiscardOldestPolicy()&lt;br /&gt;
+抛弃旧的任务
+ 
+- ThreadPoolExecutor.DiscardPolicy()&lt;br /&gt;
+抛弃当前的任务&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>HashMap知识点</title>
-      <link>https://xbeats.github.io/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
+      <link>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
       <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
+      <guid>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-dc3526b7baa6eb4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;HashMap.png&#34; /&gt;
 ###前言
 首先再次强调hashcode （==）和equals的真正含义
@@ -1303,6 +915,394 @@ HashMap基于hashing原理&lt;br /&gt;
 &lt;p&gt;参考资料：
 &lt;a href=&#34;http://blog.csdn.net/fyxxq/article/details/42066843&#34;&gt;http://blog.csdn.net/fyxxq/article/details/42066843&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;http://www.cnblogs.com/xwdreamer/archive/2012/06/03/2532832.html&#34;&gt;http://www.cnblogs.com/xwdreamer/archive/2012/06/03/2532832.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Markdown的说明文档</title>
+      <link>http://aitangba.com/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Mon, 22 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+      <description>
+
+&lt;h1 id=&#34;markdown&#34;&gt;Markdown&lt;/h1&gt;
+
+&lt;p&gt;####导语：
+&amp;gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Markdown&#34;&gt;Markdown&lt;/a&gt;是一种轻量级『标记语言』，它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。&lt;br /&gt;
+创始人为约翰·格鲁伯（John Gruber），初始版本发布在2004年3月19日。&lt;/p&gt;
+
+&lt;h2 id=&#34;一-关于markdown&#34;&gt;一、关于Markdown&lt;/h2&gt;
+
+&lt;p&gt;文本格式一种规范，使用简洁的语法代替繁琐的排版，与HTML语言相比，特点是显而易见的，多种语法，字体样式、颜色等等设置都是相对简单得多的。相对简单的语法，使我们能更专心于书写自己的文档。所以越来越多的博客平台也都相继开始兼容markdown格式，例如github的README，就是最好的代表，国内的博客平台有：Oschina，简书，CSDN等等。&lt;/p&gt;
+
+&lt;p&gt;###Markdown官相关文档
+- &lt;a href=&#34;http://www.markdown.cn/&#34;&gt;&lt;em&gt;说明文档&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
+- &lt;a href=&#34;http://www.markdown.cn/&#34;&gt;&lt;em&gt;Markdown中文语法说明&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;###使用Markdown的优点&lt;br /&gt;
+- 专注文本，而不是排版
+- 多种格式可供导出（PDF、HTML等）
+- 纯文本格式，多平台兼容
+- 可读性强，可供多种人群读写&lt;/p&gt;
+
+&lt;p&gt;###Markdown开发工具
+&amp;gt; &lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://markdownpad.com/&#34;&gt;&lt;em&gt;Markdownpad&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-014f645995f9927b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;MAC&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://25.io/mou/&#34;&gt;&lt;em&gt;Mou&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-244acb3dfee23163.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;浏览器&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://markable.in/&#34;&gt;&lt;em&gt;Markable&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://dillinger.io/&#34;&gt;&lt;em&gt;Dillinger&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;二-markdown语法&#34;&gt;二、Markdown语法&lt;/h2&gt;
+
+&lt;p&gt;###作用域
+像很多的其他编程语言一样，每个方法或者类都有一个范围或权限修饰符。而markdown的语法范围几乎都是对称的（例如：&lt;code&gt;*Hello World!*&lt;/code&gt;）,又开始必然有结束，当然也有一些特殊的类型只有开始符号（例如：&lt;code&gt;#标题&lt;/code&gt;），在其结尾部分需要通过2个空格和换行来去其他部分区分&lt;/p&gt;
+
+&lt;p&gt;###语法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;标题&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-88716dd9f7ba5886.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+标题是每篇文章都需要也是最常用的格式，在 Markdown 中，如果一段文字被定义为标题，只要在这段文字前加 # 号即可。&lt;/p&gt;
+
+&lt;p&gt;# 一级标题&lt;/p&gt;
+
+&lt;p&gt;## 二级标题&lt;/p&gt;
+
+&lt;p&gt;### 三级标题&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;列表&lt;/strong&gt;&lt;br /&gt;
+列表有有序列表与无序列表的区别，在 Markdown 下，列表的显示只需要在文字前加上 - 或 * 即可变为无序列表，有序列表则直接在文字前加 1. 2. 3. 符号要和文字之间加上一个字符的空格。&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-57afd995052ecc35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;引用&lt;/strong&gt;&lt;br /&gt;
+如果你需要引用一小段别处的句子，那么就要用引用的格式。&lt;br /&gt;
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-c6d2da6543f1a205.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;链接&lt;/strong&gt;
+链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记,在解释标示的地方加上链接地址和说明；当然也可以直接用括号加上链接地址：&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;This is [an example][id] reference-style link.&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;[id]: http://example.com/  &amp;quot;Optional Title Here&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;或者&lt;br /&gt;
+&lt;code&gt;This is [an example](http://example.com/) reference-style link.&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;图片&lt;/strong&gt;&lt;br /&gt;
+插入链接与插入图片的语法很像，区别在一个!号。可以先将图片上传到自己的云空间，生成可以访问的外链即可。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-61432270893a5830.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;粗体与斜体&lt;/strong&gt;&lt;br /&gt;
+Markdown 的粗体和斜体也非常简单，用一个 * 包含一段文本就是斜体的语法,用两个 * 包含一段文本就是粗体的语法，用三个 * 包含一段文本就是斜体加粗体的语法。&lt;br /&gt;
+例如：&lt;br /&gt;
+&lt;em&gt;这里是粗斜体&lt;/em&gt;&lt;br /&gt;
+&lt;strong&gt;这里是粗体&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;em&gt;这里是斜体加粗体&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;表格&lt;/strong&gt;&lt;br /&gt;
+表格是Markdown中最烦的语法，&lt;code&gt;&amp;quot;|&amp;quot;&lt;/code&gt;表示表格范围，&lt;code&gt;&amp;quot;-&amp;quot;&lt;/code&gt;表示内容范围，&lt;code&gt;&amp;quot;:&amp;quot;&lt;/code&gt;表示对齐方式（&lt;code&gt;:---&lt;/code&gt;和&lt;code&gt;---&lt;/code&gt;左对齐，&lt;code&gt;---：&lt;/code&gt;右对齐，&lt;code&gt;---：&lt;/code&gt;中间对齐） 例子如下：&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Tables&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Are&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Cool&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;col 3 is&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;right-aligned&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;$1600&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;col 2 is&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;centered&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;$12&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;zebra stripes&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;are neat&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;$1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;em&gt;源代码&lt;/em&gt;&lt;br /&gt;
+    | Tables| Are   | Cool  |&lt;br /&gt;
+    | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;- |:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-:| &amp;mdash;&amp;ndash;:|&lt;br /&gt;
+    | col 3 is  | right-aligned | $1600 |&lt;br /&gt;
+    | col 2 is  | centered  |   $12 |&lt;br /&gt;
+    | zebra stripes | are neat  |$1 |&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;代码框&lt;/strong&gt;
+如果你是个程序猿，需要在文章里优雅的引用代码框，在 Markdown 下实现也非常简单，只需要用两个 &amp;ldquo;`&amp;rdquo; 把中间的代码包裹起来，如 &lt;code&gt;code&lt;/code&gt;。也可使用 tab 键即可缩进。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;分割线&lt;/strong&gt;
+分割线的语法只需要另起一行，连续输入三个星号 *** 即可。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;脚注&lt;/strong&gt;&lt;br /&gt;
+用来表示一些注解&lt;br /&gt;
+&lt;code&gt;hello[^hello]&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;效果：&lt;br /&gt;
+hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:hello&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
+
+&lt;p&gt;目前总计10种语法格式，再借助工具，学习成本比较低；在使用过程中很多公司也在使用Md来开发接口文档，这样会便于版本管理，这可能会是未来的一个趋势和潮流。&lt;/p&gt;
+
+&lt;p&gt;##三、转义&lt;br /&gt;
+在前面加上反斜杠来帮助插入普通的符号&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;.END.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;##四、其他&lt;/p&gt;
+
+&lt;p&gt;锚点的使用&lt;/p&gt;
+
+&lt;p&gt;由于markdown暂时不支持自定义id和name属性，所以 只能借助html标签来定义&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;使用方法：&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;
+&amp;lt;a id=&amp;quot;anchor&amp;quot;&amp;gt;锚点标记&amp;lt;/a&amp;gt;  
+[跳转到锚点位置](#anchor) 
+&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;展示效果：&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a id=&#34;anchor&#34;&gt;锚点标记&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;#anchor&#34;&gt;跳转到锚点位置&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;#anchor&#34;&gt;锚点标记&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:hello&#34;&gt;hi
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:hello&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Android-右滑返回</title>
+      <link>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
+      <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
+      <description>
+
+&lt;h1 id=&#34;swipeback&#34;&gt;SwipeBack&lt;/h1&gt;
+
+&lt;p&gt;在设计过程中遇到也有过其他思路：&lt;br /&gt;
+1）设置Activity的透明theme，可是发现只要activity的层级变多就会变得非常卡顿；&lt;br /&gt;
+2）动态设置Activity的theme，这需要通过反射，而且还需要判断api，部分手机还不兼容；&lt;br /&gt;
+3）在滑动展示上个Activity的View时，直接将上个Activity的contentView截图保存在内存卡上，然后显示在当前Activity的view上，但是有明显的卡顿感；&lt;br /&gt;
+以上都是在设计过程中想到的方案，也逐个实践了一下，发现问题还是比较多的，想想还不如另辟蹊径，就有了现在的方案，目前看来还是能兼容大部分手机的。&lt;/p&gt;
+
+&lt;h1 id=&#34;features&#34;&gt;Features&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不需要设置透明theme或&lt;code&gt;windowIsTranslucent = true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;不影响activity的生命周期&lt;/li&gt;
+&lt;li&gt;只需继承SwipeBackActivity&lt;/li&gt;
+&lt;li&gt;支持Dialog的滑动返回&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;getting-started&#34;&gt;Getting started&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Firstly, add the following lines to your app/build.gradle.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;dependencies {  
+    compile &#39;com.aitangba:swipeback:1.0.0&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Secondly, add the following lines to your application.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomApplication extends Application{
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Finally, set the activity which need to swipe extends the SwipeBackActivity.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class BaseActivity extends SwipeBackActivity {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
+
+&lt;h3 id=&#34;api&#34;&gt;API&lt;/h3&gt;
+
+&lt;p&gt;Application在Api14之后添加了新的Callback方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就可以根据activity的生命周期缓存所有Activity，通过list获取上一个activity的实例，从而获取id为content的ContentView的子View（即setContentView中的View），并进行滑动展示。&lt;/p&gt;
+
+&lt;p&gt;默认SwipeBackActivity是支持滑动返回的，不需要滑动返回时则需要复写SwipeBackActivity的方法&lt;code&gt;supportSlideBack&lt;/code&gt;，其中方法&lt;code&gt;canBeSlideBack&lt;/code&gt;意思是能否返回至本Activity；两个方法相互配合使用，以应对各种需求。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; 
+   public class SwipeBackActivity extends AppCompatActivity {
+
+    private SwipeWindowHelper mSwipeWindowHelper;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(!supportSlideBack()) {
+            return super.dispatchTouchEvent(ev);
+        }
+
+        if(mSwipeWindowHelper == null) {
+            mSwipeWindowHelper = new SwipeWindowHelper(getWindow());
+        }
+        return mSwipeWindowHelper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * 是否支持滑动返回
+     * @return
+     */
+    protected boolean supportSlideBack() {
+        return true;
+    }
+
+    /**
+     * 能否滑动返回至当前Activity
+     * @return
+     */
+    protected boolean canBeSlideBack() {
+        return true;
+    }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6种事件状态&#34;&gt;6种事件状态&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+    private static final int MSG_ACTION_DOWN = 1; //点击事件  
+    private static final int MSG_ACTION_MOVE = 2; //滑动事件
+    private static final int MSG_ACTION_UP = 3;  //点击结束
+    private static final int MSG_SLIDE_CANCEL = 4; //开始滑动，不返回前一个页面
+    private static final int MSG_SLIDE_CANCELED = 5;  //结束滑动，不返回前一个页面
+    private static final int MSG_SLIDE_PROCEED = 6; //开始滑动，返回前一个页面
+    private static final int MSG_SLIDE_FINISHED = 7;//结束滑动，返回前一个页面
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在Down手势发生时，只要将上一个Activity的ContentView从parentView中剥离，并加入到当前View的ContentView中；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在滑动手势发生时，加上阴影View，并进行滑动；同时滑动的有当前Activity的ContentView、上一个Activity的ContentView和自定义的阴影View；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在Up手势发生时，判断滑动是否超过半屏，触发返回操作，并展示滑动动画；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;滑动取消或滑动返回发生时，需要将上个Activity的ContentView从新加入到上一个Acitivity的布局中。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;screenshot&#34;&gt;ScreenShot&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/XBeats/and_swipeback/master/screenshot/swipeback.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;gitHub地址：&lt;a href=&#34;https://github.com/XBeats/and_swipeback&#34;&gt;github.com/XBeats/and_swipeback&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>一个人的朝圣</title>
+      <link>http://aitangba.com/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
+      <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-d7da15147f296752.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;一个人的朝圣&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;像哈罗德一样，对生活和生命在某一时刻有着和过往完全不同想法的人，身边还是会有一些的。有时突发奇想的想去完成一件事情，可是在完成的过程中却发现更多新鲜的事物，&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>日常感想--电商-蜜淘C轮融资失败</title>
+      <link>http://aitangba.com/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</link>
+      <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://static.oschina.net/uploads/img/201603/31161245_WXtr.jpg&#34; alt=&#34;背景&#34; title=&#34;奋斗创业&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;现在的群多电商环境下，越来越来都的创业型企业倒闭，折射出来的是当今互利网时代的机会和挑战。&lt;br /&gt; 
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这让我突然想到了自己想要创业的想法，在公司稳稳当当地生活，或许不是最终所属。在当今社会，虽说不能单靠理想吃饭，可是没有理想的驱动，做起事来，还是缺乏一些激情和动力的。&lt;br /&gt; 
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;创业的念头，或者可以说是想我一样的90后一代人的理想。在当今的创业潮流中，90后的创业者并不多见，许多人还奋斗在职场的第一线，有的或许离创业差之毫厘。当然我身边也有许多朋友已经开始踏上了创业之路，不过大多时间还是在为今后公司的走向和一帮跟着自己的伙伴们感到担忧。很多时候我能听到他们有多么羡慕那些有着稳定工作的职员；多么厌恶现在正在接触中的顾客；多么恨那些富人们可以那么悠闲&amp;hellip;&amp;hellip; 听完他们发发牢骚和骂娘，我再向他们讲述，那个刘强东·马云等成功的道路是怎样，怎样的。给他们鼓气，给他们信心，做自己能帮到的事。&lt;br /&gt; 
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;道理谁都懂，他们需要的仅仅是总一个人能听他们说说这创业路上的所见所闻的这么一个人物。也许多我的那些朋友而已，我可能恰如其分的担当着，这样的一个角色。
+       &amp;hellip;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>一个产品的推广问题</title>
+      <link>http://aitangba.com/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;**第一步  **  ****树立方向和目标 ****
+      刚出来的app在网络上肯定是一篇空白，网络上还没有任何关于新的app的信息，建立一个关于App的百科，有用户搜索的话，用户可以从百科上更详细的了解你，同时，如果后期做品牌营销的话，也能为你引来更多的潜在用户，当然，百科不一定只仅仅是百度百科，你可以举一反三在各种百科上建立你的词条，建立的越多越方便用户快速的搜索到。建立百科看似是一个很简单的事情，其实不然。有的百科看起来简单明了，有的百科看起来一头雾水，这里面也是有技术含量的，所以建立百科时一定要条理清晰，语言通俗易通，同时配上清晰的截图，这样用户才能更快的了解，明白。国内很多app的百科写的很烂，为什么很烂，一是写的很专业，二是还有很多修饰性词语，三是还很啰嗦，这样的词条带着很重的主观思维，用户也不会喜欢，所以通俗的告诉用户你的app能帮他们干什么，可以更方便他们下载。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第二步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;注重反馈渠道&lt;/em&gt;&lt;/strong&gt;*
+      微博是一个大众化的产品，很多人的手机上可能都装有，当用户从词条哪里了解了你的app之后可以很轻松的通过微博关注你，和你互动，包括信息反馈，有的人说用户可以通过app里的“留言反馈”可以和你互动啊，这个是大错特错，很多用户在不了解一个app之前是不会轻易下载的，除非这个app是非下不可，而且很多app的用户反馈都藏的很深，用户一般找不到。相反，通过微博，用户可以实时的了解你，好的微博内容还会引起用户的转发和扩散，这些都是建立微博的好处，当然微博不仅是新浪微博，其他的微博也都要入驻，别让腾讯微博的用户去新浪微博找你，那是不可能的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第三步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;收集需求&lt;/em&gt;&lt;/strong&gt;*
+      通过百科和微博的信息填充，一个新的app算是有一定的品牌基础了，接下来就是在论坛发个帖子，别小看发帖子，我曾经一篇广告帖子可以传播几百万页面，而且被各种淘宝店当做教程，直接贴在卖手机的说明书里，我这样说的意思是别小看一篇帖子，你要把帖子写的用心一些，从用户的角度出发，让用户看了觉得非常有用才行。帖子写好了，就要找论坛发，找什么样的论坛，那肯定是找权重高的，那些网站论坛权重最高？建议用站长查询查询下，权重高的论坛搜索引擎的抓取速度是最快的，一般是一分钟之内抓取，我建议发个20~50个论坛，之前在推广APP时候，论坛带来的流量能高达一两万激活，现在应该更多。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第四步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;拓展渠道&lt;/em&gt;&lt;/strong&gt;*
+      前面三步说了那么多，其实都是在网络上布置关键词，方便用户搜索，提高app的曝光量和自传播力，接下来是拓展渠道，把新的app上传到各种应用商店，软件下载站上，拓展200个渠道，目前的渠道很多，你可以根据类别进行分类，同时发掘一些新的渠道。渠道的定义为能给APP带来展示和下载的网络媒介，谈渠道不是只指那些APP商店，比如有些公交车的免费wifi也提供APP下载的，也是你的渠道，另外一些微信粉丝比较多的应用自媒体，经常会推荐一些APP，也能为你的APP提供一些下载量，这些都是你的渠道。另外，铺渠道是一种比较累的工作，但是确实很有用，我曾经只铺渠道就带来了一百万的量。铺渠道还有另外一个好处就是，通过自然下载可以知道一个app在用户心中是什么位置了，也可以知道自己的app到底优秀不优秀，同时也可以帮你更详细的了解各个渠道的质量，为以后的付费推广做铺垫。铺渠道当然不能只是简单的铺渠道，在铺渠道的过程中，要了解渠道的一些情况，比如是否对新的APP有推广资源、首发资源等，可以为后续的大量推广做铺垫。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第五步&lt;/strong&gt; *&lt;strong&gt;&lt;em&gt;活动营销&lt;/em&gt;&lt;/strong&gt;*
+      前面说了那么多，都是免费推广APP的一些方法，当然如果有一点预算又不是很多的话，可以做一些活动营销，花费不会很多，你可以在论坛，在渠道做一些活动，活动形式要简单，可玩性强，而且奖品要吸引人，通过用户的参与可以提高APP的下载量，可以提供曝光度。活动营销要和你的APP属性相结合，找到你的特定人群，比如做女性APP的，可以在校园里办活动，也可以在线上的女性社区办活动，做旅游APP的，可以和一些旅行社合作等等，所以做活动营销一定要和受众人群合作。
+      这些都是一些新的APP的推广思路和方法，在推广APP的时候要视野宽泛，举一反三，切不可思维定势，同时要站在用户的角度考虑问题，现在的新APP一出来，大部分一开始就是换量，建议不要做，换量这种推广方式，一方面对产品的影响比较大，一方面对产品来说没有什么意义，换量适合做垃圾APP。此外，本文的思路适合没有资源的个人和中小团队。&lt;/p&gt;
+
+&lt;p&gt;原文地址:&lt;a href=&#34;http://www.zhihu.com/question/21140904/answer/27340883&#34;&gt;http://www.zhihu.com/question/21140904/answer/27340883&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

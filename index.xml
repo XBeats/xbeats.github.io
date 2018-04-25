@@ -2,30 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>XBeats Home</title>
-    <link>https://xbeats.github.io/index.xml</link>
+    <link>http://aitangba.com/index.xml</link>
     <description>Recent content on XBeats Home</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
     <lastBuildDate>Sun, 24 May 2015 18:51:50 +0200</lastBuildDate>
-    <atom:link href="https://xbeats.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://aitangba.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>About</title>
-      <link>https://xbeats.github.io/about/</link>
+      <link>http://aitangba.com/about/</link>
       <pubDate>Sun, 24 May 2015 18:51:50 +0200</pubDate>
       
-      <guid>https://xbeats.github.io/about/</guid>
+      <guid>http://aitangba.com/about/</guid>
       <description>&lt;p&gt;To be continue &amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
+      <title>暂停使用aitangba.com域名</title>
+      <link>http://aitangba.com/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</link>
+      <pubDate>Tue, 24 Apr 2018 17:19:37 +0800</pubDate>
+      
+      <guid>http://aitangba.com/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</guid>
+      <description>&lt;p&gt;域名aitangba.com不再准备续费了！&lt;/p&gt;
+
+&lt;p&gt;原意为“爱糖吧”，几年前买下这个域名是准备做一个类似在线购物的网站，当时就单纯的一个的想法，一边上班一边去完善自己的想法。几年的时间，没能花更多的精力去维护这样一个点子，后期索性做成了个人博客的域名，就这样挂了一年多吧，博客还是在不断的维护的，但是这个域名是时候说再见了！&lt;/p&gt;
+
+&lt;p&gt;虽说这个域名不再续费，但是博客还是会继续维护滴，其他的点子也在酝酿中，，，&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Android的API设计</title>
-      <link>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
+      <link>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link>
       <pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
+      <guid>http://aitangba.com/post/API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid>
       <description>
 
 &lt;h1 id=&#34;android的api设计&#34;&gt;Android的API设计&lt;/h1&gt;
@@ -99,221 +113,152 @@
     </item>
     
     <item>
-      <title>Android-右滑返回</title>
-      <link>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
-      <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
+      <title>How to use git</title>
+      <link>http://aitangba.com/post/How%20to%20use%20git/</link>
+      <pubDate>Fri, 25 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
+      <guid>http://aitangba.com/post/How%20to%20use%20git/</guid>
       <description>
 
-&lt;h1 id=&#34;swipeback&#34;&gt;SwipeBack&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-bb0ca3652ff14150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;git.png&#34; /&gt;
+团队开发中，必然会用到SVN、git等版本控制系统（Version Control System），其中SVN在分支管理上有着很大的局限性，而git则在许多方面的特性则脱颖而出。&lt;/p&gt;
 
-&lt;p&gt;在设计过程中遇到也有过其他思路：&lt;br /&gt;
-1）设置Activity的透明theme，可是发现只要activity的层级变多就会变得非常卡顿；&lt;br /&gt;
-2）动态设置Activity的theme，这需要通过反射，而且还需要判断api，部分手机还不兼容；&lt;br /&gt;
-3）在滑动展示上个Activity的View时，直接将上个Activity的contentView截图保存在内存卡上，然后显示在当前Activity的view上，但是有明显的卡顿感；&lt;br /&gt;
-以上都是在设计过程中想到的方案，也逐个实践了一下，发现问题还是比较多的，想想还不如另辟蹊径，就有了现在的方案，目前看来还是能兼容大部分手机的。&lt;/p&gt;
+&lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
 
-&lt;h1 id=&#34;features&#34;&gt;Features&lt;/h1&gt;
+&lt;p&gt;Git在生成新分支时，会生成一个指向当前版本的指针（又称&amp;rdquo;快照&amp;rdquo;），并不需要对主分支代码进行物理拷贝，所以极为方便快捷。切换分支，其实就是指针跳转到对应分支的过程。
+由于分支创建的便捷性，许多团队就忽视了对分支进行必要的管理，生成了一个枝节蔓生、四处开花的版本库，到处是分支结点，完成看不出版本库的迭代思路和脉路。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-e3c084ec920634e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;一个错误的版本库&#34; /&gt;
+上图的分支管理就显得非常杂乱，由此看来git分支管理非常必要！&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;不需要设置透明theme或&lt;code&gt;windowIsTranslucent = true&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;不影响activity的生命周期&lt;/li&gt;
-&lt;li&gt;只需继承SwipeBackActivity&lt;/li&gt;
-&lt;li&gt;支持Dialog的滑动返回&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&#34;版本管理&#34;&gt;版本管理&lt;/h2&gt;
 
-&lt;h1 id=&#34;getting-started&#34;&gt;Getting started&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://nvie.com/&#34;&gt;Vincent Driessen&lt;/a&gt;提出了一个分支管理的&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;策略&lt;/a&gt;，我觉得非常值得借鉴。它可以使得版本库的演进保持简洁，主干清晰，各个分支各司其职、井井有条。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-67b6f4b4480c4a0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;git-model.png&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Firstly, add the following lines to your app/build.gradle.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一、主分支Master&lt;/strong&gt;
+首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-3f4203bff6df3f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+Git主分支的名字，默认叫做Master。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;dependencies {  
-    compile &#39;com.aitangba:swipeback:1.0.0&#39;
-}
+&lt;p&gt;&lt;strong&gt;二、开发分支Develop&lt;/strong&gt;
+主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-7f7ab7709450dcd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+这个分支可以用来生成代码的最新隔夜版本（nightly）。如果想正式对外发布，就在Master分支上，对Develop分支进行&amp;rdquo;合并&amp;rdquo;（merge）。
+Git创建Develop分支的命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     git checkout -b develop master
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;Secondly, add the following lines to your application.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将Develop分支发布到Master分支的命令：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomApplication extends Application{
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
-    }
-
-}
+&lt;pre&gt;&lt;code&gt;　  # 切换到Master分支
+　　git checkout master
+　　# 对Develop分支进行合并
+　　git merge --no-ff develop
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;Finally, set the activity which need to swipe extends the SwipeBackActivity.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这里稍微解释一下，上一条命令的&amp;ndash;no-ff参数是什么意思。默认情况下，Git执行&amp;rdquo;快进式合并&amp;rdquo;（fast-farward merge），会直接将Master分支指向Develop分支。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-3820c9a17b02d050.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+使用&lt;code&gt;--no-ff&lt;/code&gt;参数后，会执行正常合并，在Master分支上生成一个新节点。为了保证版本演进的清晰，我们希望采用这种做法。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-edec962384700b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;strong&gt;三、临时性分支&lt;/strong&gt;
+前面讲到版本库的两条主要分支：Master和Develop。前者用于正式发布，后者用于日常开发。其实，常设分支只需要这两条就够了，不需要其他了。
+但是，除了常设分支以外，还有一些临时性分支，用于应对一些特定目的的版本开发。临时性分支主要有三种：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class BaseActivity extends SwipeBackActivity {
-
-}
+&lt;pre&gt;&lt;code&gt;* 功能（feature）分支
+* 预发布（release）分支
+* 修补bug（fixbug）分支  
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
+&lt;p&gt;这三种分支都属于临时性需要，使用完以后，应该删除，使得代码库的常设分支始终只有Master和Develop。&lt;/p&gt;
 
-&lt;h3 id=&#34;api&#34;&gt;API&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;四、 功能分支&lt;/strong&gt;
+接下来，一个个来看这三种&amp;rdquo;临时性分支&amp;rdquo;。
+第一种是功能分支，它是为了开发某种特定功能，从Develop分支上面分出来的。开发完成后，要再并入Develop。
+功能分支的名字，可以采用feature-*的形式命名。
+创建一个功能分支：&lt;/p&gt;
 
-&lt;p&gt;Application在Api14之后添加了新的Callback方法&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
-
-    }
+&lt;pre&gt;&lt;code&gt;git checkout -b feature-x develop
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这样就可以根据activity的生命周期缓存所有Activity，通过list获取上一个activity的实例，从而获取id为content的ContentView的子View（即setContentView中的View），并进行滑动展示。&lt;/p&gt;
+&lt;p&gt;开发完成后，将功能分支合并到develop分支：&lt;/p&gt;
 
-&lt;p&gt;默认SwipeBackActivity是支持滑动返回的，不需要滑动返回时则需要复写SwipeBackActivity的方法&lt;code&gt;supportSlideBack&lt;/code&gt;，其中方法&lt;code&gt;canBeSlideBack&lt;/code&gt;意思是能否返回至本Activity；两个方法相互配合使用，以应对各种需求。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; 
-   public class SwipeBackActivity extends AppCompatActivity {
-
-    private SwipeWindowHelper mSwipeWindowHelper;
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(!supportSlideBack()) {
-            return super.dispatchTouchEvent(ev);
-        }
-
-        if(mSwipeWindowHelper == null) {
-            mSwipeWindowHelper = new SwipeWindowHelper(getWindow());
-        }
-        return mSwipeWindowHelper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
-    }
-
-    /**
-     * 是否支持滑动返回
-     * @return
-     */
-    protected boolean supportSlideBack() {
-        return true;
-    }
-
-    /**
-     * 能否滑动返回至当前Activity
-     * @return
-     */
-    protected boolean canBeSlideBack() {
-        return true;
-    }
-   }
+&lt;pre&gt;&lt;code&gt;　　git checkout develop
+　　git merge --no-ff feature-x
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;6种事件状态&#34;&gt;6种事件状态&lt;/h3&gt;
+&lt;p&gt;删除feature分支：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
-    private static final int MSG_ACTION_DOWN = 1; //点击事件  
-    private static final int MSG_ACTION_MOVE = 2; //滑动事件
-    private static final int MSG_ACTION_UP = 3;  //点击结束
-    private static final int MSG_SLIDE_CANCEL = 4; //开始滑动，不返回前一个页面
-    private static final int MSG_SLIDE_CANCELED = 5;  //结束滑动，不返回前一个页面
-    private static final int MSG_SLIDE_PROCEED = 6; //开始滑动，返回前一个页面
-    private static final int MSG_SLIDE_FINISHED = 7;//结束滑动，返回前一个页面
+&lt;pre&gt;&lt;code&gt;　　git branch -d feature-x
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;在Down手势发生时，只要将上一个Activity的ContentView从parentView中剥离，并加入到当前View的ContentView中；&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;在滑动手势发生时，加上阴影View，并进行滑动；同时滑动的有当前Activity的ContentView、上一个Activity的ContentView和自定义的阴影View；&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;在Up手势发生时，判断滑动是否超过半屏，触发返回操作，并展示滑动动画；&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;滑动取消或滑动返回发生时，需要将上个Activity的ContentView从新加入到上一个Acitivity的布局中。&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;五、预发布分支&lt;/strong&gt;
+第二种是预发布分支，它是指发布正式版本之前（即合并到Master分支之前），我们可能需要有一个预发布的版本进行测试。
+预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并进Develop和Master分支。它的命名，可以采用release-*的形式。
+创建一个预发布分支：&lt;/p&gt;
 
-&lt;h1 id=&#34;screenshot&#34;&gt;ScreenShot&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/XBeats/and_swipeback/master/screenshot/swipeback.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;gitHub地址：&lt;a href=&#34;https://github.com/XBeats/and_swipeback&#34;&gt;github.com/XBeats/and_swipeback&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>线程池ThreadPoolExecutor</title>
-      <link>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
-      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;线程池.png&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ThreadPoolExecutor的构造方法：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public ThreadPoolExecutor(int corePoolSize,  
-                          int maximumPoolSize,  
-                          long keepAliveTime,  
-                          TimeUnit unit,  
-                          BlockingQueue&amp;lt;Runnable&amp;gt; workQueue,  
-                          ThreadFactory threadFactory,  
-                          RejectedExecutionHandler handler)  
+&lt;pre&gt;&lt;code&gt;　　git checkout -b release-1.2 develop
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;###说明
-- corePoolSize： 线程池维护线程的最少数量&lt;br /&gt;
-- maximumPoolSize：线程池维护线程的最大数量
-- keepAliveTime： 线程池维护线程所允许的空闲时间
-- unit： 线程池维护线程所允许的空闲时间的单位
-- workQueue： 线程池所使用的缓冲队列
-- handler： 线程池对拒绝任务的处理策略&lt;/p&gt;
+&lt;p&gt;确认没有问题后，合并到master分支：&lt;/p&gt;
 
-&lt;p&gt;###逻辑
-1. 当池子线程数量小于corePoolSize就新建线程，并处理请求&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;当池子大小等于corePoolSize，就会将请求放入workQueue中，等池子里的线程空闲了，就去从workQueue中取任务并处理&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;当workQueue放不下新入的任务时，新建线程入池，并处理请求，如果池子大小撑到了maximumPoolSize就用RejectedExecutionHandler来做拒绝处理&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;另外，当池子的线程数大于corePoolSize的时候，多余的线程会等待keepAliveTime长的时间，如果无请求可处理就自行销毁&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;###理解
-一个任务通过 execute(Runnable)方法被添加到线程池，任务就是一个 Runnable类型的对象，任务的执行方法就是Runnable类型对象的run()方法。&lt;/p&gt;
-
-&lt;p&gt;###参数
-&lt;strong&gt;unit&lt;/strong&gt;  可选的参数为java.util.concurrent.TimeUnit中的几个静态属性：
-- NANOSECONDS
-- MICROSECONDS
-- MILLISECONDS 毫秒
-- SECONDS 秒&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;workQueue&lt;/strong&gt;  常用的是：java.util.concurrent.ArrayBlockingQueue&lt;br /&gt;
-- SynchronousQueue  直接提交，它将任务直接提交给线程而不保持它们。
-- LinkedBlockingQueue  无界队列，将导致在所有 corePoolSize 线程都忙的情况下将新任务加入队列。
-- ArrayBlockingQueue  有界队列，有助于防止资源耗尽，但是可能较难调整和控制。
-&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;handler&lt;/strong&gt;  有四个选择：
-- ThreadPoolExecutor.AbortPolicy()&lt;br /&gt;
-抛出java.util.concurrent.RejectedExecutionException异常
- 
-- ThreadPoolExecutor.CallerRunsPolicy()&lt;br /&gt;
-当抛出RejectedExecutionException异常时，会调用&lt;strong&gt;rejectedExecution&lt;/strong&gt;方法
-(如果主线程没有关闭，则主线程调用run方法,源码如下&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {            
-         if (!e.isShutdown()) {                
-                 r.run();            
-         }
-        }
-)
+&lt;pre&gt;&lt;code&gt;　　git checkout master
+　　git merge --no-ff release-1.2
+　　# 对合并生成的新节点，做一个标签　　git tag -a 1.2
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt; 
-- ThreadPoolExecutor.DiscardOldestPolicy()&lt;br /&gt;
-抛弃旧的任务
- 
-- ThreadPoolExecutor.DiscardPolicy()&lt;br /&gt;
-抛弃当前的任务&lt;/p&gt;
+&lt;p&gt;再合并到develop分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout develop
+　　git merge --no-ff release-1.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后，删除预发布分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git branch -d release-1.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;六、修补bug分支&lt;/strong&gt;
+最后一种是修补bug分支。软件正式发布以后，难免会出现bug。这时就需要创建一个分支，进行bug修补。
+修补bug分支是从Master分支上面分出来的。修补结束以后，再合并进Master和Develop分支。它的命名，可以采用fixbug-*的形式。
+&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-86baeac96407f0c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
+创建一个修补bug分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout -b fixbug-0.1 master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修补结束后，合并到master分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout master
+　　git merge --no-ff fixbug-0.1
+　　git tag -a 0.1.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再合并到develop分支：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git checkout develop
+　　git merge --no-ff fixbug-0.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后，删除&amp;rdquo;修补bug分支&amp;rdquo;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;　　git branch -d fixbug-0.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;原文地址：
+&lt;a href=&#34;http://www.ruanyifeng.com/blog/2012/07/git.html&#34;&gt;http://www.ruanyifeng.com/blog/2012/07/git.html&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://www.jianshu.com/p/3081e33a6136&#34;&gt;http://www.jianshu.com/p/3081e33a6136&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>热修复入门：Android-中的-ClassLoader</title>
-      <link>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
+      <link>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</link>
       <pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
+      <guid>http://aitangba.com/post/%E7%83%AD%E4%BF%AE%E5%A4%8D%E5%85%A5%E9%97%A8%EF%BC%9AAndroid-%E4%B8%AD%E7%9A%84-ClassLoader/</guid>
       <description>
 
 &lt;p&gt;从去年下半年开始，热修复技术在 Android 技术社区热了一阵子，这种不用发布新版本就可以修复线上 bug 的技术确实有很大的需求，最近正好在研究一些开源的热修复方案，本文就其中常用的 ClassLoader 方式实现的热修复方案中的 ClassLoader 机制作一个简单的介绍。
@@ -759,11 +704,90 @@ String say();
     </item>
     
     <item>
+      <title>线程池ThreadPoolExecutor</title>
+      <link>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/%E7%BA%BF%E7%A8%8B%E6%B1%A0ThreadPoolExecutor/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-459060beaba1a205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;线程池.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ThreadPoolExecutor的构造方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public ThreadPoolExecutor(int corePoolSize,  
+                          int maximumPoolSize,  
+                          long keepAliveTime,  
+                          TimeUnit unit,  
+                          BlockingQueue&amp;lt;Runnable&amp;gt; workQueue,  
+                          ThreadFactory threadFactory,  
+                          RejectedExecutionHandler handler)  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;###说明
+- corePoolSize： 线程池维护线程的最少数量&lt;br /&gt;
+- maximumPoolSize：线程池维护线程的最大数量
+- keepAliveTime： 线程池维护线程所允许的空闲时间
+- unit： 线程池维护线程所允许的空闲时间的单位
+- workQueue： 线程池所使用的缓冲队列
+- handler： 线程池对拒绝任务的处理策略&lt;/p&gt;
+
+&lt;p&gt;###逻辑
+1. 当池子线程数量小于corePoolSize就新建线程，并处理请求&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;当池子大小等于corePoolSize，就会将请求放入workQueue中，等池子里的线程空闲了，就去从workQueue中取任务并处理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;当workQueue放不下新入的任务时，新建线程入池，并处理请求，如果池子大小撑到了maximumPoolSize就用RejectedExecutionHandler来做拒绝处理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;另外，当池子的线程数大于corePoolSize的时候，多余的线程会等待keepAliveTime长的时间，如果无请求可处理就自行销毁&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;###理解
+一个任务通过 execute(Runnable)方法被添加到线程池，任务就是一个 Runnable类型的对象，任务的执行方法就是Runnable类型对象的run()方法。&lt;/p&gt;
+
+&lt;p&gt;###参数
+&lt;strong&gt;unit&lt;/strong&gt;  可选的参数为java.util.concurrent.TimeUnit中的几个静态属性：
+- NANOSECONDS
+- MICROSECONDS
+- MILLISECONDS 毫秒
+- SECONDS 秒&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;workQueue&lt;/strong&gt;  常用的是：java.util.concurrent.ArrayBlockingQueue&lt;br /&gt;
+- SynchronousQueue  直接提交，它将任务直接提交给线程而不保持它们。
+- LinkedBlockingQueue  无界队列，将导致在所有 corePoolSize 线程都忙的情况下将新任务加入队列。
+- ArrayBlockingQueue  有界队列，有助于防止资源耗尽，但是可能较难调整和控制。
+&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;handler&lt;/strong&gt;  有四个选择：
+- ThreadPoolExecutor.AbortPolicy()&lt;br /&gt;
+抛出java.util.concurrent.RejectedExecutionException异常
+ 
+- ThreadPoolExecutor.CallerRunsPolicy()&lt;br /&gt;
+当抛出RejectedExecutionException异常时，会调用&lt;strong&gt;rejectedExecution&lt;/strong&gt;方法
+(如果主线程没有关闭，则主线程调用run方法,源码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {            
+         if (!e.isShutdown()) {                
+                 r.run();            
+         }
+        }
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; 
+- ThreadPoolExecutor.DiscardOldestPolicy()&lt;br /&gt;
+抛弃旧的任务
+ 
+- ThreadPoolExecutor.DiscardPolicy()&lt;br /&gt;
+抛弃当前的任务&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>HashMap知识点</title>
-      <link>https://xbeats.github.io/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
+      <link>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
       <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
+      <guid>http://aitangba.com/post/HashMap%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-dc3526b7baa6eb4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;HashMap.png&#34; /&gt;
 ###前言
 首先再次强调hashcode （==）和equals的真正含义
@@ -905,166 +929,11 @@ HashMap基于hashing原理&lt;br /&gt;
     </item>
     
     <item>
-      <title>暂停使用aitangba.com域名</title>
-      <link>https://xbeats.github.io/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</link>
-      <pubDate>Tue, 24 Apr 2018 17:19:37 +0800</pubDate>
-      
-      <guid>https://xbeats.github.io/post/%E5%9F%9F%E5%90%8D%E5%81%9C%E7%94%A8%E4%BA%86/</guid>
-      <description>&lt;p&gt;域名aitangba.com不再准备续费了！&lt;/p&gt;
-
-&lt;p&gt;原意为“爱糖吧”，几年前买下这个域名是准备做一个类似在线购物的网站，当时就单纯的一个的想法，一边上班一边去完善自己的想法。几年的时间，没能花更多的精力去维护这样一个点子，后期索性做成了个人博客的域名，就这样挂了一年多吧，博客还是在不断的维护的，但是这个域名是时候说再见了！&lt;/p&gt;
-
-&lt;p&gt;虽说这个域名不再续费，但是博客还是会继续维护滴，其他的点子也在酝酿中，，，&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>How to use git</title>
-      <link>https://xbeats.github.io/post/How%20to%20use%20git/</link>
-      <pubDate>Fri, 25 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://xbeats.github.io/post/How%20to%20use%20git/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-bb0ca3652ff14150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;git.png&#34; /&gt;
-团队开发中，必然会用到SVN、git等版本控制系统（Version Control System），其中SVN在分支管理上有着很大的局限性，而git则在许多方面的特性则脱颖而出。&lt;/p&gt;
-
-&lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
-
-&lt;p&gt;Git在生成新分支时，会生成一个指向当前版本的指针（又称&amp;rdquo;快照&amp;rdquo;），并不需要对主分支代码进行物理拷贝，所以极为方便快捷。切换分支，其实就是指针跳转到对应分支的过程。
-由于分支创建的便捷性，许多团队就忽视了对分支进行必要的管理，生成了一个枝节蔓生、四处开花的版本库，到处是分支结点，完成看不出版本库的迭代思路和脉路。
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-e3c084ec920634e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;一个错误的版本库&#34; /&gt;
-上图的分支管理就显得非常杂乱，由此看来git分支管理非常必要！&lt;/p&gt;
-
-&lt;h2 id=&#34;版本管理&#34;&gt;版本管理&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://nvie.com/&#34;&gt;Vincent Driessen&lt;/a&gt;提出了一个分支管理的&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;策略&lt;/a&gt;，我觉得非常值得借鉴。它可以使得版本库的演进保持简洁，主干清晰，各个分支各司其职、井井有条。
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-67b6f4b4480c4a0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;git-model.png&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;一、主分支Master&lt;/strong&gt;
-首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-3f4203bff6df3f4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
-Git主分支的名字，默认叫做Master。它是自动建立的，版本库初始化以后，默认就是在主分支在进行开发。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;二、开发分支Develop&lt;/strong&gt;
-主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-7f7ab7709450dcd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
-这个分支可以用来生成代码的最新隔夜版本（nightly）。如果想正式对外发布，就在Master分支上，对Develop分支进行&amp;rdquo;合并&amp;rdquo;（merge）。
-Git创建Develop分支的命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;     git checkout -b develop master
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将Develop分支发布到Master分支的命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　  # 切换到Master分支
-　　git checkout master
-　　# 对Develop分支进行合并
-　　git merge --no-ff develop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这里稍微解释一下，上一条命令的&amp;ndash;no-ff参数是什么意思。默认情况下，Git执行&amp;rdquo;快进式合并&amp;rdquo;（fast-farward merge），会直接将Master分支指向Develop分支。
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-3820c9a17b02d050.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
-使用&lt;code&gt;--no-ff&lt;/code&gt;参数后，会执行正常合并，在Master分支上生成一个新节点。为了保证版本演进的清晰，我们希望采用这种做法。
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-edec962384700b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;strong&gt;三、临时性分支&lt;/strong&gt;
-前面讲到版本库的两条主要分支：Master和Develop。前者用于正式发布，后者用于日常开发。其实，常设分支只需要这两条就够了，不需要其他了。
-但是，除了常设分支以外，还有一些临时性分支，用于应对一些特定目的的版本开发。临时性分支主要有三种：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;* 功能（feature）分支
-* 预发布（release）分支
-* 修补bug（fixbug）分支  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这三种分支都属于临时性需要，使用完以后，应该删除，使得代码库的常设分支始终只有Master和Develop。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;四、 功能分支&lt;/strong&gt;
-接下来，一个个来看这三种&amp;rdquo;临时性分支&amp;rdquo;。
-第一种是功能分支，它是为了开发某种特定功能，从Develop分支上面分出来的。开发完成后，要再并入Develop。
-功能分支的名字，可以采用feature-*的形式命名。
-创建一个功能分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git checkout -b feature-x develop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;开发完成后，将功能分支合并到develop分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git checkout develop
-　　git merge --no-ff feature-x
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;删除feature分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git branch -d feature-x
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;五、预发布分支&lt;/strong&gt;
-第二种是预发布分支，它是指发布正式版本之前（即合并到Master分支之前），我们可能需要有一个预发布的版本进行测试。
-预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并进Develop和Master分支。它的命名，可以采用release-*的形式。
-创建一个预发布分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git checkout -b release-1.2 develop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;确认没有问题后，合并到master分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git checkout master
-　　git merge --no-ff release-1.2
-　　# 对合并生成的新节点，做一个标签　　git tag -a 1.2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;再合并到develop分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git checkout develop
-　　git merge --no-ff release-1.2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后，删除预发布分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git branch -d release-1.2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;六、修补bug分支&lt;/strong&gt;
-最后一种是修补bug分支。软件正式发布以后，难免会出现bug。这时就需要创建一个分支，进行bug修补。
-修补bug分支是从Master分支上面分出来的。修补结束以后，再合并进Master和Develop分支。它的命名，可以采用fixbug-*的形式。
-&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-86baeac96407f0c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;&#34; /&gt;
-创建一个修补bug分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git checkout -b fixbug-0.1 master
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修补结束后，合并到master分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git checkout master
-　　git merge --no-ff fixbug-0.1
-　　git tag -a 0.1.1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;再合并到develop分支：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git checkout develop
-　　git merge --no-ff fixbug-0.1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后，删除&amp;rdquo;修补bug分支&amp;rdquo;：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;　　git branch -d fixbug-0.1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;原文地址：
-&lt;a href=&#34;http://www.ruanyifeng.com/blog/2012/07/git.html&#34;&gt;http://www.ruanyifeng.com/blog/2012/07/git.html&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://www.jianshu.com/p/3081e33a6136&#34;&gt;http://www.jianshu.com/p/3081e33a6136&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Markdown的说明文档</title>
-      <link>https://xbeats.github.io/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
+      <link>http://aitangba.com/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</link>
       <pubDate>Mon, 22 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
+      <guid>http://aitangba.com/post/Markdown%E7%9A%84%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</guid>
       <description>
 
 &lt;h1 id=&#34;markdown&#34;&gt;Markdown&lt;/h1&gt;
@@ -1263,11 +1132,142 @@ hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=
     </item>
     
     <item>
+      <title>Android-右滑返回</title>
+      <link>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</link>
+      <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://aitangba.com/post/Android-%E5%8F%B3%E6%BB%91%E8%BF%94%E5%9B%9E/</guid>
+      <description>
+
+&lt;h1 id=&#34;swipeback&#34;&gt;SwipeBack&lt;/h1&gt;
+
+&lt;p&gt;在设计过程中遇到也有过其他思路：&lt;br /&gt;
+1）设置Activity的透明theme，可是发现只要activity的层级变多就会变得非常卡顿；&lt;br /&gt;
+2）动态设置Activity的theme，这需要通过反射，而且还需要判断api，部分手机还不兼容；&lt;br /&gt;
+3）在滑动展示上个Activity的View时，直接将上个Activity的contentView截图保存在内存卡上，然后显示在当前Activity的view上，但是有明显的卡顿感；&lt;br /&gt;
+以上都是在设计过程中想到的方案，也逐个实践了一下，发现问题还是比较多的，想想还不如另辟蹊径，就有了现在的方案，目前看来还是能兼容大部分手机的。&lt;/p&gt;
+
+&lt;h1 id=&#34;features&#34;&gt;Features&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不需要设置透明theme或&lt;code&gt;windowIsTranslucent = true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;不影响activity的生命周期&lt;/li&gt;
+&lt;li&gt;只需继承SwipeBackActivity&lt;/li&gt;
+&lt;li&gt;支持Dialog的滑动返回&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;getting-started&#34;&gt;Getting started&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Firstly, add the following lines to your app/build.gradle.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;dependencies {  
+    compile &#39;com.aitangba:swipeback:1.0.0&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Secondly, add the following lines to your application.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class CustomApplication extends Application{
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Finally, set the activity which need to swipe extends the SwipeBackActivity.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class BaseActivity extends SwipeBackActivity {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
+
+&lt;h3 id=&#34;api&#34;&gt;API&lt;/h3&gt;
+
+&lt;p&gt;Application在Api14之后添加了新的Callback方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就可以根据activity的生命周期缓存所有Activity，通过list获取上一个activity的实例，从而获取id为content的ContentView的子View（即setContentView中的View），并进行滑动展示。&lt;/p&gt;
+
+&lt;p&gt;默认SwipeBackActivity是支持滑动返回的，不需要滑动返回时则需要复写SwipeBackActivity的方法&lt;code&gt;supportSlideBack&lt;/code&gt;，其中方法&lt;code&gt;canBeSlideBack&lt;/code&gt;意思是能否返回至本Activity；两个方法相互配合使用，以应对各种需求。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; 
+   public class SwipeBackActivity extends AppCompatActivity {
+
+    private SwipeWindowHelper mSwipeWindowHelper;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(!supportSlideBack()) {
+            return super.dispatchTouchEvent(ev);
+        }
+
+        if(mSwipeWindowHelper == null) {
+            mSwipeWindowHelper = new SwipeWindowHelper(getWindow());
+        }
+        return mSwipeWindowHelper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * 是否支持滑动返回
+     * @return
+     */
+    protected boolean supportSlideBack() {
+        return true;
+    }
+
+    /**
+     * 能否滑动返回至当前Activity
+     * @return
+     */
+    protected boolean canBeSlideBack() {
+        return true;
+    }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6种事件状态&#34;&gt;6种事件状态&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;
+    private static final int MSG_ACTION_DOWN = 1; //点击事件  
+    private static final int MSG_ACTION_MOVE = 2; //滑动事件
+    private static final int MSG_ACTION_UP = 3;  //点击结束
+    private static final int MSG_SLIDE_CANCEL = 4; //开始滑动，不返回前一个页面
+    private static final int MSG_SLIDE_CANCELED = 5;  //结束滑动，不返回前一个页面
+    private static final int MSG_SLIDE_PROCEED = 6; //开始滑动，返回前一个页面
+    private static final int MSG_SLIDE_FINISHED = 7;//结束滑动，返回前一个页面
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在Down手势发生时，只要将上一个Activity的ContentView从parentView中剥离，并加入到当前View的ContentView中；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在滑动手势发生时，加上阴影View，并进行滑动；同时滑动的有当前Activity的ContentView、上一个Activity的ContentView和自定义的阴影View；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;在Up手势发生时，判断滑动是否超过半屏，触发返回操作，并展示滑动动画；&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;滑动取消或滑动返回发生时，需要将上个Activity的ContentView从新加入到上一个Acitivity的布局中。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;screenshot&#34;&gt;ScreenShot&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/XBeats/and_swipeback/master/screenshot/swipeback.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;gitHub地址：&lt;a href=&#34;https://github.com/XBeats/and_swipeback&#34;&gt;github.com/XBeats/and_swipeback&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>一个人的朝圣</title>
-      <link>https://xbeats.github.io/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
+      <link>http://aitangba.com/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
+      <guid>http://aitangba.com/post/%E3%80%8A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9C%9D%E5%9C%A3%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/1708374-d7da15147f296752.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;一个人的朝圣&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;像哈罗德一样，对生活和生命在某一时刻有着和过往完全不同想法的人，身边还是会有一些的。有时突发奇想的想去完成一件事情，可是在完成的过程中却发现更多新鲜的事物，&lt;/p&gt;
@@ -1276,10 +1276,10 @@ hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=
     
     <item>
       <title>日常感想--电商-蜜淘C轮融资失败</title>
-      <link>https://xbeats.github.io/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</link>
+      <link>http://aitangba.com/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</link>
       <pubDate>Thu, 26 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</guid>
+      <guid>http://aitangba.com/post/%E6%97%A5%E5%B8%B8%E6%84%9F%E6%83%B3--%E7%94%B5%E5%95%86-%E8%9C%9C%E6%B7%98C%E8%BD%AE%E8%9E%8D%E8%B5%84%E5%A4%B1%E8%B4%A5/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://static.oschina.net/uploads/img/201603/31161245_WXtr.jpg&#34; alt=&#34;背景&#34; title=&#34;奋斗创业&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;现在的群多电商环境下，越来越来都的创业型企业倒闭，折射出来的是当今互利网时代的机会和挑战。&lt;br /&gt; 
@@ -1292,10 +1292,10 @@ hello&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:hello&#34;&gt;&lt;a rel=
     
     <item>
       <title>一个产品的推广问题</title>
-      <link>https://xbeats.github.io/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</link>
+      <link>http://aitangba.com/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</link>
       <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://xbeats.github.io/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://aitangba.com/post/%E4%B8%80%E4%B8%AA%E4%BA%A7%E5%93%81%E7%9A%84%E6%8E%A8%E5%B9%BF%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;p&gt;**第一步  **  ****树立方向和目标 ****
       刚出来的app在网络上肯定是一篇空白，网络上还没有任何关于新的app的信息，建立一个关于App的百科，有用户搜索的话，用户可以从百科上更详细的了解你，同时，如果后期做品牌营销的话，也能为你引来更多的潜在用户，当然，百科不一定只仅仅是百度百科，你可以举一反三在各种百科上建立你的词条，建立的越多越方便用户快速的搜索到。建立百科看似是一个很简单的事情，其实不然。有的百科看起来简单明了，有的百科看起来一头雾水，这里面也是有技术含量的，所以建立百科时一定要条理清晰，语言通俗易通，同时配上清晰的截图，这样用户才能更快的了解，明白。国内很多app的百科写的很烂，为什么很烂，一是写的很专业，二是还有很多修饰性词语，三是还很啰嗦，这样的词条带着很重的主观思维，用户也不会喜欢，所以通俗的告诉用户你的app能帮他们干什么，可以更方便他们下载。&lt;/p&gt;
 
